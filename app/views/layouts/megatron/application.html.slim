@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+html
+  head
+    - if @title.present?
+      title #{@title} | Compose
+    - else
+      title Compose
+    meta name="viewport" content="width=device-width,initial-scale=1"
+    meta charset="utf-8"
+    = csrf_meta_tags
+    = megatron_assets_tags
+    = yield :stylesheets
+    = yield :javascripts
+  body
+    - if flash[:notice]
+      .form-flash.hidden data-type="action"= flash[:notice]
+    - if flash[:success]
+      .form-flash.hidden data-type="success"= flash[:success]
+    - if flash[:error]
+      .form-flash.hidden data-type="error"= flash[:error]
+
+    .site
+      header.site-header role="banner" data-no-turbolink=true
+        button.nav_toggle onclick="toggleNav(); this.blur()"
+          span.icon
+          span.hidden_label View Navigation
+        a.header_logo.logo_icon href="/"
+          span.hidden_label Compose
+      .site-content
+        - if !@custom_nav
+          = render 'megatron/shared/primary_nav'
+        - if content_for?(:primary_nav)
+          nav.primary_nav role="navigation" data-no-turbolink=true
+            = yield :primary_nav
+        .page
+          = yield
+          - if content_for?(:main)
+            header.page-header
+              = yield :page_header
+            .page-content
+              - if content_for?(:secondary_nav)
+                nav.secondary_nav
+                  = yield :secondary_nav
+              - if content_for?(:sidebar)
+                .main.with-sidebar
+                  .main-content
+                    - if @wide_layout
+                      .wide
+                        = render 'megatron/shared/main_content'
+                    - else
+                      = render 'megatron/shared/main_content'
+                  .main-sidebar
+                    = yield :sidebar
+              - else
+                .main
+                  .main-content
+                    - if @wide_layout
+                      .wide
+                        = render 'megatron/shared/main_content'
+                    - else
+                      = render 'megatron/shared/main_content'
