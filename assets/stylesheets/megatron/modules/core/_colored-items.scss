@@ -1,0 +1,22 @@
+@each $name, $color in $full-palette {
+  // Assign a `.[color]-text` class with a color of [color]
+  .#{"" + unquote($name)}-text {
+    color: $color;
+  }
+  .#{"" + unquote($name)}-hover-text:hover {
+    color: $color !important;
+  }
+  .#{"" + unquote($name)}-bg {
+    background-color: $color !important;
+  }
+  .#{"" + unquote($name)}-hover-bg:hover {
+    background-color: $color !important;
+  }
+  .#{"" + unquote($name)}-border {
+    border-color: $color !important;
+  }
+  .#{"" + unquote($name)}-hover-border:hover {
+    border-color: $color !important;
+  }
+}
+

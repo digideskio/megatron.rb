@@ -1,0 +1,157 @@
+@mixin pop-message-style($bg, $icon, $color, $link-hover: false) {
+  color: $color;
+  &:before {
+    @extend .#{$icon}_icon:before;
+  }
+  .icon, &:before {
+    background: lighten($bg, 6);
+  }
+  .dismiss {
+    background: darken($bg, 6);
+    &:hover {
+      background: darken($bg, 3);
+    }
+  }
+  p { 
+    background: $bg;
+    &:hover {
+      background: lighten($bg, 4);
+    }
+  }
+  @if ($link-hover) {
+    a:hover, a:hover:after { color: $link-hover; }
+  }
+
+  &.with-url:not(.dismissable):hover {
+    &:before {
+      background: lighten($bg, 10);
+    }
+    p:hover {
+      background: lighten($bg, 4);
+    }
+  }
+}
+
+.pop-message {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  margin: 0 auto;
+  height: 0;
+  overflow: visible;
+  font-size: .95em;
+  text-shadow: none;
+  &.new {
+    animation: slide-down .3s;
+  }
+
+  @include until($medium) {
+    display: none;
+  }
+
+  .message-content {
+    display: table;
+    margin: 0 auto;
+    position: relative;
+    @include smooth-text;
+    &:before {
+      font-family: 'roboticons';
+      transition: all .2s ease;
+      display: table-cell;
+      vertical-align: middle;
+      text-align: center;
+      width: 2em;
+      font-size: 1.1em;
+    }
+    p, .dismiss {
+      display: table-cell;
+      margin: 0;
+      transition: all .2s ease;
+    }
+  }
+
+  .dismissable {
+    &:before { display: none; }
+    p { position: relative; }
+  }
+
+  .icon {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    width: 2em;
+    padding: 0;
+  }
+
+  .dismiss {
+    padding-left: 0;
+    width: 2em;
+    color: rgba(#fff, .3);
+
+    &:hover {
+      color: rgba(#fff, .5);
+    }
+
+    &:before {
+      color: inherit;
+      display: table-cell;
+      vertical-align: middle;
+      font-size: 1.1em;
+      vertical-align: middle;
+      display: inline-block;
+      position: relative; top: -.1em;
+    }
+  }
+
+  .dismiss-icon {
+    vertical-align: middle;
+    font-size: 1.2em;
+  }
+
+  p {
+    padding: .4em .6em;
+  }
+
+  p a {
+    display: inline-block;
+    text-decoration: none;
+    transition: all .2s ease;
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0; bottom: 0; left: 0; right: 0;
+    }
+    &:after {
+      @extend .chevron_icon:before;
+      position: relative; top: 1px;
+      font-family: 'roboticons';
+      padding-left: .4em;
+      display: inline-block;
+      text-decoration: none;
+    }
+  }
+  
+  // Styles
+  .message-content {
+
+    &:before { color: inherit; }
+    p a, p a:after { color: inherit; }
+
+    // Standard style
+    &.normal {
+      @include pop-message-style(lighten($night, 7), star, $lightgray, $overcast);
+    }
+
+    // Error style
+    &.negative, &.error {
+      @include pop-message-style(darken($red, 14), warning, #fff);
+    }
+
+    &.positive {
+      @include pop-message-style(darken($green, 14), warning, #fff);
+    }
+  }
+}
+

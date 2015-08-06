@@ -1,0 +1,49 @@
+$slider-red:    hsl(0, 70, 65) !default;
+$slider-orange: hsl(30, 90, 68) !default;
+$slider-blue:   hsl(205, 60, 55) !default;
+$slider-purple: hsl(235, 60, 65) !default;
+$slider-glow:   hsl(199, 70%, 44%) !default;
+$slider-font:   Helvetica, Arial, sans;
+$slider-font-size: 13px;
+$slider-track: #e8e8e8;
+$slider-switch-bg: #fafafa;
+$slider-label-color: #555;
+
+$slider-segment-width: 45px !default;
+$slider-segment-height: 11px !default;
+$slider-track-offset: 3px !default; //account for rounded corners
+
+@mixin slider-fill-bg {
+  &, &:first-child:before { @content; }
+}
+
+@mixin slider-track-bg {
+  &, &:last-child:after { @content; }
+}
+
+@mixin slider-border($color) {
+  border-left-color: adjust-color($color, $lightness: 8%, $saturation: 20%);
+  border-right-color: adjust-color($color, $lightness: -10%, $saturation: -20%);
+}
+
+@mixin slider-fill-colors($color) {
+  @include slider-fill-bg {
+    background-color: $color;
+  }
+  @include slider-border($color);
+}
+
+%slider-segment {
+  width: $slider-segment-width;
+  height: $slider-segment-height;
+  display: inline-block;
+  float: left;
+  &:first-child { border-left-color: transparent; }
+  &:last-child { border-right-color: transparent; }
+}
+
+select.slider, .slider select {
+  position: absolute; opacity: 0;
+  font-size: 0;
+}
+

@@ -1,0 +1,33 @@
+@mixin color-box($bg) {
+  $border: adjust-color($bg, $lightness: -15%, $saturation: -20%);
+  $color: adjust-color($bg, $lightness: -45%, $saturation: -50%);
+  background-color: $bg;
+  border-color: $border;
+  color: $color;
+  a:not([class*=btn]) {
+    color: darken($color, 5);
+  }
+}
+
+@mixin dark-color-box($bg) {
+  $border: adjust-color($bg, $lightness: -15%, $saturation: -20%);
+  $color: adjust-color($bg, $lightness: 45%, $saturation: -50%);
+  background-color: $bg;
+  border-color: $border;
+  text-shadow: $border 0 1px 1px;
+  color: $color;
+  a:not([class*=btn]) {
+    color: lighten($color, 5);
+  }
+}
+
+.softred-box    { @include color-box($softred)    }
+.softorange-box { @include color-box($softorange) }
+.softyellow-box { @include color-box($softyellow) }
+.softgreen-box  { @include color-box($softgreen)  }
+.softblue-box   { @include color-box($softblue)   }
+.softpurple-box { @include color-box($softpurple) }
+.white-box      { @include color-box($white)   }
+.offwhite-box   { @include color-box($offwhite)   }
+.gray-box       { @include dark-color-box($gray)   }
+.boyblue-box    { @include dark-color-box($boyblue)  }

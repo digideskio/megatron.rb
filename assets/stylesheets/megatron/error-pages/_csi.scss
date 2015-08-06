@@ -1,0 +1,41 @@
+.csi {
+  overflow: hidden;
+  position: relative;
+  display: block;
+  height: 1.5em;
+}
+
+.csi span {
+  display: block;
+  text-align: center;
+  line-height: 1.5em;
+}
+
+.error-page.error-503:hover {
+  p {
+    margin: 0;
+  }
+  .csi {
+    animation: $error-animation-step*2 ease-out fade-in-slowly;
+    font-size: 50px;
+    top: 15px;
+  }
+  .csi span { 
+    font-size: 50px;
+    &:first-child {
+      display: none;
+    }
+    transform: translateY(-1.5em * 3);
+    animation: csi 4.5s steps(5, end);
+  }
+  h1:after {
+    content: "YEEEEEAAAAAAAHHHH!!!!!";
+    display: block;
+    font-size: 16px;
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    text-align: center;
+    animation: 7s ease-out fade-in-slowly;
+  }
+}

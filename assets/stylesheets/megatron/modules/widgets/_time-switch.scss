@@ -1,0 +1,24 @@
+.time-switch {
+  cursor: pointer;
+  .utc, .local {
+    font-size: 14px;
+    [class*=_icon]{
+      font-size: 11px;
+    }
+  }
+  .timeago { font-size: 14px; }
+
+  .local { display: none; }
+
+  &.alt-zone {
+    .utc   { display: none; }
+    .local { display: inline-block; }
+  }
+  .date, .time, .timeago {
+    white-space: nowrap;
+  }
+}
+
+.timeago {
+  white-space: nowrap;
+}

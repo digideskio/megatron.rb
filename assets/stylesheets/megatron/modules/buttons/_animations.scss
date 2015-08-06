@@ -1,0 +1,35 @@
+@keyframes blue-pulse {
+  0%, 100% {
+    background-color: $button-blue;
+  }
+  50% {
+    background-color: darken($button-blue, 12);
+  }
+}
+
+@keyframes green-pulse {
+  0%, 100% {
+    background-color: $green;
+  }
+  50% {
+    background-color: darken($green, 12);
+  }
+}
+
+@keyframes light-blue-pulse {
+  0%, 100% {
+    background-color: hsl(206, 43%, 94%);
+  }
+  50% {
+    background-color: #fdfdfd;
+  }
+}
+@keyframes destroy-pulse {
+  0%, 100% {
+    background-color: $button-red; 
+  }
+  50% {
+    background-color: darken($button-red, 8); 
+  }
+}
+

@@ -1,0 +1,13 @@
+.small-table {
+  @extend .table;
+  @include until($small) { 
+    &, .table-cell, .table-row, .table-head, .table-head-cell { display: block; }
+  }
+}
+.medium-table {
+  @extend .table;
+  @include until($medium) { 
+    &, .table-cell, .table-row, .table-head, .table-head-cell { display: block; }
+  }
+}
+

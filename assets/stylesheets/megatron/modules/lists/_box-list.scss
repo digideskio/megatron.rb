@@ -1,0 +1,53 @@
+.box-list {
+  @extend %base-list;
+  .list-item {
+    display: block;
+    border: $page-border 1px solid { bottom-width: 0 }
+    background: $bright-table-bg;
+    @include h-pad-box;
+    padding-bottom: 1px;
+
+    &:last-child {
+      border-bottom-width: 1px;
+    }
+  }
+  a.list-item {
+    text-decoration: none;
+    color: inherit;
+    &:hover {
+      background: $white;
+    }
+  }
+}
+
+.wide .list-item {
+  border: { 
+    left-color: transparent;
+    right-color: transparent;
+  }
+}
+
+.box .box-list {
+  margin: 0;
+  .list-item:first-child{
+    border-top-width: 0;
+    padding-top: 1px;
+  }
+}
+
+.after-icon {
+  position: relative;
+  &:after {
+    font-size: 1.5em;
+    color: $lightgray;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate(0, -50%);
+    transition: all .3s ease-out;
+    opacity: .5;
+  }
+  &:hover:after {
+    opacity: 1;
+  }
+}

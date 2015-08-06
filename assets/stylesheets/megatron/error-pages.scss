@@ -1,0 +1,164 @@
+@charset "UTF-8";
+$error-animation-step: .5s;
+* { box-sizing: border-box; }
+
+@import "modules/core/colors";
+@import "modules/core/mixins";
+@import "error-pages/animations";
+
+.error-layout {
+  background: #262b30;
+  height: 100%;
+  @media all and (min-width: 600px) and (min-height: 600px) { overflow: hidden; }
+
+  body {
+    overflow: visible;
+    text-align: center;
+  }
+
+  .error-page {
+    padding: 60px 0 20px;
+    display: inline-block;
+    font-family: Helvetica-neue, Helvetica, Arial, sans-serif;
+    color: #788392;
+    
+    svg {
+      position: relative;
+      overflow: visible;
+      z-index: 2;
+      transform: translate3d(0,0,0);
+      margin: 4em;
+    }
+
+    .error-message {
+      margin: 1em 0;
+      position: relative;
+      transform: translate3d(0,0,0);
+      z-index: 2;
+    }
+    
+    h1 {
+      font-size: 50px;
+      font-weight: normal;
+      margin: 0;
+      span {
+        animation: $error-animation-step*3 ease-out fade-in-slowly;
+      }
+    }
+    p {
+      font-size: 20px;
+      margin: 10px 0;
+      span {
+        animation: $error-animation-step*4 ease-out fade-in-slowly;
+      }
+    }
+
+    .support-links {
+      margin: 1.5em 0;
+      animation: $error-animation-step*5 ease-out fade-in-slowly;
+      position: relative;
+      z-index: 3;
+    }
+
+    a {
+      color: $shade;
+      text-decoration: none;
+      &:hover { text-decoration: underline; }
+      + a:before {
+        content: "";
+        position: relative;
+        top: -.3em;
+        width: 10px;
+        margin: 0 15px;
+        border-top: 1px solid $shade;
+        display: inline-block;
+      }
+    }
+    &.error-404 svg:hover + .error-message {
+      animation: error-party .9s linear infinite;
+      transform: translateY(10px);
+
+      [data-alt-message]{
+        font-size: 0;
+        &:before { content: attr(data-alt-message) }
+      }
+      h1[data-alt-message]:before {
+        font-size: 20px;
+      }
+      p[data-alt-message]:before {
+        font-size: 50px;
+      }
+      p {
+        animation: error-bounce .5s linear infinite; 
+      }
+    }
+  } 
+
+  @for $i from 1 through 12 {
+    [id$=cube-#{$i}], [id$=cube-#{$i + 12}], [id$=cube-#{$i + 24}] {
+      animation: drop-cube-#{$i} .9s cubic-bezier(0.190, 1.000, 0.320, 1.000);
+      path {
+        animation: fade-cube-#{$i} .9s cubic-bezier(0.190, 1.000, 0.320, 1.000);
+      }
+    }
+  }
+
+  .reverse-stack svg:hover + .error-message {
+    h1[data-alt-message]:before { 
+      font-size: 20px;
+      position: relative;
+      top: 10px;
+    }
+
+    p[data-alt-message]:before  { 
+      font-size: 50px;
+    }
+
+  }
+
+  .error-404 svg:hover {
+
+    @for $i from 1 through 12{
+      [id$=cube-#{$i}] path, [id$=cube-#{$i + 12}] path, [id$=cube-#{$i + 24}] path {
+        animation: fade-out-cube-#{$i} .7s cubic-bezier(0.190, 1.000, 0.320, 1.000) infinite;
+      }
+    }
+
+  }
+}
+
+$logo-width: 20px;
+$logo-height: $logo-width * 1.173;
+$cube-animation-style: 1.5s ease-out infinite;
+
+@include tetromino-graphics(small, $logo-width, $logo-height, 47515b, 262b30);
+
+.hidden_label {
+  font-size: 0;
+}
+
+.compose-logo {
+  position: relative;
+  height: $logo-height * 1.7;
+  width: $logo-width * 2.5;
+  display: inline-block;
+  text-align: left;
+  top: -5px;
+  margin: 4em 0;
+
+  &:before, &:after,
+  .hidden_label:before,
+  .hidden_label:after   { @extend %small-tetromino; }
+
+  &:before              { @extend %small-tetromino-position-1 }
+  .hidden_label:before  { @extend %small-tetromino-position-2 }
+  .hidden_label:after   { @extend %small-tetromino-position-3 }
+  &:after               { @extend %small-tetromino-position-4 }
+
+  &:hover {
+    &:before              { animation: small-tetromino-animation-1 $cube-animation-style; }
+    .hidden_label:before  { animation: small-tetromino-animation-2 $cube-animation-style; }
+    .hidden_label:after   { animation: small-tetromino-animation-3 $cube-animation-style; z-index: 2; }
+    &:after               { animation: small-tetromino-animation-4 $cube-animation-style; }
+  }
+}

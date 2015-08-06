@@ -1,0 +1,99 @@
+input[type=checkbox]:not(.switch), input[type=radio]:not(.switch) { 
+  position: absolute;
+  z-index: -100;
+  opacity: 0;
+  + label {
+    margin-right: .4em;
+    font-size: 16px;
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    $size: 18px;
+    &:before {
+      transition: background-color .3s ease-out, box-shadow .15s ease, border-color .15s ease;
+      content: "";
+      width: $size; height: $size;
+      position: relative;
+      display: inline-block;
+      text-align: center;
+      top: 3px;
+      margin-right: 8px;
+      border: 1px solid hsl(0, 0%, 79%);
+      cursor: pointer;
+      background-color: #fff;
+    }
+    &:after {
+      content: "";
+      position: absolute;
+    }
+  }
+  &:focus + label:before {
+    box-shadow: lighten($blue, 20) 0 0 0 2px inset;
+    border-color: lighten($blue, 10);
+
+  }
+  &:checked + label {
+    &:before {
+      background-color: $blue;
+      border-color: darken($blue, 10);
+    }
+  }
+}
+
+input[type=checkbox]:not(.switch) {
+  + label {
+    &:before {
+      border-radius: 4px;
+    }
+    &:after {
+      left: 5px;
+      width: 8px; height: 4px;
+      border: 3px solid rgba($blue, 0) { top: none; right: none;};
+      top: .55em;
+      transform: rotate(-45deg);
+    }
+
+    &:hover:after {
+      border-color: rgba(#000, .2);
+    }
+  }
+
+  + label.plain { 
+    &:before { top: 1px; }
+    &:after { top: 3px; }
+  }
+
+  &:checked + label {
+    &:after {
+      border-color: #fff;
+    }
+  }
+}
+
+input[type=radio]:not(.switch) {
+  + label {
+    &:before { 
+      border-radius: 50%;
+    }
+
+    &:after {
+      $size: 6px;
+      width: $size; height: $size;
+      border-radius: 50%;
+      left: 7px;
+      top: 55%;
+      transform: translateY(-50%);
+    }
+
+    &:hover:after {
+      background-color: rgba(#000, .2);
+    }
+
+  }
+  &:checked + label {
+    &:after {
+      background-color: #fff;
+    }
+  }
+}
+

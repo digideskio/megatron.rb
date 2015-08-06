@@ -1,0 +1,31 @@
+form {
+  width: 100%;
+
+  &.max {
+    max-width: 100%;
+  }
+
+  fieldset {
+    padding: 0;
+    border: 0;
+  }
+}
+
+label {
+  font-size: 15px;
+}
+
+form, .form-width {
+  max-width: 700px;
+}
+
+.form-row {
+  margin: .8em 0;
+  &.split {
+    margin-top: 1.3em;
+    padding-top: .5em;
+    border-top: 1px solid $page-border;
+    box-shadow: #fff 0 1px inset;
+  }
+}
+

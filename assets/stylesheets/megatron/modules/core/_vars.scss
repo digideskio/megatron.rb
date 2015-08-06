@@ -1,0 +1,30 @@
+@import "z-index";
+// Global breakpoints
+$tiny: 320px;
+$x-small: 450px;
+$small: 600px;
+$medium: 750px;
+$large: 900px;
+$x-large: 1020px;
+$max: 1500px;
+
+$h-pad-box: 8px, 12px;
+$v-pad-box: 8px, 14px;
+
+// Widths for primary navigation
+// Standard and mobile epxanded
+$primary-nav-width: (
+  small: 75%,
+  large: 65px
+);
+
+$secondary-nav-width: (
+  small: 42px, large: 140px
+);
+
+$page-header-height: 52px;
+$plain-page-header-height: 40px;
+
+$main-sidebar-width: 300px;
+
+$block-margin: 1em;

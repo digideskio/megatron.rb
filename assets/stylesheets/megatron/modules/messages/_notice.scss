@@ -1,0 +1,57 @@
+.notice {
+  $notice-yellow: $softyellow;
+  $notice-blue: $softblue;
+  $notice-green: $softgreen;
+  $notice-red: $softred;
+  $notice-gray: $offwhite;
+
+  border-radius: 3px;
+  @include h-pad_box;
+  border: {
+    width: 1px;
+    style: solid;
+  }
+  margin: { top: $block-margin; bottom: $block-margin; }
+
+  // Themes
+  //
+  &.info {
+    @extend .softblue-box;
+  }
+  &.positive {
+    @extend .softgreen-box;
+  }
+  &.warning {
+    @extend .softyellow-box;
+  }
+  &.error {
+    @extend .softred-box;
+  }
+
+  // Layouts
+  //
+  &.full, &.flush {
+    @include invert-h-pad;
+    border: {
+      radius: 0;
+      left: 0;
+      right: 0;
+    }
+  }
+
+  &.flush {
+    margin-top: 0;
+    border-top-color: transparent;
+    transform: translateY(-1px);
+  }
+
+  // Children
+  p {
+    margin: { top: $block-margin * .8; bottom: $block-margin * .8; }
+  }
+
+  a:hover, :focus {
+    color: $blue;
+  }
+
+}

@@ -1,0 +1,7 @@
+.auto-navigate {
+  cursor: pointer;
+
+  &:active {
+    cursor: text;
+  }
+}

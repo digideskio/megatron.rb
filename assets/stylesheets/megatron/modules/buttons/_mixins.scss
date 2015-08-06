@@ -1,0 +1,108 @@
+@function auto-gradient($color, $difference: 5%) {
+  @return linear-gradient(scale-color($color, $lightness: $difference), scale-color($color, $lightness: -$difference))
+}
+
+@mixin light-button-gradient { 
+  background-image: linear-gradient(
+    rgba(#fff, 1) 2%, rgba(#fff, .6) 40%, rgba(#fff, .4) 50%, rgba(#fff, .1) 80%, rgba(#fff, 0) 95%
+  );
+}
+
+@mixin dark-button-gradient  {
+  background-image: linear-gradient(
+    rgba(#fff,.5), rgba(#fff, .2) 2%, rgba(#fff, .02) 50%, rgba(#fff, 0) 50%
+  );
+}
+
+@mixin dark-outline-button($color) {
+  @extend %btn-base;
+  @include border-button($color);
+  color: $color;
+  text-shadow: none;
+
+  &:hover {
+    @include dark-button(darken($color, 5));
+  }
+
+  &:hover, &:focus {
+    color: #fff;
+  }
+
+  &:focus {
+    @include dark-button($color);
+    box-shadow: rgba(#fff, .5) 0 0 0 2px inset;
+  }
+
+  &:active {
+    color: #fff;
+    background-color: darken($color, 8);
+    background-image: none;
+    @include dark-button-active-shadow;
+  }
+}
+
+@mixin dark-text-shadow($color) {
+  text-shadow: scale-color($color, $lightness: -25%) 0 1px 1px;
+}
+
+@mixin light-text-shadow($color) {
+  text-shadow: scale-color($color, $lightness: 85%) 0 1px 1px;
+}
+
+@mixin light-button($color) {
+  @include light-text-shadow($color);
+  background-color: $color;
+  $border: scale-color($color, $lightness: -20%);
+  box-shadow: $border 0 0 0 1px inset;
+}
+
+@mixin border-button($color) {
+  @include light-text-shadow($color);
+  background-color: transparent;
+  box-shadow: $color 0 0 0 2px inset;
+}
+
+@mixin dark-button($color) {
+  @include dark-text-shadow($color);
+  background-color: $color;
+  box-shadow: $color 0 0 0 1px inset;
+}
+
+@mixin light-button-active-shadow {
+  box-shadow: rgba(#000, .2) 0 1px 7px inset;
+}
+
+@mixin dark-button-active-shadow {
+  box-shadow: rgba(#000, .3) 0 1px 10px inset;
+}
+
+@mixin not-disabled($sel: false) {
+  $not-attr: "&:not([disabled])";
+  $not-class: ":not(.disabled)";
+  @if ($sel) {
+    $not-attr: $not-attr + $sel;
+    $not-class: $not-class + $sel;
+  }
+
+  #{$not-attr + $not-class} { @content; }
+}
+
+@mixin input-active {
+  @include not-disabled('.active') { @content; }
+  @include not-disabled(':active') { @content; }
+}
+
+@mixin input-focus {
+  @include not-disabled(':focus') { @content; }
+}
+
+@mixin input-hover {
+  @include not-disabled(':hover') { @content; }
+}
+
+@mixin input-hover-focus {
+  @include not-disabled(':hover') { @content; }
+  @include not-disabled(':focus') { @content; }
+}
+
+

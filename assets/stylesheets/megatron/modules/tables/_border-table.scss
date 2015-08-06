@@ -1,0 +1,28 @@
+.border-table {
+  @extend %table_base;
+  border-bottom: $page-border 1px solid;
+  display: table;
+
+  th, .table-head-cell {
+    color: $light-text-color;
+    @include v-pad_box((3px, 5px));
+    text-shadow: 0 1px rgba(#fff, .8);
+    font-size: 12px;
+    background-color: $silver;
+  }
+
+  .table-row {
+    display: table-row;
+  }
+  .table-cell {
+    display: table-cell;
+  }
+
+  .table-cell, .table-head-cell, td, th{
+    border: $page-border 1px solid;
+  }
+  .table-cell, td {
+    background: $bright-table-bg;
+  }
+
+}

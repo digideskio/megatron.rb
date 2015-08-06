@@ -1,0 +1,41 @@
+.grid-demo .grid-cell {
+
+  code {
+    display: inline-block;
+    color: #fff;
+    background: hsl(200, 65%, 72%); 
+    width: 100%;
+    border: none;
+    border-radius: 0px;
+    line-height: 1.8em;
+    margin-bottom: 1px;
+  }
+  .grid {
+    code {
+      background: hsl(160, 45%, 72%); 
+    }
+  }
+}
+
+.cell-size-demo {
+  .grid-cell:nth-child(even) {
+    code {
+      background: hsl(200, 12%, 90%);
+      color: #444;
+    }
+  }
+}
+
+.gutter-demo {
+  .grid-cell:nth-child(2) code {
+     background: hsl(160, 45%, 72%); 
+  }
+
+  .grid-cell:nth-child(3) code {
+     background: hsl(0, 45%, 72%); 
+  }
+
+  .grid-cell:nth-child(4) code {
+     background: hsl(240, 45%, 72%); 
+  }
+}

@@ -1,0 +1,98 @@
+$code-selected-bg: #BDE1FF;
+
+.cm-s-default {
+  .cm-keyword {color: $code_blue;}
+  .cm-atom {color: $code_yellow;}
+  .cm-number {color: $code_cyan;}
+  .cm-def {color: $code_magenta; font-weight: bold;}
+  .cm-variable {color: $code_orange;}
+  .cm-variable-2 {color: $code_blue;}
+  .cm-variable-3 {color: $code_green;}
+  .cm-property {color: $code_base1;}
+  .cm-operator {color: $code_base1;}
+  .cm-comment {color: $code_base01;}
+  .cm-string {color: $code_cyan;}
+  .cm-string-2 {color: $code_green;}
+  .cm-meta {color: #555;}
+  .cm-error {color: $code_red;}
+  .cm-qualifier {color: #555;}
+  .cm-builtin {color: #30a;}
+  .cm-bracket {color: #997;}
+  .cm-tag {color: $code_blue; font-weight: bold;}
+  .cm-attribute {color: $code_base1;}
+  .cm-header {color: blue;}
+  .cm-quote {color: #090;}
+  .cm-hr {color: #999;}
+  .cm-link {color: $code_violet;}
+  .cm-qualifier.cm-attribute {color: $code_orange;}
+  .cm-error {color: #f00;}
+}
+
+.static-code {
+  .cm-variable {color: $code_base1;}
+}
+
+.cm-negative {color: #d44;}
+.cm-positive {color: #292;}
+.cm-header, .cm-strong {font-weight: bold;}
+.cm-em {font-style: italic;}
+.cm-link {text-decoration: underline;}
+
+.cm-invalidchar {color: #f00;}
+
+
+div.CodeMirror {
+  background: $softwhite;
+  border: 1px solid $page-border;
+  border-radius: 4px;
+  padding: 5px;
+  font-family: $mono-font;
+
+  pre {
+    color: $code_base0;
+    font-size: 14px;
+    cursor: text; 
+  }
+  .CodeMirror-cursor {
+    border-left: 2px solid #43baff;
+  }
+  .CodeMirror-cursor {
+    border-left: 2px solid #43baff;
+  }
+  span.CodeMirror-matchingbracket {
+    color: $boyblue; font-weight: bold;
+  }
+  span.CodeMirror-nonmatchingbracket {
+    color: $code_red;
+  }
+}
+
+.CodeMirror-scroll {
+  height: 100%;
+  overflow-y: hidden;
+  overflow-x: auto;
+  min-height: 250px;
+  padding-bottom: 0;
+}
+
+.code-editor, .code-editor-content {
+  height: 100%;
+  .CodeMirror {
+    height: 100%;
+    max-height: 100%;
+  }
+}
+
+div.CodeMirror-focused {
+  border-color: hsl(203, 47%, 65%);
+  background-color: #fff;
+  box-shadow: 0 0 0 2px hsl(203, 47%, 65%) inset;
+}
+
+.document-view {
+  pre { cursor: default; }
+  .CodeMirror-cursor { display: none; }
+}
+
+div.CodeMirror-selected { background: desaturate($code-selected-bg, 100); }
+.CodeMirror-focused div.CodeMirror-selected { background: $code-selected-bg; }

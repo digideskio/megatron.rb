@@ -1,0 +1,67 @@
+$page-header-bg: #fafafa;
+
+header {
+  h1,h2,h3,h4,h5,h6 {
+    margin: { top: $block-margin; bottom: $block-margin; }
+  }
+}
+
+.page-header, .main-header, .box-header {
+  display: table;
+  width: 100%;
+
+  > * {
+    vertical-align: middle;
+  }
+
+  h1,h2,h3,h4,h5,h6 {
+    display: table-cell;
+  }
+}
+
+.main-header {
+  margin: { top: $block-margin; bottom: $block-margin; }
+}
+
+.page-header {
+  background: $page-header-bg;
+  border-bottom: $page-border 1px solid;
+  @include h-pad_box;
+  height: $page-header-height;
+  position: relative;
+  z-index: 2;
+
+  h1 {
+    margin: 0;
+    font-size: 22px;
+    line-height: 1em;
+    font-weight: normal;
+  }
+
+  &.plain {
+    border-bottom: none;
+    background: none;
+  }
+
+  .breadcrumb {
+    font-weight: normal;
+    text-decoration: none;
+  }
+}
+
+.page-header-content {
+  padding-top: 14px;
+  padding-bottom: 15px;
+  display: table-cell;
+}
+
+
+.page-header-info {
+  font-size: 12px;
+  @extend .expand;
+  @extend .h-padded;
+  &:last-child {
+    position: relative;
+    top: 7px;
+  }
+}

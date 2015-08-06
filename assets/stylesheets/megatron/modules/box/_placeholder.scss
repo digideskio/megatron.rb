@@ -1,0 +1,6 @@
+.placeholder-box {
+  background: $white;
+  border: 1px solid $page-border;
+  text-align: center;
+  @include v-pad-box;
+}

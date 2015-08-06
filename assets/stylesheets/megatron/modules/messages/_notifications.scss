@@ -1,0 +1,126 @@
+$status-text: #fff;
+$status-text-shadow: rgba(#000, .2) 0 1px 1px;
+
+@mixin notification-style($color) {
+  .notification-content { 
+    background: $color;
+  }
+  .notification-content:before {
+    background: darken($color, 10);
+  }
+}
+
+.form-flash {
+  display: none;
+}
+
+.notification {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: 1px;
+  z-index: $z-notifications;
+  overflow: visible;
+  transform: translate3d(0,0,0);
+  &:after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 56px;
+    z-index: -1;
+  }
+
+  &-content {
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    color: $status-text;
+    text-shadow: $status-text-shadow;
+    background: $purple;
+    display: table;
+    table-layout: fixed;
+    animation: slide-down .3s;
+    @extend .bubble_icon;
+    &:before {
+      @include smooth-text;
+      background: darken($purple, 10);
+      font-family: 'roboticons';
+      display: table-cell;
+      width: 65px;
+      font-size: 30px;
+      vertical-align: middle;
+      text-align: center;
+    }
+  }
+
+  &-message, &-close {
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  &-message {
+    padding: 8px 15px;
+    a { 
+      color: #fef0bd;
+      &:hover, &:focus {
+        color: inherit;
+      }
+    }
+  }
+
+  &-close {
+    width: 54px;
+    text-align: center;
+    text-decoration: none;
+    padding: 14px;
+    font-size: 25px;
+    color: #fff;
+    cursor: pointer;
+    opacity: .7;
+    transition: opacity .1s ease-out;
+    animation: half-spin .5s ease-out;
+
+    [class*=_icon]{
+      display: block;
+      transform: scale(.80, .80);
+      transition: all .3s cubic-bezier(0.190, 1.000, 0.220, 1.000);
+      cursor: pointer;
+      &:before {
+        position: relative;
+        top: 3px;
+        cursor: pointer;
+      }
+    }
+
+    &:focus, &:hover {
+      opacity: 1;
+      outline: none;
+      [class*=_icon]{
+        transform: scale(1, 1);
+      }
+    }
+  }
+
+  &.dismiss {
+    animation: fade-out .3s .2s ease-in;
+    .notification-content {
+      animation: slide-up .2s .3s ease-out;
+    }
+    .notification-close {
+      animation: half-spin .5s ease-in reverse;
+    }
+  }
+
+  &.error {
+    @include notification-style($red);
+  }
+
+  &.action {
+    @include notification-style($boyblue);
+  }
+  &.success {
+    @include notification-style($green);
+  }
+
+  &.message {
+    @include notification-style($slate);
+  }
+}

@@ -1,0 +1,96 @@
+$error-drop-distance: 200px;
+
+@for $i from 1 through 12 {
+  @keyframes drop-cube-#{$i} {
+    0%, #{7 * $i}% {
+      transform: translateY($error-drop-distance);
+    } 100% {
+      transform: translateY(0);
+    }
+  }
+  @keyframes fade-cube-#{$i} {
+    0%, #{7 * $i}% {
+      opacity: 0;
+    } 
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes fade-out-cube-#{$i} {
+    $start: 3 * $i;
+    $mid: 100 - $start;
+    0%, #{$start}% {
+      opacity: 1;
+    }
+    #{$mid}% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+}
+
+@keyframes error-party {
+  0% {
+    color: #8e55dd;
+  } 20% {
+    color: #967adc;
+  } 40% {
+    color: #fef0bd;
+  } 60% {
+    color: #d4eef7;
+  } 80% {
+    color: #82c1ed;
+  } 100% {
+    color: #5d9cec;
+  }
+}
+
+@keyframes fade-in-slowly {
+  0%   { opacity: 0; }
+  80%  { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes error-bounce {
+  0%, 100% {
+    transform: scale(.95, .95)
+  }
+  50% {
+    transform: scale(1, 1)
+  }
+}
+
+/*
+  @keyframes waves-1 {
+    0% {
+      transform: translate(0px, 0px);
+    } 100% {
+      transform: translate(40px, 0px);
+    }
+  }  
+  @keyframes waves-2 {
+    0% {
+      transform: translate(0px, 0px);
+    } 100% {
+      transform: translate(-40px, 0px);
+    }
+  }
+
+  @keyframes tide {
+    0%, 100% {
+      transform: translateY(0);
+    } 50% {
+      transform: translateY(-25px);
+    }
+  }
+
+  @keyframes csi {
+    0% {
+      transform: translateY(1.5em);
+    } 100% {
+      transform: translateY(-1.5em * 4);
+    }
+  }
+*/

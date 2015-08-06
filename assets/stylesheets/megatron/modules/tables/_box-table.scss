@@ -1,0 +1,36 @@
+.box-table {
+  @extend %table_base;
+  display: table;
+  border-collapse: collapse;
+
+  thead, .table-head {
+    color: $light-text-color;
+    font-size: 12px;
+  }
+
+  .table-row {
+    display: table-row;
+  }
+
+  .table-cell, td {
+    border-top: $page-border 1px solid;
+    border-bottom: $page-border 1px solid;
+    background: $bright-table-bg;
+    display: table-cell;
+
+    &:first-child {
+      border-left: $page-border 1px solid;
+    }
+    &:last-child {
+      border-right: $page-border 1px solid;
+    }
+  }
+
+  thead th, thead td, .table-head .table-cell {
+    font-weight: normal;
+    border-color: transparent;
+    background: transparent;
+    border-bottom: none;
+  }
+}
+

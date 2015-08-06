@@ -1,0 +1,87 @@
+$main-nav-bg: lighten($secondary_nav-bg, 1);
+$main-nav-here-bg: $main-bg;
+$main-nav-color: $lightgray;
+$main-nav-here-color: $mediumgray;
+
+.tabs {
+  @include invert-h-pad;
+  @include h-pad_box;
+  margin: { top: $block-margin; bottom: $block-margin; }
+  border-bottom: 1px solid $page-border;
+  display: table;
+  top: 1px;
+  position: relative;
+
+  // Fake table cell allowing tabs to have auto-width
+  &:after {
+    display: table-cell;
+    width: 100%;
+    content: "";
+  }
+
+  .tab-btn {
+    position: absolute;
+    right: nth($h-pad-box, 1);
+    @include at-least($medium) {
+      right: nth($h-pad-box, 2);
+    }
+  }
+}
+
+.box-tabs {
+  border: 1px solid $page-border;
+  .box &:not(:first-child) {
+    border-top: 0;
+  }
+}
+
+.tab {
+  display: table-cell;
+  width: auto;
+  padding: 10px 13px;
+  text-decoration: none;
+  color: $main-nav-color;
+  font-size: 14px;
+  position: relative;
+  top: 1px;
+  white-space: pre;
+
+  border: {
+    width: 1px;
+    left-width: 0;
+    style: solid;
+    color: $page-border;
+  }
+
+  &:hover, &:focus {
+    color: $gray;
+  }
+
+  &.here {
+    color: $mediumgray;
+    background: linear-gradient(rgba(#fff, .8), rgba(#fff, 0));
+  }
+}
+
+.box-tabs .tab {
+  border-top: 0;
+
+  &.here {
+    background-color: $white;
+  }
+}
+
+.tabs .tab {
+  &:first-child {
+    border-top-left-radius: 5px;
+    border-left-width: 1px;
+  }
+
+  &:last-of-type {
+    border-top-right-radius: 5px;
+  }
+  &.here {
+    border-bottom-color: $main-nav-here-bg;
+  }
+}
+

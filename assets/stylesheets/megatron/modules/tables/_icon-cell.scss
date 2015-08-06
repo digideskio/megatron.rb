@@ -1,0 +1,9 @@
+.icon-cell.icon-cell {
+  width: 1%;
+  padding-right: 4px;
+  border-right: none;
+  + .table-cell, + td {
+    border-left: none;
+    padding-left: 4px;
+  }
+}

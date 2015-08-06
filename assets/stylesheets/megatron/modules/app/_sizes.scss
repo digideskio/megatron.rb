@@ -1,0 +1,28 @@
+.tiny-width { max-width: $tiny; }
+.x-small-width { max-width: $x-small; }
+.small-width { max-width: $small; }
+.medium-width { max-width: $medium; }
+.large-width { max-width: $large; }
+.x-large-width { max-width: $x-large; }
+.max-width { max-width: 100%; }
+
+.small-height { max-height: 5em; }
+.medium-height { max-height: 15em; }
+.large-height { max-height: 20em; }
+.x-large-height { max-height: 25em; }
+.xx-large-height { max-height: 30em; }
+.max-height { max-height: 100%; }
+
+.max-height-small    { max-height: 5em; }
+.max-height-medium   { max-height: 15em; }
+.max-height-large    { max-height: 20em; }
+.max-height-x-large  { max-height: 25em; }
+.max-height-xx-large { max-height: 30em; }
+.max-height-max      { max-height: 100%; }
+
+.min-height-small    { min-height: 5em; }
+.min-height-medium   { min-height: 15em; }
+.min-height-large    { min-height: 20em; }
+.min-height-x-large  { min-height: 25em; }
+.min-height-xx-large { min-height: 30em; }
+.min-height-max      { min-height: 100%; }

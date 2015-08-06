@@ -1,0 +1,21 @@
+.main-sidebar {
+  @include h-pad_box;
+  @include until($x-large) {
+    @include invert-h-pad;
+    border-top: 1px solid $page-border;
+    box-shadow: #fff 0 1px inset;
+  }
+  @include at-least($x-large) {
+    padding-top: 1px;
+    background: $page-gray;
+    border-left: 1px solid $page-border;
+  }
+  section {
+    margin: { top: $block-margin; bottom: $block-margin; }
+  }
+
+  section + section {
+    border-top: 1px solid $page-border;
+    box-shadow: #fff 0 1px inset;
+  }
+}

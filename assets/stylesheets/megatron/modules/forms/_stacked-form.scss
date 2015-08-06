@@ -1,0 +1,29 @@
+.stacked-form {
+  margin: .8em 0;
+
+  label:first-child {
+    font-size: .9em;
+    display: block;
+    margin: .8em 0;
+  }
+
+  [type=checkbox] + label,
+  [type=radio] + label {
+    font-size: 1em;
+  }
+
+  [type=text],[type=password] {
+    width: 100%;
+  }
+
+  .auto {
+    width: auto;
+  }
+
+  @include at-least($medium) {
+    label {
+      font-size: 1em;
+    }
+  }
+}
+

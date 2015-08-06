@@ -1,0 +1,8 @@
+$header-pad: 15px; 
+
+.site-header {
+  text-shadow: darken($base-bg, 25) 0 -1px;
+  padding: $header-pad;
+  position: absolute;
+  width: 100%;
+}

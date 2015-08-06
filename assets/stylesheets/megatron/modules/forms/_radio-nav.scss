@@ -1,0 +1,62 @@
+.radio-nav {
+
+  display: inline-block;
+  position: relative;
+  /*overflow: hidden;*/
+  /*border-radius: 5px;*/
+  /*box-shadow: #fff 0 1px 1px, rgba(#000, .18) 0 0 0 1px inset;*/
+  margin: { top: $block-margin/2; bottom: $block-margin/2; }
+  letter-spacing: -4px;
+  z-index: 1;
+
+  input {
+    position: absolute;
+    z-index: -100;
+    opacity: 0;
+    top: 0;
+    left: 0;
+  }
+
+  label {
+    text-align: left;
+    letter-spacing: normal;
+    cursor: pointer;
+    display: inline-block;
+    padding: 2px 12px;
+    line-height: 1.8em;
+    font-size: 13px;
+    color: $gray;
+    background-color: $silver;
+    box-shadow: $lightgray 0 0 0 1px;
+    position: relative;
+  }
+
+  input:first-child + label {
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+  }
+
+  label:last-child {
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-right: 0;
+  }
+
+  input:focus + label, label:hover {
+    background-color: $offwhite;
+    color: $mediumgray;
+  }
+
+  input:focus + label {
+    box-shadow: hsl(204, 67%, 70%) 0 0 0 1px, hsl(204, 67%, 70%) 0 0 0 1px inset;
+    z-index: 1;
+  }
+
+  input:checked + label {
+    color: $night;
+    background-image: linear-gradient(#fff, rgba(#fff, 0));
+    background-color: $offwhite;
+  }
+}
+
+

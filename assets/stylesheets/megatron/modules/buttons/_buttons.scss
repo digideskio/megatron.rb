@@ -1,0 +1,266 @@
+$button-blue: $boyblue;
+$button-red: $red;
+$button-dark: lighten($night, 8);
+
+// Button style reset and basic styles
+@mixin btn-base() {
+  font: {
+    size: 14px;
+    family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+
+  padding: 4px 16px;
+  border-radius: 4px;
+  line-height: 31px;
+
+  vertical-align: middle;
+  margin: { top: 0; bottom: 0 }
+  text-align: center;
+  cursor: pointer;
+  display: inline-block;
+  /*border: transparent 1px solid;*/
+  border: none;
+  @include smooth-text;
+
+  // Remove default outlines
+  &:active, &:hover   { outline: none }
+  &:focus             { outline: none; }
+  &::-moz-focus-inner { border: none; padding: 0; }
+
+  // Remove any hover decorations for links
+  &, &:hover, &:focus { text-decoration: none; }
+
+  &.small {
+    font-size: 10px;
+    padding: 1px 8px;
+    border-radius: 4px;
+    line-height: 20px;
+  }
+
+  &.medium {
+    font-size: 13px;
+    padding: 3px 10px;
+    border-radius: 4px;
+    line-height: 24px;
+  }
+
+  &.large {
+    font-size: 18px;
+    padding: 8px 20px;
+    border-radius: 5px;
+    line-height: 32px;
+  }
+  &.x-large {
+    font-size: 24px;
+    padding: 12px 25px;
+    border-radius: 5px;
+    line-height: 32px;
+  }
+}
+
+%btn-base {
+  @include btn-base;
+  font-weight: bold;
+  &:focus {
+    transition: box-shadow .15s ease;
+  }
+
+  &:hover, &:active {
+    transition: none;
+  }
+
+  &.disabled, &[disabled] {
+    opacity: .5;
+    cursor: default;
+    pointer-events: none;
+  }
+}
+
+.btn {
+  $bg: #fdfdfd;
+
+  @extend %btn-base;
+  @include light-button($bg);
+  color: $text-color;
+
+  &:hover, &:focus {
+    $bg: hsl(206, 43%, 96%);
+    background-color: $bg;
+    box-shadow: hsl(203, 47%, 65%) 0 0 0 1px inset;
+    color: hsl(204, 36%, 46%);
+  }
+
+  &:focus {
+    animation: light-blue-pulse 1.5s linear infinite;
+    box-shadow: hsl(204, 67%, 70%) 0 0 0 2px inset;
+  }
+
+  &:active {
+    background-color: $bg;
+    background-image: none;
+    box-shadow: hsl(203, 47%, 65%) 0 0 0 1px inset, rgba(#000, .2) 0 1px 7px inset;
+  }
+}
+
+.text-btn {
+  @include btn-base;
+  border: 0;
+  padding: { left: 0; right: 0; }
+  border-radius: 0;
+  margin: 0 15px;
+  background: transparent linear-gradient($button-blue, $button-blue) 50% 75%/0px 1px no-repeat;
+  transition: background .1s ease, color .15s ease;
+
+  color: $text-color;
+
+  text-shadow: 1px 0 hsl(0, 100%, 100%), -1px 0 hsl(0, 100%, 100%), 2px 0 hsl(0, 100%, 100%), -2px 0 hsl(0, 100%, 100%);
+  &:hover, &:focus {
+    color: $button-blue;
+    background: transparent linear-gradient($button-blue, $button-blue) 50% 75%/100% 1px no-repeat;
+  }
+
+  &:active {
+    transform: scale(.97, .97);
+    color: $text-color;
+    background: transparent linear-gradient($text-color, $text-color) 50% 75%/100% 1px no-repeat;
+  }
+}
+
+.primary-btn {
+  @extend %btn-base;
+  @include dark-button($button-blue);
+  color: #fff;
+
+  &:hover {
+    @include dark-button(darken($button-blue, 8));
+    color: #fff;
+  }
+
+  &:focus {
+    border-color: transparent;
+    animation: blue-pulse 1.5s linear infinite;
+    box-shadow: lighten($button-blue, 20) 0 0 0 2px inset;
+    color: #fff;
+  }
+
+  &:active {
+    background-color: darken($button-blue, 5);
+    background-image: none;
+    @include dark-button-active-shadow;
+  }
+}
+
+.destroy-btn {
+  $destroy-bright: #fdfdfd;
+  $button-red: $red;
+
+  @extend %btn-base;
+
+  @include light-button($destroy-bright);
+  color: $button-red;
+
+  &:focus {
+    border-color: $button-red;
+    box-shadow: rgba($button-red, 0.8) 0 0 0 2px inset;
+  }
+
+  &:hover {
+    @include dark-button($button-red);
+    color: #fff;
+  }
+
+  &:active {
+    color: #fff;
+    background-color: darken($button-red, 8);
+    border-color: scale-color($button-red, $lightness: -30%);
+    background-image: none;
+    @include dark-button-active-shadow;
+    @include dark-text-shadow(scale-color($button-red, $lightness: -5%));
+  }
+}
+
+.primary-destroy-btn {
+  $button-darkred: darken($button-red, 8);
+  @extend %btn-base;
+  @include dark-button($button-red);
+  color: #fff;
+
+  &:hover, &:focus {
+    @include dark-button($button-darkred);
+    color: #fff;
+  }
+
+  &:focus {
+    animation: destroy-pulse 1.5s linear infinite;
+    box-shadow: lighten($button-red, 25) 0 0 0 2px inset;
+  }
+
+  &:active {
+    color: #fff;
+    background-color: $button-darkred;
+    border-color: transparent;
+    @include dark-button-active-shadow;
+  }
+}
+
+.dark-btn {
+  color: #fff;
+  @extend %btn-base;
+  @include dark-button($button-dark);
+  
+  &:hover {
+    @include dark-button(darken($button-dark, 8));
+  }
+
+  &:focus {
+    box-shadow: rgba(#fff, .5) 0 0 0 2px inset;
+    border-color: transparent;
+  }
+
+  &:active {
+    background-color: darken($button-dark, 12);
+    background-image: none;
+    @include dark-button-active-shadow;
+  }
+}
+
+.green-btn {
+  @extend %btn-base;
+  @include dark-button($green);
+  color: #fff;
+
+  &:hover {
+    @include dark-button(darken($green, 5));
+  }
+
+  &:focus {
+    border-color: transparent;
+    box-shadow: lighten($green, 20) 0 0 0 2px inset;
+  }
+
+  &:active {
+    background-color: darken($green, 8);
+    background-image: none;
+    @include dark-button-active-shadow;
+  }
+}
+
+.green-outline-btn {
+  @include dark-outline-button($green);
+}
+
+.blue-outline-btn {
+  @include dark-outline-button($boyblue);
+}
+
+.dark-outline-btn {
+  @include dark-outline-button($button-dark);
+}
+
+.header-btn {
+  margin-left: 8px;
+  float: right;
+  .page-header & {
+    margin: 13px 0;
+  }
+}

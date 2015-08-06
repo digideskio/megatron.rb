@@ -1,0 +1,65 @@
+/* Set up the basic look and feel */
+
+code,
+kbd,
+samp {
+  color: inherit;
+  background-color: rgba(#fff, .3);//$code_base03;
+  border: 1px solid rgba(#000, .1);
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+  font-size: .95em;
+  border-radius: 3px;
+  &:before, &:after {
+    content: "\00a0";
+    letter-spacing: -0.2em;
+  }
+}
+
+pre[class*=lang-]{
+  padding: 1em;
+}
+
+pre.box-content {
+  margin-top: 0;
+}
+
+.highlighted {
+  border: 1px solid #e5e5e5;
+  position: relative;
+  background-color: $code_base03;
+  color: $code_base0;
+  line-height: inherit;
+  overflow-y: scroll;
+  font-size: 14px;
+  max-width: 100%;
+  word-break: normal;
+  word-wrap: normal;
+}
+
+.highlighted-code {
+  font-family: $mono-font;
+  background: none;
+  direction: ltr;
+  display: block;
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+  tab-size: 2;
+  text-align: left;
+  word-spacing: normal;
+  line-height: inherit;
+  word-break: normal;
+  word-wrap: normal;
+  overflow-x: scroll;
+
+  display: block;
+  border: none;
+  font-size: inherit;
+
+  &:before, &:after {
+    content: none;
+  }
+}
+
+

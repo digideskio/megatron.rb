@@ -1,0 +1,61 @@
+$header-pad: 15px; 
+
+// Nav button for toggling mobile nav
+.nav_toggle {
+  
+  float: left;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 8px 2px;
+  border: 0px;
+  background: none;
+  position: absolute;
+  right: $header-pad;
+  
+  // Do not show for large screens
+  @include at-least($medium){
+    display: none;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  .icon {
+    &, &:before, &:after {
+      position: relative;
+      display: block;
+      width: 18px;
+      height: 3px;
+      background: #fff;
+      transition: all .15s ease-in-out;
+    }
+    &:before, &:after {
+      content: "";
+    }
+    &:before { top: -6px; }
+    &:after { top: 3px; }
+
+    @include until($medium) {
+      .active-nav & {
+        background: rgba(#fff, 0);
+        &:before {
+          transform: rotate(-45deg);
+          top: -1px;
+        }
+        &:after {
+          transform: rotate(45deg);
+          top: -4px;
+        }
+      }
+    }
+  }
+}
+
+.nav_menu {
+  color: #fff;
+  position: absolute;
+  left: -10%;
+  top: 100%;
+  font-size: 10px;
+}

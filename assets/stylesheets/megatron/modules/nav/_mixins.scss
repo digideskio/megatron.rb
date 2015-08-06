@@ -1,0 +1,53 @@
+@mixin link-label-base($color, $offset, $direction: left) {
+  position: absolute;
+  #{$direction}: $offset;
+  z-index: -1;
+  font-size: 14px;
+  background: $color;
+  border-radius: 4px;
+  top: 50%;
+  color: #fff;
+  padding: 10px 15px;
+  line-height: 20px;
+  opacity: 0;
+
+  transform: translate3d(-5px, -50%, 0);
+  &:before {
+    @include triangle($direction, $color, 4px);
+    content: "";
+    position: absolute;
+    #{$direction}: -4px;
+    top: 50%;
+    transform: translate3d(0, -50%, 0);
+    opacity: 0;
+  }
+}
+
+@mixin link-label-hover {
+  position: relative;
+  z-index: 3;
+  + .link_label {
+    transition: {
+      property: opacity, transform;
+      timing-function: ease-out;
+      duration: .15s;
+    }
+    z-index: 2;
+    transform: translate3d(10px, -50%, 0);
+    opacity: 1;
+    font-weight: normal;
+    @include smooth-text;
+    &:before { opacity: 1; }
+  }
+}
+
+@mixin link-label($color, $offset, $direction: left) {
+  .link_label {
+    @include link-label-base($color, $offset, $direction); 
+  }
+
+  [class*=_icon]:hover {
+    @include link-label-hover;
+  }
+}
+

@@ -1,0 +1,170 @@
+$bright-table-bg: $bright;
+
+@mixin table-align($pos) {
+  .align-#{$pos},
+  &.align-#{$pos} .table-cell, 
+  &.align-#{$pos} td, 
+  &.align-#{$pos} th {
+    vertical-align: $pos;
+  }
+}
+
+@mixin auto-table {
+  display: table;
+  width: 100%;
+
+  .table-row {
+    display: table-row;
+    &.span-left {
+      &:before {
+        content: "";
+        display: table-cell;
+      }
+    }
+    &.span-right {
+      &:after {
+        content: "";
+        display: table-cell;
+      }
+    }
+  }
+
+  .table-cell, .table-head-cell {
+    display: table-cell;
+  }
+}
+
+.table {
+  width: 100%;
+  display: table;
+  @extend %table_base;
+  .table-body, .table-head {
+    display: table-row-group;
+  }
+  .table-row {
+    display: table-row;
+  }
+  .table-cell, .table-head-cell {
+    display: table-cell;
+  }
+}
+
+%table_base .table-heading-row td,
+%table_base .table-heading-row .table-cell {
+  color: $light-text-color;
+  @include v-pad_box((3px, 5px));
+  text-shadow: 0 1px rgba(#fff, .8);
+  font-size: 12px;
+  background-color: $silver;
+}
+
+th {
+  font-weight: normal;
+  text-align: left;
+}
+
+th, td, .table-cell, .table-head-cell {
+  @include v-pad_box((8px, 10px));
+  @include h-pad_box;
+}
+
+.tight-table {
+  th, td, .table-cell, .table-head-cell {
+    @include v-pad_box((3px, 5px));
+    @include h-pad_box;
+  }
+}
+
+.zebra-table {
+  .table-row:nth-child(even) .table-cell, tr:nth-child(even) td {
+    background: none;
+  }
+  .table-row:nth-child(odd) .table-cell, tr:nth-child(odd) td {
+    background-color: rgba($white, .8);
+  }
+}
+
+.wide {
+  tr td, tr th, .table-row .table-cell {
+    &:last-child {
+      border-right: none;
+    }
+    &:first-child {
+      border-left: none;
+    }
+  }
+}
+
+.fixed-table {
+  table-layout: fixed;
+}
+
+tr.split td,
+.table-row.split .table-cell {
+  border-top: 1px solid $page-border;
+}
+
+tr.split-thick td,
+.table-row.split-thick .table-cell {
+  border-top: 2px solid $page-border;
+}
+
+table {
+  border-collapse: collapse;
+  margin: { top: $block-margin; bottom: $block-margin; }
+}
+
+%table_base {
+  width: 100%;
+  border-collapse: collapse;
+  text-decoration: none;
+  margin: { top: $block-margin; bottom: $block-margin; }
+
+  .table-body, .table-head {
+    display: table-row-group;
+  }
+
+  .table-row {
+    display: table-row;
+    &.link-hover-row:hover {
+      td, .table-cell {
+        background: $white;
+      }
+    }
+  }
+
+  a { text-decoration: none; }
+
+  td, .table-cell {
+    a:not([class*=btn]):hover {
+      text-decoration: underline;
+    }
+  }
+
+  .meta {
+    font-size: .8em;
+    color: $light-text-color;
+  }
+
+  @include table-align(top);
+  @include table-align(middle);
+  @include table-align(bottom);
+}
+
+.box %table_base {
+  margin-top: 0;
+
+  th, .table-head-cell {
+    border-color: $page-border;
+  }
+  &:not(:first-child) {
+    tr:first-child {
+      th, td { border-top: 0; }
+    }
+    .table-row:first-child {
+      .table-head-cell, .table-cell {
+        border-top: 0;
+      }
+    }
+  }
+}

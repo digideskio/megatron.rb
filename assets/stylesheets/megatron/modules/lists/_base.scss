@@ -1,0 +1,13 @@
+%base-list {
+  list-style: none;
+  padding: 0;
+  margin: { top: $block-margin; bottom: $block-margin; }
+
+  .list-item {
+    margin: 0;
+  }
+
+  &.wide {
+    @include invert-h-pad;
+  }
+}

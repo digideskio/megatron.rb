@@ -1,0 +1,35 @@
+.breadcrumbs {
+  display: table-cell;
+  word-wrap: break-word;
+  letter-spacing: -4px;
+  /*word-spacing: -.3em;*/
+}
+
+.breadcrumb {
+  letter-spacing: 0;
+  &:after {
+    content: "";
+    border-right: 1px solid $gray;
+    height: .9em;
+    width: .2em;
+    padding: 0 5px;
+    color: $light-text-color;
+    display: inline-block;
+    @include smooth-text;
+    transform: translateX(-6px) rotate(20deg);
+  }
+
+  &:first-child {
+    font-weight: 500;
+  }
+  &:last-child {
+    text-decoration: none;
+    font-weight: bold;
+    color: $text-color;
+
+    &:after {
+      content: "";
+      display: none;
+    }
+  }
+}

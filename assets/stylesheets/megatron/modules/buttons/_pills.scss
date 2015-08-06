@@ -1,0 +1,44 @@
+@each $name, $color in $full-palette {
+  .#{"" + unquote($name)}-pill, .#{"" + unquote($name)}-outline-pill {
+    border-color: $color;
+    @extend %pill;
+  }
+  .#{"" + unquote($name)}-pill {
+    background-color: $color;
+    color: $white;
+  }
+  .#{"" + unquote($name)}-outline-pill {
+    color: $color;
+  }
+}
+
+%pill {
+  display: inline-block;
+  border-radius: 1em;
+  font-size: 14px;
+  font-weight: normal;
+  position: relative;
+  line-height: 1.4em;
+  top: -.2em;
+  border-width: 2px;
+  border-style: solid;
+
+  &:before, &:after {
+    content: "\00a0";
+    letter-spacing: .5em;
+  }
+}
+
+.tag {
+  border-radius: 4px;
+  font-size: 11px;
+  line-height: 1.3em;
+  top: -.1em;
+  border-width: 1px;
+  border-style: solid;
+
+  &:before, &:after {
+    content: "\00a0";
+    letter-spacing: .2em;
+  }
+}

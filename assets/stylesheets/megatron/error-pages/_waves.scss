@@ -1,0 +1,36 @@
+.waves-bg {
+  $animation-style: 1.5s ease-in-out infinite;
+  $box-height: 66px;
+  $box-width: 40px;
+  $top-shift: $box-height/2;
+  position: fixed;
+  top: 0; left: 0;
+  bottom: 0; right: 0;
+  z-index: -1;
+  animation: tide 4.5s ease infinite;
+  
+  &:before, &:after {
+    background-image: url('data:image/svg+xml;utf-8,%3Csvg xmlns="http://www.w3.org/2000/svg" width="40" height="44.7" viewBox="0 0 59.4 66.5"%3E%3ClinearGradient id="a" gradientUnits="userSpaceOnUse" x1="29.72" y1="66.48" x2="29.72"%3E%3Cstop offset=".117" stop-opacity="0"/%3E%3Cstop offset="1" stop-opacity=".1"/%3E%3C/linearGradient%3E%3Cpath fill="url(%23a)" d="M29.7 0L0 16.6v33.2l29.7 16.6 29.7-16.6V16.6L29.7 0z"/%3E%3Cpath opacity=".3" fill="%2330363d" d="M29.7 7.8L7 20.5l22.7 12.7 22.7-12.7L29.7 7.8"/%3E%3C/svg%3E');
+    position: absolute;
+    top: -$box-width; left: -$box-width;
+    bottom: -$box-width; right: -$box-width;
+    background-size: $box-width $box-height;
+    opacity: 0;
+    content: "";
+    transition: opacity 1.5s ease-out;
+  }
+  &:after {
+    background-position: $box-width/2 $top-shift;
+    animation: waves-1 $animation-style;
+  }
+  &:before {
+    animation: waves-2 $animation-style;
+  }
+}
+
+.error-500:hover + .waves-bg {
+  opacity: 1;
+  &:before, &:after {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,62 @@
+//
+// $icon-host: Optionally point to a remote host where files are being served.
+//   - e.g. $icon-host: "//megatron.dblayer.com"
+//
+
+$icon-host: "https://app.compose.io/assets/megatron" !default;
+
+@font-face {
+  font-family: 'roboticons';
+  src:url('#{$icon-host}/fonts/roboticons.woff?hxraic') format('woff'),
+  url('#{$icon-host}/fonts/roboticons.ttf?hxraic') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+%icon-font {
+  font: {
+    family: 'roboticons';
+    style: normal;
+    weight: normal;
+    variant: normal;
+  }
+
+  text: {
+    decoration: none;
+    transform: none;
+  }
+
+  display: inline-block;
+  speak: none;
+  line-height: 1;
+  @include smooth-text;
+}
+
+[class*=_icon]:before { @extend %icon-font; }
+
+// Aliases:
+
+.x_fill_icon { @extend .x_circle_fill_thin_icon; }
+.x_line_icon { @extend .x_circle_thin_icon; }
+
+.hidden_label {
+  position: absolute !important;
+  height: 1px; width: 1px; 
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+$font-sizes: (
+  'xx-small'  : 10px,
+  'x-small'   : 12px,
+  'small'     : 14px,
+  'medium'    : 16px,
+  'large'     : 18px,
+  'x-large'   : 22px,
+  'xx-large'  : 26px,
+  'xxx-large' : 32px
+);
+
+@each $name, $size in $font-sizes {
+  .#{$name}-text { font-size: $size; }
+}

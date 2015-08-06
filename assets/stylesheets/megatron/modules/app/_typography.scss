@@ -1,0 +1,111 @@
+$mono-font: "Ubuntu Mono", "Consolas", "Liberation Mono", monaco, "Lucida Console", "Consolas", monospace;
+html { font-size: 62.5%; }
+
+body {
+  font: {
+    size: 16px;
+    family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+}
+
+h1, h2, h3 {
+  font-weight: normal;
+}
+
+h1 { font-size: 36px; }
+h2 { font-size: 24px; }
+h3 { font-size: 20px; }
+h4 { font-size: 18px; }
+h5 { font-size: 16px; }
+h6 { font-size: 14px; }
+
+h4, h5, h6 {
+  margin: 1em 0;
+}
+
+.mono-font {
+  font-family: $mono-font;
+}
+
+/* @extend this to force long lines of continuous text to wrap */
+.force-wrap {
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.xx-small-text { font-size: 8px; }
+.x-small-text  { font-size: 10px; }
+.small-text    { font-size: 13px; }
+.large-text    { font-size: 18px; }
+.x-large-text  { font-size: 20px; }
+.xx-large-text  { font-size: 24px; }
+
+.big-text      { @extend .large-text; }
+
+.strong-text { font-weight: bold; }
+.normal-text { font-weight: normal; }
+
+.light-text { color: $darkgray; }
+
+.thin-chevron:after {
+  @extend .chevron_thin_icon:before;
+  @extend %icon-font;
+}
+
+.plus-circle:after {
+  @extend .plus_circle_icon:before;
+  @extend %icon-font;
+}
+
+.help-text {
+  font-size: 13px;
+  color: #888;
+}
+
+.hover-link {
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.normal-text-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.contain-margin-pad {
+  padding: 1px;
+}
+
+.contain-margin-border {
+  border: 1px solid transparent;
+}
+
+.hide {
+  display: none !important;
+}
+
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+hr {
+  border: none;
+  background: none;
+  width: 100%;
+  border-bottom: 1px solid $page-border;
+  &.dark {
+    border-bottom: 1px solid $gray;
+  }
+}
+
+pre, p, form, ul, dl, ol {
+  margin: { top: $block-margin; bottom: $block-margin; }
+}
+

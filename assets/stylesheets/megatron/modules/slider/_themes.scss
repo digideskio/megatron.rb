@@ -1,0 +1,42 @@
+/*--------------------------------\
+| Slider default styles           |
+\--------------------------------*/
+
+.select-slider {
+  &.default {
+    .slider-fill {
+      background-color: $slider-blue;
+    }
+    .slider-track:before {
+      background-color: $slider-track;
+    }
+  }
+
+  .slider-fill-segment {
+    @include slider-fill-colors($slider-blue);
+  }
+}
+
+.alert-slider {
+  max-width: 150px;
+  margin: 0 { left: .5em }
+  .slider-fill-segment-1 {
+    @include slider-fill-colors($slider-red);
+  }
+  .slider-fill-segment-2 {
+    @include slider-fill-colors($slider-orange);
+  }
+}
+
+.upgrade-slider {
+  .slider-fill .used {
+    @include slider-fill-colors($slider-red);
+    //@include slider-fill-colors(change-color($slider-blue, $hue: 210, $lightness: 50));
+  }
+  .slider-track .used {
+    @include slider-fill-colors(mix($slider-red, $slider-track, 25%));
+  }
+  .slider-track .paid {
+    @include slider-fill-colors(mix($slider-blue, $slider-track, 20%));
+  }
+}

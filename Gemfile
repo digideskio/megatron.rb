@@ -13,3 +13,7 @@ gemspec
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
 
+gem 'sass', '~> 3.3', '>= 3.3.4'
+gem 'rack-cors'
+gem 'rack-try_static2'
+gem 'puma'

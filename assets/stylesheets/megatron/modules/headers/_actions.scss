@@ -1,0 +1,10 @@
+.header-actions {
+  text-align: right;
+  display: table-cell;
+  a, button {
+    margin-left: .8em;
+  }
+  > * {
+    display: inline-block;
+  }
+}

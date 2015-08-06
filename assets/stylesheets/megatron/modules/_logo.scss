@@ -1,0 +1,67 @@
+$cube-animation-style: 1.5s ease-out infinite;
+
+@include tetromino-graphics(small, 14px, 17px, fff, 262B30);
+
+.header_logo {
+  position: relative;
+  &:before, &:after {
+    @extend %small-tetromino;
+  }
+  .hidden_label {
+    &:before, &:after {
+      @extend %small-tetromino;
+    }
+  }
+}
+
+.header_logo .hidden_label {
+  position: absolute;
+  clip: auto;
+  font-size: 0;
+  width: 125px;
+  height: 24px;
+  background: url('data:image/svg+xml;utf-8,%3Csvg viewBox="0 0 475 135" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="1.414"%3E%3Cpath d="M0 67.65c0-18.6 13.875-33.6 33.6-33.6 12.075 0 19.35 4.05 25.575 9.825l-9.15 10.575c-5.1-4.35-10.2-7.275-16.425-7.275-10.95 0-18.6 9.15-18.6 20.1v.375c0 10.95 7.65 20.475 18.6 20.475 7.275 0 12.075-2.925 16.8-7.65l9.15 9.15c-6.6 6.9-13.875 11.7-26.25 11.7C14.25 100.875 0 86.25 0 67.65zm100.725-33.6c-19.65 0-34.275 15-34.275 33.6 0 18.225 14.175 33.225 34.275 33.225 19.65 0 34.275-15 34.275-33.225v-.375c0-18.225-14.175-33.225-34.275-33.225zm0 54.075C89.025 88.125 81 78.6 81 67.65v-.375c0-10.95 8.025-20.1 19.35-20.1 11.7 0 19.725 9.15 19.725 20.475 0 10.95-7.65 20.475-19.35 20.475zM147.45 35.175h15.3l16.8 27.375 16.8-27.375h15.3v64.65H197.4v-42L179.175 85.2h-.375l-17.85-27.375v42h-13.875l.375-64.65zM253.575 35.175h-26.25l-.075 64.275h14.25V80.1h10.95c14.25 0 25.95-7.65 25.95-22.65 0-13.125-9.525-22.275-24.825-22.275zm10.575 22.65c0 5.475-4.425 9.825-11.325 9.825v-.3H241.5V47.625h10.95c7.35 0 11.7 3.6 11.7 9.825v.375zm56.175-23.775c-19.65 0-34.275 15-34.275 33.6 0 18.225 14.625 33.225 34.275 33.225s34.275-15 34.275-33.225v-.375c0-18.225-14.175-33.225-34.275-33.225zm.075 54.075c-11.7 0-19.725-9.525-19.725-20.475v-.375c0-10.95 7.65-20.1 19.35-20.1 11.7 0 19.725 9.15 19.725 20.475 0 10.95-8.025 20.1-19.35 20.475zm42 2.175l8.4-10.2c5.85 4.725 12.075 7.65 19.35 7.65 5.85 0 9.15-2.175 9.15-6.225v-.375c0-3.675-2.175-5.475-13.125-8.025-13.125-3.3-21.525-6.9-21.525-19.725v-.375c0-11.7 9.525-19.35 22.65-19.35 9.525 0 17.55 2.925 24.075 8.025L404.1 52.275c-5.85-4.05-11.325-6.225-16.8-6.225-5.475 0-8.4 2.55-8.4 5.475v.375c0 4.35 2.925 5.475 13.875 8.4 13.125 3.3 20.475 8.025 20.475 19.35 0 12.75-9.825 20.1-23.7 20.1-9.675.75-19.5-2.55-27.15-9.45zM425.85 35.175h48.525v12.75h-34.65V61.05h30.3V73.8h-30.3v13.5h35.025v12.75h-49.275l.375-64.875z" fill="%23fff" fill-rule="nonzero"/%3E%3C/svg%3E') no-repeat right 50%;
+  background-size: auto 100%;
+}
+
+.header_logo {
+  &:before              { @extend %small-tetromino-position-1 }
+  .hidden_label:before  { @extend %small-tetromino-position-2 }
+  .hidden_label:after   { @extend %small-tetromino-position-3 }
+  &:after               { @extend %small-tetromino-position-4 }
+}
+//.nprogress-busy { //animate when site is in busy mode
+.header_logo:hover {
+  &:before              { animation: small-tetromino-animation-1 $cube-animation-style; }
+  .hidden_label:before  { animation: small-tetromino-animation-2 $cube-animation-style; }
+  .hidden_label:after   { animation: small-tetromino-animation-3 $cube-animation-style; z-index: 2; }
+  &:after               { animation: small-tetromino-animation-4 $cube-animation-style; }
+}
+
+$large-width: 70px;
+$large-height: $large-width * 1.173;
+@include tetromino-graphics(large, $large-width, $large-height, 4a89dc, fbfbfb);
+
+.box-message {
+  text-align: center;
+  padding: $block-margin 0 ($block-margin * 2);
+  margin: $block-margin 0;
+}
+
+.loading-graphic-wrapper {
+  position: relative;
+  height: $large-height * 1.7;
+  width: $large-width * 2.5;
+  padding-top: 15px;
+  text-align: left;
+  margin: ($block-margin * 2.5) auto;
+
+  &:before, &:after,
+  .loading-graphic:before,
+  .loading-graphic:after   { @extend %large-tetromino; }
+
+  &:before                 { animation: large-tetromino-animation-1 $cube-animation-style; }
+  .loading-graphic:before  { animation: large-tetromino-animation-2 $cube-animation-style; }
+  .loading-graphic:after   { animation: large-tetromino-animation-3 $cube-animation-style; z-index: 2; }
+  &:after                  { animation: large-tetromino-animation-4 $cube-animation-style; }
+}

@@ -1,0 +1,262 @@
+@mixin until($size) {
+  $size: $size - 1;
+  @media all and (max-width: $size) { @content; }
+}
+
+@mixin at-least($size) {
+  @media all and (min-width: $size) { @content; }
+}
+
+@mixin between($small-width, $large-width) {
+  $large-width: $large-width - 1;
+  @media (max-width: $large-width) and (min-width: $small-width) { @content; }
+}
+
+@mixin destroy-margins {
+  @include destroy-top-margins;
+  @include destroy-bottom-margins;
+}
+
+@mixin destroy-top-margins {
+  > :first-child,
+  > :first-child > :first-child,
+  > :first-child > :first-child > :first-child { margin-top: 0; }
+}
+
+@mixin destroy-bottom-margins {
+  > :last-child,
+  > :last-child > :last-child,
+  > :last-child > :last-child > :last-child { margin-bottom: 0; }
+}
+
+// Remove inner elements' top and bottom margin
+%destroy-margins {
+  @include destroy-margins;
+}
+
+
+@mixin pad_box($v: $v-pad-box, $h: $h-pad-box) {
+  @if $v {
+    @include v-pad_box($v);
+  }
+  @if $h {
+    @include h-pad_box($h);
+  }
+}
+
+@mixin invert-h-pad($h: $h-pad-box) {
+  margin: {
+    left: - nth($h, 1);
+    right: - nth($h, 1);
+  }
+  @include at-least($medium) {
+    margin: {
+      left: - nth($h, 2);
+      right: - nth($h, 2);
+    }
+  }
+}
+
+@mixin v-pad_box($v: $v-pad-box) {
+  padding: {
+    top: nth($v, 1);
+    bottom: nth($v, 1);
+  }
+  @include at-least($medium) {
+    padding: {
+      top: nth($v, 2);
+      bottom: nth($v, 2);
+    }
+  }
+}
+
+@mixin h-pad_box($h: $h-pad-box) {
+  padding: {
+    left: nth($h, 1);
+    right: nth($h, 1);
+  }
+  @include at-least($medium) {
+    padding: {
+      left: nth($h, 2);
+      right: nth($h, 2);
+    }
+  }
+}
+
+@mixin left-pad_box($h: $h-pad-box) {
+
+  padding-left: nth($h, 1);
+
+  @include at-least($medium) {
+    padding-left: nth($h, 2);
+  }
+}
+
+@mixin right-pad_box($h: $h-pad-box) {
+
+  padding-right: nth($h, 1);
+
+  @include at-least($medium) {
+    padding-right: nth($h, 2);
+  }
+}
+
+@mixin top-pad_box($v: $v-pad-box) {
+
+  padding-top: nth($v, 1);
+
+  @include at-least($medium) {
+    padding-top: nth($v, 2);
+  }
+}
+
+@mixin bottom-pad_box($v: $v-pad-box) {
+
+  padding-bottom: nth($v, 1);
+
+  @include at-least($medium) {
+    padding-bottom: nth($v, 2);
+  }
+}
+
+@mixin smooth-text {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@function icon-selector() {
+  @return "[class*='_icon']:before";
+}
+
+@mixin icon {
+  #{icon-selector()} {
+    @content;
+  }
+}
+
+// Returns true if the color is brighter than 50% lightness
+@function is-bright($color) {
+  @return (lightness($color) > 50%);
+}
+
+// Picks the color with the highest contrast
+@function if-bright($bg, $light: true, $dark: false) {
+  @return if(is-bright($bg), $light, $dark);
+}
+
+// Picks the color with the highest contrast
+@function text-contrast($bg, $dark-text: #000, $light-text: #fff) {
+  @return if-bright($bg, $dark-text, $light-text);
+}
+
+
+@mixin triangle($direction, $color, $size) {
+  @if $direction == left {
+    border-bottom: $size solid transparent;
+    border-right: $size solid $color;
+    border-top: $size solid transparent;
+  }
+  @else if $direction == right {
+    border-bottom: $size solid transparent;
+    border-left: $size solid $color;
+    border-top: $size solid transparent;
+  }
+  @else if $direction == up {
+    border-bottom: $size solid $color;
+    border-left: $size solid transparent;
+    border-right: $size solid transparent;
+  }
+  @else if $direction == down {
+    border-right: $size solid transparent;
+    border-left: $size solid transparent;
+    border-top: $size solid $color;
+  }
+
+  height: 0;
+  width: 0;
+}
+
+
+@mixin tetromino-animations($name, $x, $y) {
+  @keyframes #{$name}-tetromino-animation-1 {
+    0%, 40% { 
+      /* compose logo *//* 1 on 3 *//* L-shape */
+      transform: translate(0,0);
+    } 50% {
+      /* pre-box */
+      transform: translate($x,-$y);
+    } 60%, 100% {
+      /* box *//* compose logo */
+      transform: translate($x*2,0);
+    }
+  }
+
+  @keyframes #{$name}-tetromino-animation-2 {
+    0%, 20% { 
+      /* compose logo *//* 1 on 3 */
+      transform: translate($x*2, 0px);
+    } 40%, 100% { 
+      /* L-shape *//* box *//* compose logo */
+      transform: translate($x*3, $y);
+    }
+  }
+
+  @keyframes #{$name}-tetromino-animation-3 {
+    0% { 
+      /* compose logo */
+      transform: translate($x*3, $y);
+    } 20%, 60% { 
+      /* 1 on 3 *//* L-shape *//* box */
+      transform: translate($x*2, $y*2);
+    } 90%, 100% { 
+      /* compose logo */
+      transform: translate($x, $y);
+    }
+  }
+
+  @keyframes #{$name}-tetromino-animation-4 {
+    0%, 60% {
+      /* compose logo *//* 1 on 3 *//* L-shape *//* box */
+      transform: translate($x, $y);
+    } 90%, 100% { 
+      /* compose logo */
+      transform: translate(0, 0);
+    }
+  }
+}
+
+@mixin tetromino-graphics($name, $width, $height, $cube-color, $hole-color){
+  $x: $width/2 - .5;
+  $y: $height/4 - .7;
+
+  @if($height > 50){
+    $y: $y - 1;
+    $x: $x - 2;
+  }
+
+  @include tetromino-animations($name, $x, $y);
+  
+  %#{$name}-tetromino {
+    content: "";
+    width: $width;
+    height: $height;
+    position: absolute;
+    background: url('data:image/svg+xml;utf-8,%3Csvg viewBox="0 0 38 44" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="1.414"%3E%3Cpath fill="%23#{$cube-color}" d="M18.76 43.28L.017 32.46V10.82L18.758 0 37.5 10.82v21.64L18.76 43.28z"/%3E%3Cpath d="M18.76 2.885L33.75 11.54 18.76 20.2 3.764 11.54 18.76 2.886zM2.516 31.018V13.705L17.51 22.36v17.315L2.516 31.018z" fill="%23#{$hole-color}"/%3E%3Cpath d="M2.516 31.018V13.705L17.51 22.36v17.315L2.516 31.018z" fill-opacity=".50" fill="%23#{$cube-color}" /%3E%3C/svg%3E') no-repeat top center;
+  }
+
+  %#{$name}-tetromino-position-1 {
+    transform: translate(0, 0);
+  }
+
+  %#{$name}-tetromino-position-2 {
+    transform: translate($x*2, 0px);
+  }
+
+  %#{$name}-tetromino-position-3 {
+    transform: translate($x*3, $y);
+  }
+
+  %#{$name}-tetromino-position-4 {
+    transform: translate($x, $y);
+  }
+}

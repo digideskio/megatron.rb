@@ -1,0 +1,37 @@
+{
+  "name": "megatron",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "browser": {
+    "dialog": "compose-dialog",
+    "notify": "compose-notification",
+    "tap-event": "compose-tap-event",
+    "remote-form": "compose-remote-form"
+  },
+  "dependencies": {
+    "bean": "^1.0.15",
+    "classie": "^1.0.0",
+    "codemirror": "^5.5.0",
+    "compose-dataset-shim": "^1.0.0",
+    "compose-dialog": "^1.0.6",
+    "compose-notification": "^2.0.6",
+    "compose-remote-form": "^1.0.2",
+    "compose-tap-event": "^1.0.0",
+    "domify": "^1.3.3",
+    "lodash": "^3.10.1",
+    "superagent": "^1.2.0",
+    "svgo": "^0.5.5"
+  },
+  "devDependencies": {
+    "babelify": "^6.1.3",
+    "browserify": "^11.0.1",
+    "minifyify": "^7.0.3",
+    "watchify": "^3.3.1"
+  }
+}

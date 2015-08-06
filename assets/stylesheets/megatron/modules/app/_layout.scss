@@ -1,0 +1,261 @@
+
+* { box-sizing: border-box; }
+
+html {
+  height: 100%;
+  background: $base-bg;
+  color: $text-color;
+}
+
+body {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  &:after { content: ""; } // ensure HTML flows over full site.
+}
+
+a {
+  color: $link-color;
+}
+
+.site {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+// Primary container layout
+//
+.site-content {
+  height: 100%;
+  padding-top: $page-header-height;
+}
+
+.primary_nav {
+  width: map-get($primary-nav-width, small);
+  float: left;
+  position: absolute;
+  background: $base-bg;
+}
+
+.page {
+  transition: transform .2s ease-out;
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+  float: right;
+  border-top: 1px solid transparent;
+  background: $main-bg;
+}
+
+.secondary_nav {
+  display: table;
+  width: 100%;
+}
+
+.page-content {
+  background: $main-bg;
+}
+
+.main {
+  padding-top: 1px;
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+  height: 100%;
+  vertical-align: top;
+  @include h-pad-box;
+  @include bottom-pad-box((50px, 100px));
+
+  // Allow full-height content to kill padding
+  &.no-v-pad {
+    padding-bottom: 0;
+  }
+}
+
+// Style .secondary_nav and .main as columns
+@include at-least($small) {
+  .page-content {
+    margin-top: -$page-header-height;
+    padding-top: $page-header-height;
+    height: 100%;
+    display: table;
+    width: 100%;
+  }
+
+  .secondary_nav {
+    display: table-cell;
+    height: 100%;
+    vertical-align: top;
+    width: map-get($secondary-nav-width, small);
+    position: relative;
+  }
+}
+
+// Style .page and .primary_nav as columns
+@include at-least($medium) {
+  .site-content {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+  }
+
+  .page {
+    float: none;
+    display: table-cell;
+    vertical-align: top;
+  }
+
+  .primary_nav {
+    width: map-get($primary-nav-width, large);
+    float: none;
+    position: static;
+    display: table-cell;
+    vertical-align: top;
+    z-index: $z-primary-nav;
+  }
+
+  .page, .page-header, .page-content {
+    border-top-left-radius: 5px;
+  }
+
+}
+
+@include at-least($x-large) {
+  .main.with-sidebar {
+    padding: 0;
+  }
+  .main-content {
+    vertical-align: top;
+    display: table-cell;
+    padding: { left: nth($h-pad-box, 2); right: nth($h-pad-box, 2); }
+    padding-bottom: 100px;
+  }
+
+  .main-sidebar {
+    vertical-align: top;
+    display: table-cell;
+    width: $main-sidebar-width;
+    @include h-pad-box;
+  }
+
+  .secondary_nav {
+    width: 1%;
+  }
+}
+
+@include at-least($max) {
+  .site {
+    width: $max;
+  }
+  .login-layout .site { width: auto; }
+
+  .page, .page-header, .page-content {
+    border-top-right-radius: 5px;
+  }
+}
+
+.site.small-card {
+  max-width: $small;
+  height: auto;
+  margin: 60px auto 0;
+
+  .main {
+    padding-bottom: 1em;
+  }
+
+  @include at-least($small) {
+    .page, .page-header, .page-content {
+      border-top-right-radius: 5px;
+      border-top-left-radius: 5px;
+    }
+    .page, .page-content {
+      border-bottom-right-radius: 5px;
+      border-bottom-left-radius: 5px;
+    }
+  }
+}
+
+.padded {
+  @include pad-box;
+}
+
+.h-padded {
+  @include h-pad-box;
+}
+
+.v-padded {
+  @include v-pad-box;
+}
+
+.block-margin {
+  margin: { top: $block-margin; bottom: $block-margin; }
+}
+
+.top-block-margin {
+  margin: { top: $block-margin; }
+}
+
+.bottom-block-margin {
+  margin: { bottom: $block-margin; }
+}
+
+.no-margin.no-margin {
+  margin: {
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+  }
+}
+
+.no-padding.no-padding {
+  padding: {
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+  }
+}
+
+.block {
+  display: block;
+}
+
+.no-wrap {
+  white-space: nowrap;
+}
+.center-block {
+  margin: { left: auto; right: auto; }
+}
+
+.no-top-margin.no-top-margin {
+  margin-top: 0;
+}
+
+.no-bottom-margin.no-bottom-margin {
+  margin-bottom: 0;
+}
+
+.short-margin {
+  margin: { top: $block-margin/2; bottom: $block-margin/2; }
+}
+
+.tall-margin {
+  margin: { top: $block-margin*2; bottom: $block-margin*2; }
+}
+
+.wide { @include invert-h-pad; }
+.expand { @include invert-h-pad; }
+
+.fill { width: 100%; max-width: 100%; }
+
+.limit-width { max-width: 100%; }
+
+.auto-width { width: auto; }
+
+.hidden {
+  visibility: hidden;
+  display: none !important;
+}

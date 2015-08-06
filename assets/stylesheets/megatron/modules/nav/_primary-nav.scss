@@ -1,0 +1,120 @@
+$primary-nav-color:       rgba(#fff, 0.4);
+$primary-nav-here-color:  #fff;
+$primary-nav-hover-color: rgba(#fff, 0.7);
+$header-pad: 15px;
+
+.active-nav {
+  @include until($medium) {
+    overflow-x: hidden;
+    .page {
+      transform: translate3d(map-get($primary-nav-width, small), 0, 0);
+      overflow-x: hidden;
+    }
+  }
+}
+
+.primary_nav-item {
+  color: $primary-nav-color;
+  text-decoration: none;
+  transition: .1s color ease-in-out;
+  display: block;
+  padding: 10px 8px 6px;
+  border-bottom: 1px solid rgba(#fff, .1);
+
+  &:hover, &:focus {
+    color: $primary-nav-hover-color;
+  }
+
+  &.here {
+    color: $primary-nav-here-color;
+  }
+  
+  .icon_label {
+    @include smooth-text;
+  }
+
+  @include until($medium) {
+
+    &:hover, &:focus {
+      background: rgba(#fff, .05);
+    }
+
+    &.here {
+      background-color: $link-color;
+      &:hover, &:focus {
+        background-color: lighten($link-color, 3);
+      }
+    }
+
+    #{icon-selector()} {
+      display: inline-block;
+      font-size: 26px;
+      width: 28px;
+      text-align: center;
+    }
+
+    .icon_label {
+      line-height: 22px;
+      position: relative;
+      top: -5px;
+    }
+    
+  }
+
+  @include at-least($medium) {
+    width: map-get($primary-nav-width, large);
+    text-align: center;
+    position: relative;
+    border: none;
+    padding: 0;
+    [class*=_icon] {
+      display: block;
+      width: 100%;
+      padding: 7px 0;
+    }
+
+    #{icon-selector()} {
+      font-size: 35px;
+    }
+
+    @include link-label($link-color, map-get($primary-nav-width, large) - 15);
+
+  }
+}
+
+// Special positioning for sign_out link
+//
+@include at-least($medium) {
+  
+  // Move top-links to the top right
+  //
+  .primary_nav-top {
+    position: absolute;
+    top: $header-pad;
+    right: nth($h-pad-box, 2);
+    font-size: 14px;
+    line-height: 22px;
+
+    .primary_nav-item {
+      padding: 0;
+      display: inline-block;
+      margin-left: .8em;
+      width: auto;
+      [class*=_icon] {
+        display: inline;
+      }
+      #{icon-selector()} {
+        display: inline;
+        font-size: 1.2em;
+        position: relative;
+        top: .1em;
+      }
+    }
+  }
+}
+
+@include at-least($max + 20) {
+  .primary_nav-top {
+    right: 0;
+  }
+}

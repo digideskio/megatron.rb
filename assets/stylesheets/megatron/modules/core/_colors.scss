@@ -1,0 +1,163 @@
+// Colors
+$slate:        #788392;
+$night:        #2D333B;
+$space:        #262b30;
+$black:        #000;
+
+$white:        #FFFFFF;
+$softwhite:    #fbfbfb;
+$offwhite:     #f5f6f6;
+$silver:       #edefef;
+$overcast:     darken($offwhite, 10);
+$lightgray:    #B3B9BC;
+$gray:         #8d9297;
+$mediumgray:   #666;
+$darkgray:     #444;
+$bluegray:     lighten(#5e6b77, 2);
+$shade:        darken(#5e6b77, 5);// == #57636e;
+
+$red:          #cb413a;
+$boldred:      #DF192A;
+$lightred:     hsl(5, 63%, 55%);
+$palered:      hsl(0, 70, 65);
+$softred:      hsla(0, 70%, 90%, 1);//hsl(10, 61%, 92%);
+$pink:         #FF2D55;
+
+$orange:       #FF9500;
+$paleorange:   hsl(30, 70, 65);
+$softorange:   hsla(35, 70%, 90%, 1);
+
+$yellow:       #FFCC00;
+$softyellow:   hsla(55, 70%, 90%, 1);
+$cream:        #fef0bd;
+$yellowwhite:  #fffefa;
+
+$softgreen:    hsla(140, 70%, 90%, 1);//hsl(140, 70%, 93%);
+$green:        #2ab22e;
+$greenwhite:   #fafefa;
+
+$blue:         #4A89DC;
+$boyblue:      #409bd9;
+$softblue:     hsla(196, 70%, 90%, 1);//hsl(196, 62%, 92%);
+$babyblue:     #82C1ED;
+$darkblue:     #427BC5;
+$lightblue:    #5D9CEC;
+$paleblue:     hsl(205, 50, 65);
+$bluewhite:    #f5fcff;
+
+$purple:       hsl(265, 67%, 60%);
+$lightpurple:  #967ADC;
+$softpurple: hsla(265, 70%, 90%, 1);
+
+
+$base-bg: $space;
+
+// Text colors
+$link-color: $blue;
+$text-color: $shade;// == #57636e; #3f474f;
+$light-text-color: #888;
+
+// Main content
+$main-bg: $offwhite;
+$header-border: #ccc;
+$page-border: darken($main-bg, 10);
+
+$page-gray: #edefef;
+$bright: #fafafa;
+
+/*$code-purple: #8868BC;*/
+/*$code-green:  #539F50;*/
+/*$code-yellow: #E6DB74;*/
+/*$code-orange: #FD971F;*/
+/*$code-red:    #DB4139;*/
+
+$full-palette: (
+'black':      $black,
+'mediumgray': $mediumgray,
+'darkgray':   $darkgray,
+slate:        $slate,
+space:        $space,
+night:        $night,
+
+'white':      $white,
+softwhite:    $softwhite,
+offwhite:     $offwhite,
+silver:       $silver,
+'lightgray':  $lightgray,
+'gray':       $gray,
+'overcast':   $overcast,
+bluegray:     $bluegray,
+shade:        $shade,
+
+'red':        $red,
+boldred:      $boldred,
+lightred:     $lightred,
+palered:      $palered,
+softred:      $softred,
+pink:         $pink,
+
+orange:       $orange,
+paleorange:   $paleorange,
+softorange:   $softorange,
+
+'yellow':     $yellow,
+softyellow:   $softyellow,
+cream:        $cream,
+yellowwhite:  $yellowwhite,
+
+softgreen:    $softgreen,
+green:        $green,
+greenwhite:   $greenwhite,
+
+'blue':       $blue,
+boyblue:      $boyblue,
+softblue:     $softblue,
+babyblue:     $babyblue,
+'darkblue':   $darkblue,
+'lightblue':  $lightblue,
+paleblue:     $paleblue,
+bluewhite:    $bluewhite,
+
+'purple':     $purple,
+lightpurple:  $lightpurple,
+softpurple:   $softpurple
+);
+
+
+/* Colors from Ethan Shoonover's _Solarized_:
+ * http://ethanschoonover.com/solarized
+ */
+
+$solarized_base03:  #002b36;
+$solarized_base02:  #073642;
+$solarized_base01:  #586e75;
+$solarized_base00:  #657b83;
+$solarized_base0:   #839496;
+$solarized_base1:   #93a1a1;
+$solarized_base2:   #eee8d5;
+$solarized_base3:   #fbfbfb;
+$solarized_yellow:  #b58900;
+$solarized_orange:  #cb4b16;
+$solarized_red:     #dc322f;
+$solarized_magenta: #d33682;
+$solarized_violet:  #6c71c4;
+$solarized_blue:    #268bd2;
+$solarized_cyan:    #2aa198;
+$solarized_green:   #859900;
+
+$code_base03:  $solarized_base3;
+$code_base02:  $solarized_base2;
+$code_base01:  $solarized_base1;
+$code_base00:  $solarized_base0;
+$code_base0:   $solarized_base00;
+$code_base1:   $solarized_base01;
+$code_base2:   $solarized_base02;
+$code_base3:   $solarized_base03;
+$code_yellow:  $solarized_yellow;
+$code_orange:  $solarized_orange;
+$code_red:     $solarized_red;
+$code_magenta: $solarized_magenta;
+$code_violet:  $solarized_violet;
+$code_blue:    $solarized_blue;
+$code_cyan:    $solarized_cyan;
+$code_green:   $solarized_green;

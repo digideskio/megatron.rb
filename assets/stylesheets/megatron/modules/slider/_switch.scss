@@ -1,0 +1,75 @@
+
+//----------------------------//
+//  Switch horizontal slider  //
+//----------------------------//
+
+.select-switch {
+  $border-width: 3px;
+  $border-radius: 20px;
+
+  font-family: $slider-font;
+  font-size: 11px;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  margin-bottom: .5em;
+  line-height: 1.8em;
+
+  .slider-track {
+    border-radius: $border-radius;
+    border: 1px solid rgba(#000, .18);
+    background-color: $slider-switch-bg;
+    box-shadow: #fff 0 1px 1px;
+  }
+
+  .slider-label {
+    padding-top: 1px;
+    font-weight: bold;
+    line-height: 1.8em;
+    display: inline-block;
+    width: 37px;
+    text-align: center;
+    color: #999;
+    text-shadow: #fff 0 1px;
+    transition: color .2s ease-in-out;
+  }
+
+  .slider-handle {
+    width: 50%;
+    position: absolute;
+    top: 0px; bottom: 0px;
+    z-index: 1;
+    background-color: rgba(#000, .06);
+    background-image: linear-gradient(rgba(#fff, .4), rgba(#fff, 0) 80%);
+    transition: background-color .2s ease-in-out;
+    border-radius: $border-radius - 1;
+    box-shadow: rgba(#000, .15) 0 0 0 1px inset, rgba(#fff, .5) 0 1px inset;
+  }
+
+  select:focus {
+    ~ .slider-track {
+      border-color: mix($slider-glow, #fff);
+        box-shadow: rgba($slider-glow, .5) 0 0 1px;
+    }
+    ~ .slider-handle {
+      box-shadow: rgba($slider-glow, .45) 0 0 0 1px inset;
+    }
+  }
+
+
+  &[data-step='0']{
+    .step-0 { color: #666; }
+  }
+
+  &[data-step='1']{
+    .slider-handle { 
+      background-color: rgba($slider-glow, .1);
+      box-shadow: rgba($slider-glow, .3) 0 0 0 1px inset;
+    }
+    .step-1 { color: darken($slider-glow, 10); }
+  }
+
+  .step-1:hover { color: $slider-glow; }
+  .step-0:hover { color: #666; }
+}
+

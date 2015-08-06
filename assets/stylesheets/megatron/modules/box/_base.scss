@@ -1,0 +1,94 @@
+$box-content-bg: $bright;
+
+.box {
+  margin: { top: $block-margin; bottom: $block-margin; }
+  display: block;
+  position: relative;
+  @include until($small) {
+    $mg: -(.1 + nth($h-pad-box, 1));
+    margin: $block-margin $mg;
+  }
+}
+
+a.box {
+  color: inherit;
+  text-decoration: none;
+}
+
+.auto-radius {
+  @include at-least($medium) {
+    border-top: {
+      left-radius: 4px;
+      right-radius: 4px;
+    }
+  }
+}
+
+.bordered {
+  border-width: 1px;
+  border-style: solid;
+}
+
+.rounded {
+  border-radius: 4px;
+}
+
+.box-header {
+  margin-top: $block-margin;
+  border: 1px solid $page-border;
+  border-bottom-width: 2px;
+  background-color: $page-gray;
+  background-image: linear-gradient(rgba(#fff, .2), rgba(#fff, 0));
+  position: relative;
+  @include pad-box;
+  @extend .auto-radius;
+
+  &.wide, .wide > &, .wide > .box & {
+    border: { left: 0; right: 0; radius: 0; }
+  }
+}
+
+.box-content {
+  margin-bottom: $block-margin;
+  border: 1px solid $page-border;
+  background: $box-content-bg;
+  padding-top: 1px;
+  position: relative;
+  overflow: hidden;
+  @include h-pad-box;
+  .box &:not(:first-child) {
+    border-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.box-well {
+  border-radius: 4px;
+  box-shadow: rgba(#000, .2) 0 1px 4px inset;
+  background-color: rgba(#000, .03);
+  margin: { top: $block-margin; bottom: $block-margin; }
+  border: 1px solid transparent;
+  @include h-pad-box;
+}
+
+.box-info {
+  background: #f4f4f4;
+  position: relative;
+  border: 1px solid $page-border;
+  font-size: 12px;
+
+  .box &:not(:first-child) {
+    border-top: 0;
+  }
+
+  @include v-pad-box((5px, 10px));
+  @include h-pad-box;
+
+  .box-content & {
+    border: {
+      left: none;
+      right: none;
+    }
+  }
+}
+

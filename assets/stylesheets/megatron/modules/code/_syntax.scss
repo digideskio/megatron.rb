@@ -1,0 +1,18 @@
+.bson-code {
+  font-size: 13px;
+  background-color: $code_base03;
+  color: $code_base0;
+  .key { color: $code_base2; }
+  .value { color: $code_blue; }
+  .string {
+    color: $code_cyan;
+    word-break: break-all;
+  }
+  .function { color: $code_yellow; }
+  .number { color: $code_orange; }
+
+  /*a { color: darken($code_blue, 4); }*/
+
+
+  /*pre { background: none; border: 0; padding: 0;}*/
+}

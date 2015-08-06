@@ -1,0 +1,118 @@
+%text-input {
+  @include v-pad_box((5px, 7px));
+  border: 1px solid hsl(0, 0%, 79%);
+  border-radius: 3px;
+  padding: 5px .9em;
+  margin: 0;
+  line-height: 1.65em;
+  box-shadow: transparent 0 0 0 2px inset;
+  transition: background-color .3s ease-out, box-shadow .15s ease, border-color .15s ease;
+  color: #666;
+  font-size: 14px;
+
+  &:focus {
+    box-shadow: 0 0 0 2px hsl(203, 47%, 65%) inset;
+    border-color: hsl(203, 47%, 65%);
+    background-color: #fff;
+    outline: none;
+  }
+
+  &.error {
+    border-color: hsl(0, 37%, 70%);
+    background-color: hsl(0, 47%, 98%);
+    &:focus {
+      border-color: hsl(0, 47%, 65%);
+      background-color: #fff;
+      box-shadow: 0 0 0 2px rgba($red, .8) inset;
+    }
+  }
+
+  &.dark {
+    background-color: #424242;
+    color: #eee;
+    text-shadow: #000 0 1px;
+    &:focus {
+      background-color: #333;
+    }
+  }
+}
+
+textarea {
+  @extend %text-input;
+  min-height: 10em;
+  width: 100%;
+  display: block;
+  
+  label + & {
+    margin-top: .4em;
+  }
+
+  &.short {
+    min-height: 7em;
+  }
+  &.tiny {
+    min-height: 3em;
+    height: 3em;
+  }
+}
+
+[type=text], [type=password] {
+  @extend %text-input;
+  vertical-align: middle;
+  margin-right: .5em;
+
+  &.big {
+    font-size: 15px;
+    padding: { top: 10px; bottom: 10px; }
+    margin-right: .8em;
+  }
+}
+
+.input-label {
+  display: inline-block;
+  letter-spacing: -5px;
+  input { letter-spacing: 0; }
+
+  &:before, &:after {
+    color: #888;
+    letter-spacing: 0;
+    display: inline-block;
+    background: $softwhite;
+    border: 1px solid hsl(0, 0%, 79%);
+    padding: 0 .9em;
+    @include v-pad_box((5px, 7px));
+    font-size: 14px;
+    line-height: 1.65em;
+    box-shadow: transparent 0 0 0 2px inset;
+  }
+
+  &[data-suffix]{
+    margin-right: .4em;
+    input {
+      border-top-right-radius: 0px;
+      border-bottom-right-radius: 0px;
+      margin-right: 0;
+    }
+    &:after {
+      content: attr(data-suffix);
+      border-top-right-radius: 4px;
+      border-bottom-right-radius: 4px;
+      border-left: 0;
+    }
+  }
+
+  &[data-prefix]{
+    input {
+      border-top-left-radius: 0px;
+      border-bottom-left-radius: 0px;
+    }
+    &:before {
+      content: attr(data-prefix);
+      border-top-left-radius: 4px;
+      border-bottom-left-radius: 4px;
+      border-right: 0;
+    }
+  }
+
+}
+

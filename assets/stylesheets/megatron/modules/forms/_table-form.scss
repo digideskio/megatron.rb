@@ -1,0 +1,53 @@
+.table-form {
+  margin: .8em 0;
+
+  .table-row {
+    margin: .8em 0;
+  }
+
+  .table-cell:empty {
+    padding: 0;
+  }
+
+  [type=text],[type=password] {
+    width: 100%;
+  }
+  .auto {
+    width: auto;
+  }
+
+  @include until($medium) {
+    .table-cell {
+      padding: 0;
+    }
+    label:first-child {
+      font-size: .8em;
+      display: inline-block;
+      margin: .4em 0;
+    }
+  }
+
+  @include at-least($medium) {
+    @include auto-table;
+
+    .table-cell {
+      padding: .4em 0;
+      vertical-align: middle;
+      margin: 0;
+
+    }
+
+    // Ensure labels do not wrap
+    //
+    label.table-cell,
+    .table-cell:first-child:not(:last-child) {
+      width: 1%;
+      label {
+        white-space: pre;
+        line-height: 2em;
+        padding-right: 1em;
+      }
+    }
+  }
+}
+
