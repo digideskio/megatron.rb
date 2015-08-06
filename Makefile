@@ -17,3 +17,7 @@ touch_empty:
 
 clean:
 	rm -f public/assets/megatron/megatron*
+
+publish: clean build
+	gem build megatron.gemspec
+	gem push megatron-$(GEM_VERSION).gem

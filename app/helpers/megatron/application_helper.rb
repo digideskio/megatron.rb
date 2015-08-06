@@ -1,13 +1,16 @@
 module Megatron
   module ApplicationHelper
     def megatron_asset_path(asset)
-      url = Rails.env.production? && !ENV['LOCAL_MEGATRON'] ? "https://app.compose.io/assets/megatron/#{asset}" : "/assets/megatron/#{asset}"
+      return "#{ENV['MEGATRON_ASSET_HOST']}/assets/megatron/#{asset}" if ENV['MEGATRON_ASSET_HOST']
+      return "https://d1jybc9y95nviz.cloudfront.net/assets/megatron/#{asset}" if Rails.env.production?
+      return "/assets/megatron/#{asset}"
     end
 
     def megatron_assets_tags
+      version = Megatron::VERSION
       favicon_link_tag(megatron_asset_path('favicon.ico')) + 
-      stylesheet_link_tag(megatron_asset_path('megatron')) +
-      javascript_include_tag(megatron_asset_path('megatron'))
+      stylesheet_link_tag(megatron_asset_path("megatron-#{version}")) +
+      javascript_include_tag(megatron_asset_path("megatron-#{version}"))
     end
 
     def icon(name)
