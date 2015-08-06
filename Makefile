@@ -9,6 +9,7 @@ build.js:
 
 build.css:
 	bundle exec sass --style compressed assets/stylesheets/megatron/megatron.scss:public/assets/megatron/megatron-$(GEM_VERSION).css
+	postcss --use autoprefixer public/assets/megatron/megatron-$(GEM_VERSION).css -o public/assets/megatron/megatron-$(GEM_VERSION).css
 
 install: clean build touch_empty
 
