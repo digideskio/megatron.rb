@@ -60,7 +60,7 @@ end
 
 def build
   system "sass assets/stylesheets/megatron/megatron.scss:#{destination}"
-  system "postcss --use autoprefixer #{destination} -o #{destination}"
+  system "./node_modules/postcss-cli/bin/postcss --use autoprefixer #{destination} -o #{destination}"
   puts "Built: #{destination}"
 end
 
