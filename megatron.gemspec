@@ -7,8 +7,8 @@ require "megatron/version"
 Gem::Specification.new do |spec|
   spec.name        = "megatron"
   spec.version     = Megatron::VERSION
-  spec.authors     = ["Jerome Gravel-Niquet"]
-  spec.email       = ["jeromegn@gmail.com"]
+  spec.authors     = ["Jerome Gravel-Niquet", "Brandon Mathis"]
+  spec.email       = ["jeromegn@gmail.com", "brandon@imathis.com"]
   spec.homepage    = "https://www.compose.io"
   spec.summary     = "Megatron view helpers"
   spec.description = "Hotness."
