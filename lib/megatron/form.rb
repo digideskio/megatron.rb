@@ -104,7 +104,7 @@ module Megatron
     end
 
     def errors_on?(method)
-      @object.present? && && @object.respond_to?(:errors) && @object.errors[method].present?
+      @object.present? && @object.respond_to?(:errors) && @object.errors[method].present?
     end
 
     def stacked_row(&block)
