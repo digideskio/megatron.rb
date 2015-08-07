@@ -20,5 +20,5 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'to_words', '~> 1.1.0'
   spec.add_runtime_dependency 'slim-rails'
 
-  spec.add_dependency "rails", "~> 4.2.3"
+  spec.add_dependency "rails", "~> 4"
 end

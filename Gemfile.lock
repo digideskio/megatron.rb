@@ -3,7 +3,7 @@ PATH
   specs:
     megatron (0.0.4)
       block_helpers (~> 0.3.3)
-      rails (~> 4.2.3)
+      rails (~> 4)
       slim-rails
       to_words (~> 1.1.0)
 
@@ -146,4 +146,4 @@ DEPENDENCIES
   spring
 
 BUNDLED WITH
-   1.10.6
+   1.10.2
