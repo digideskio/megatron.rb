@@ -8,7 +8,7 @@ import * as _ from 'lodash'
 import * as notify from 'notify'
 import * as request from 'superagent'
 
-module.exports = {
+window.Megatron = module.exports = {
   Dialog: Dialog,
   notify: notify,
   utils: utils,
@@ -45,8 +45,6 @@ function pageChange(){
   utils.Timeago.setup()
   utils.Messages.load()
 }
-
-console.log(tap)
 
 // Dialog document listener and auto-creator
 bean.on(document, 'click', '[data-trigger=dialog]', handleDialogTrigger)

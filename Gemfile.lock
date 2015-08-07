@@ -144,6 +144,3 @@ DEPENDENCIES
   sass (~> 3.3, >= 3.3.4)
   sass-rails (= 5.0.3)
   spring
-
-BUNDLED WITH
-   1.10.2

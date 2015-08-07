@@ -7,7 +7,7 @@ var Messages = {
   },
 
   fetch: function(){
-    request.get('/messages.json', this.success.bind(this));
+    request.get('/messages.json').end(this.end.bind(this));
   },
 
   dismiss: function(event){
@@ -27,8 +27,8 @@ var Messages = {
 
   },
 
-  success: function(response) {
-    if (response.serverError) {
+  end: function(error, response) {
+    if (error || response.serverError) {
       return
     } else {
       var options = JSON.parse(response.text)[0]
@@ -84,7 +84,7 @@ var Messages = {
 
   load: function(){
     if(window.location.hostname.match(/app\.compose\.(io|dev)/)){
-      message = window.Megatron.accountMessage
+      var message = window.Megatron.accountMessage
       if(!message) {
         this.fetch()
       } else {
