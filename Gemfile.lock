@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    megatron (0.0.8)
+    megatron (0.0.9)
       block_helpers (~> 0.3.3)
       rails (~> 4)
       slim-rails
@@ -144,3 +144,6 @@ DEPENDENCIES
   sass (~> 3.3, >= 3.3.4)
   sass-rails (= 5.0.3)
   spring
+
+BUNDLED WITH
+   1.10.2

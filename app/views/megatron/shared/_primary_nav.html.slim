@@ -1,6 +1,14 @@
 - primary_nav do |nav|
-  = nav.item 'Deployments', "/#{current_account.slug}/deployments", icon: 'deployments'
-  = nav.item 'Account',     "/account",                             icon: 'account_circle'
-  = nav.item 'Alerts',      "/#{current_account.slug}/alerts",      icon: 'alerts'
-  = nav.item 'Support',     "/#{current_account.slug}/tickets",     icon: 'question_line'
+  = nav.item 'Deployments', "/#{current_account.slug}/deployments",
+    icon: 'deployments'
+
+  = nav.item 'Account', "/account",
+    icon: 'account_circle'
+  
+  = nav.item 'Alerts', "/#{current_account.slug}/alerts",
+    icon: 'alerts'
+  
+  = nav.item 'Support', "/#{current_account.slug}/tickets",
+    icon: 'question_line'
+  
   = nav.sign_out

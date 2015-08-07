@@ -53,9 +53,8 @@ html
                     = yield :sidebar
               - else
                 .main
-                  .main-content
-                    - if @wide_layout
-                      .wide
-                        = render 'megatron/shared/main_content'
-                    - else
+                  - if @wide_layout
+                    .wide
                       = render 'megatron/shared/main_content'
+                  - else
+                    = render 'megatron/shared/main_content'
