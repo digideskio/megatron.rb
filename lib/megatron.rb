@@ -1,5 +1,5 @@
 Gem.loaded_specs['megatron'].dependencies.each do |d|
- require d.name
+  require d.name
 end
 
 require "megatron/form"

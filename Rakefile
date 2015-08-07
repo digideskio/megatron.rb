@@ -14,11 +14,7 @@ RDoc::Task.new(:rdoc) do |rdoc|
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
 
-
-
 load 'rails/tasks/statistics.rake'
-
-
 
 Bundler::GemHelper.install_tasks
 
@@ -29,7 +25,7 @@ task :sass_watch do
 end
 
 def listen
-  listener = Listen.to('assets/stylesheets/megatron/', only: /\.scss$/) do |modified, added, removed|
+  listener = Listen.to('app/assets/stylesheets/megatron/', only: /\.scss$/) do |modified, added, removed|
     output_paths("Changes detected to", modified)
     output_paths("Added", added)
     output_paths("Removed", removed)
@@ -59,7 +55,7 @@ def destination
 end
 
 def build
-  system "sass assets/stylesheets/megatron/megatron.scss:#{destination}"
+  system "sass app/assets/stylesheets/megatron/megatron.scss:#{destination}"
   system "./node_modules/postcss-cli/bin/postcss --use autoprefixer #{destination} -o #{destination}"
   puts "Built: #{destination}"
 end

@@ -15,6 +15,12 @@ gemspec
 
 gem 'sass', '~> 3.3', '>= 3.3.4'
 gem 'rack-cors'
-gem 'rack-try_static2'
 gem 'puma'
-gem 'listen', '~> 3.0'
+gem 'sass-rails', '5.0.3'
+gem 'redcarpet'
+
+group :development, :test do
+  gem 'listen', '~> 3.0'
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'spring'
+end
