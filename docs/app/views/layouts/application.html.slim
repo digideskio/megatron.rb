@@ -13,14 +13,13 @@ html
   body
     = render 'layouts/secondary_nav'
     .site
-      .page-content
+      main
         - if content_for?(:secondary_nav)
-          nav.secondary_nav
+          nav.main-nav
             = yield :secondary_nav
         - if content_for?(:main)
-          .main
-            .main-content
-              - if content_for?(:main_header)
+          .main-page
+            - if content_for?(:main_header)
               = yield :main_header
-              = yield :main
+            = yield :main
 
