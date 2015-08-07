@@ -1,7 +1,26 @@
-= megatron_layout do
-  - stylesheets do
+<!DOCTYPE html>
+html
+  head
+    - if @title.present?
+      title #{@title} | Compose
+    - else
+      title Compose
+    meta name="viewport" content="width=device-width,initial-scale=1"
+    meta charset="utf-8"
+    = csrf_meta_tags
+    = megatron_assets_tags
     = stylesheet_link_tag "application"
+  body
+    = render 'layouts/secondary_nav'
+    .site
+      .page-content
+        - if content_for?(:secondary_nav)
+          nav.secondary_nav
+            = yield :secondary_nav
+        - if content_for?(:main)
+          .main
+            .main-content
+              - if content_for?(:main_header)
+              = yield :main_header
+              = yield :main
 
-  - page_header "Megatron"
-
-  = render 'layouts/secondary_nav'

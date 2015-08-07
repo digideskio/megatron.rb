@@ -1,5 +1,5 @@
 module Megatron
-  module ExampleHelper
+  module DocsHelper
 
     DEMO_DEFAULTS = {
       type: :slim, 
