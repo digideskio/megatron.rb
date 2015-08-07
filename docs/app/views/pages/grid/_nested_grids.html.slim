@@ -1,0 +1,19 @@
+= heading "Nested Grids"
+
+p Want to get all Xzibit and put a grid inside another grid so you can grid while you grid? Go for it. Here's how it looks.
+
+= demo_box 'Nested Grid'
+  - grid gutters: :small, match_gutters: true do |g|
+    = g.cell 2, 5
+      code=width(2,5)
+    = g.cell 3, 5
+      - grid gutters: :small, match_gutters: true do |gg|
+        = gg.cell 1, 2
+          code=width(1,2)
+        = gg.cell 1, 2
+          code=width(1,2)
+        = gg.cell 1, 3
+          code=width(1,3)
+        = gg.cell 1, 3
+          code=width(1,3)
+

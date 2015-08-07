@@ -1,0 +1,56 @@
+- main_header "Navigation"
+- content_for :main
+
+  = heading "Main Navigation"
+ 
+  p The primary navigation is built in to Megatron, but if your app needs to customize it, you'll need to set the option when you call <code>megatron_layout</code>.
+
+  code: slim
+    = megatron_layout custom_nav: true
+
+  p Then you add links to the primary layout like this:
+
+  code: slim
+    - primary_nav do |nav|
+      = nav.item 'link title', page_path, icon: 'icon_name'
+      = nav.sign_out
+
+  p The <code>nav.item</code> helpers generate the HTML for a navigational element, but they accept options just like the standard Rails <code>link_to</code> helpers.
+
+  = heading "Secondary Navigation"
+
+  p To add custom navigation to a page, follow this pattern:
+
+  code: slim
+    - secondary_nav do |nav|
+      = nav.item 'link title', page_path, icon: 'icon_name'
+
+  = heading "Tabs"
+
+  p For a third level of navigation, use tabs. Here's what that looks like:
+
+  = demo_box 'Tabs'
+    - tabs do |t|
+      = t.tab 'Tab 1', '#'
+      = t.tab 'Tab 2', '#'
+      = t.tab 'Tab 3', '#'
+      = t.tab_button 'Tab button', '#'
+
+  p When you want to nest your tabs underneath a container, use "box tabs".
+
+  = demo_box 'Box Tabs'
+    - box_tabs do |t|
+      = t.tab 'Tab 1', '#'
+      = t.tab 'Tab 2', '#'
+      = t.tab 'Tab 3', '#'
+
+  = heading "Breadcrumbs"
+
+  p Breadcrubs help provide navigational context. These are used when you are "drilling down" into a naturally heiarchical series of pages.
+
+  = demo_box 'Breadcrumbs'
+    - breadcrumbs do |b|
+      = b.crumb 'first', '#'
+      = b.crumb 'second', '#'
+      = b.crumb 'third', '#'
+      = b.crumb 'current'

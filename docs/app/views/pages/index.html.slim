@@ -1,0 +1,44 @@
+- main_header
+  / More complex headers can accept a block
+  h2 Megatron Setup
+
+- main
+  p Add the `megatron.rb` gem to your gemfile:
+
+  code: ruby
+    source 'https://gems.gemfury.com/Gqx3RZsppEheCrtxkFQ5'
+    gem 'megatron.rb'
+    
+  
+  p In your app's <code>config/application.rb</code>.
+  
+  code: ruby, title: asdfasfd
+     require 'megatron'
+
+
+  = heading "Layouts"
+
+  p Add Megatron's helper methods to your app's <code>views/layouts/application.html.slim</code>. Your layout can be as simple as this:
+
+  code: slim
+    = megatron_layout
+      yield
+
+  p Or you can add inject scripts and set the page's header
+
+  code: slim
+    = megatron_layout
+      - javascripts do
+        = javascript_include_tag "application", "data-turbolinks-track" => true
+      - stylesheets do
+        = stylesheet_link_tag "application"
+
+      - page_header "megatron.rb"
+
+
+  - sidebar do
+    = heading "Sidebar"
+    p Add a sidebar to your pages with the sidebar helper.
+    code: slim
+      - sidebar do
+        p sidebar

@@ -1,0 +1,97 @@
+- main_header "Buttons"
+
+- content_for :main
+  p Buttons can be a links or true <code>&lt;button></code> tags.
+
+  code: ruby
+    # Basic button usage
+    button 'Text', [options]
+
+    # options:
+    href: ''        # Make button a link
+    type: :type     # :primary, :destroy, :primary_destroy, :text
+    color: :color   # :green, :dark, :blue_outline, :green_outline, :dark_outline
+    size: :size     # :small, :medium, :large, :xlarge
+    disabled: false
+
+  p 
+    'When there are several forms on a single page, use a standard button type.
+    'A primary button should be used as the default submission button for a large form, usually when that is the only form on the page.
+  p You can use a button type healper instead of passing the type as an option.
+
+  = demo_box "types", padded: false
+    .demo-box-row
+      = button 'Normal'
+      = button 'Normal', disabled: true
+    .demo-box-row
+      = button 'Link', href: '#'
+      = button 'Link', href: '#', disabled: true
+    .demo-box-row
+      = primary_button 'Primary'
+      = primary_button 'Primary', disabled: true
+    .demo-box-row
+      = destroy_button 'Destroy'
+      = destroy_button 'Destroy', disabled: true
+    .demo-box-row
+      = primary_destroy_button 'Primary Destroy'
+      = primary_destroy_button 'Primary Destroy', disabled: true
+    .demo-box-row
+      = text_button 'Text Button'
+      = text_button 'Text Button', disabled: true
+
+  p Use the text button to provide an alternative action.
+
+  = demo_box "Sample text button usage" do
+    = text_button 'Cancel'
+    = primary_button 'Save Changes'
+
+  = heading 'Button Options'
+
+  p There are only a few color options for buttons, here's a look.
+
+  = demo_box "Colors" do
+    = button ':green', color: :green
+    = button ':dark', color: :dark
+    = button ':blue_outline', color: :blue_outline
+    = button ':green_outline', color: :green_outline
+    = button ':dark_outline', color: :dark_outline
+
+  p Set the size option for different size buttons. Here's a preview.
+
+  = demo_box "Sizes" do
+    = button ':small', size: :small
+    = button ':medium', size: :medium
+    = button 'default'
+    = button ':large', size: :large
+    = button ':xlarge', size: :xlarge
+
+  = heading "Pills"
+  markdown:
+    Use a pill to call attention to a small scraps of important text. 
+
+    - They are not buttons.
+    - Pills shouldn't be more than two words.
+    - There shouldn't be many on the same page.
+
+    Any color from the [color palette](color) will work. Here's a demo:
+
+  = demo_box "Pills" do
+    span.pink-pill .pink-pill
+    span.red-pill .red-pill
+    span.orange-pill .orange-pill
+    span.yellow-pill .yellow-pill
+    span.green-pill .green-pill
+    span.blue-pill .blue-pill
+    span.purple-pill .purple-pill
+    span.black-pill .black-pill
+
+  = demo_box "Outline Pills" do
+    span.pink-outline-pill .pink-outline-pill
+    span.red-outline-pill .red-outline-pill
+    span.orange-outline-pill .orange-outline-pill
+    span.yellow-outline-pill .yellow-outline-pill
+    span.green-outline-pill .green-outline-pill
+    span.blue-outline-pill .blue-outline-pill
+    span.purple-outline-pill .purple-outline-pill
+    span.black-outline-pill .black-outline-pill
+

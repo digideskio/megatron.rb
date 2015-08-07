@@ -1,0 +1,63 @@
+= heading "Cell Sizing"
+p Megatron ships with a sixths-based grid, meaning that the smallest size available is <strong>16.667%</strong>, or one-sixth. However, you can easily extend these. Depicted below are the available width classes.
+
+.cell-size-demo
+  = demo_box "Cell Sizes"
+    - grid gutters: :none do |g|
+      = g.cell 1, 6
+        code=width(1, 6)
+      = g.cell 5, 6, class: 'text-right'
+        code=width(5, 6)
+
+      = g.cell 1, 5
+        code=width(1, 5)
+      = g.cell 4, 5, class: 'text-right'
+        code=width(4, 5)
+
+      = g.cell 1, 4
+        code=width(1, 4)
+      = g.cell 3, 4, class: 'text-right'
+        code=width(3, 4)
+
+      = g.cell 1, 3
+        code=width(1, 3)
+      = g.cell 2, 3, class: 'text-right'
+        code=width(2, 3)
+
+      = g.cell 2, 5
+        code=width(2, 5)
+      = g.cell 3, 5, class: 'text-right'
+        code=width(3, 5)
+
+      = g.cell 1, 2
+        code=width(1, 2)
+      = g.cell 1, 2, class: 'text-right'
+        code=width(1, 2)
+
+      = g.cell 3, 5
+        code=width(3, 5)
+      = g.cell 2, 5, class: 'text-right'
+        code=width(2, 5)
+
+      = g.cell 2, 3
+        code=width(2, 3)
+      = g.cell 1, 3, class: 'text-right'
+        code=width(1, 3)
+
+      = g.cell 3, 4
+        code=width(3, 4)
+      = g.cell 1, 4, class: 'text-right'
+        code=width(1, 4)
+
+      = g.cell 4, 5
+        code=width(4, 5)
+      = g.cell 1, 5, class: 'text-right'
+        code=width(1, 5)
+
+      = g.cell 5, 6
+        code=width(5, 6)
+      = g.cell 1, 6, class: 'text-right'
+        code=width(1, 6)
+
+      = g.cell
+        code grid-cell

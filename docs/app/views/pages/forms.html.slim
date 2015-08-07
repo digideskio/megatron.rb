@@ -1,0 +1,14 @@
+- main_header "Forms"
+
+- content_for :main
+  p Using the default form builder from Rails, we can achieve Megatron-enhanced forms!
+
+  = demo_box "Table forms"
+    = table_form_for :test do |f|
+      = f.text_field :hello, value: 'hello'
+      = f.select :ahhh, [:ah, :oh]
+  
+  = demo_box "Stacked forms"
+    = stacked_form_for :test do |f|
+      = f.text_field nil, placeholder: 'hello'
+      = f.select :ahhh, [:ah, :oh]

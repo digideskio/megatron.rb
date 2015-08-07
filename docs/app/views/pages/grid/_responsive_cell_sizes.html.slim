@@ -1,0 +1,30 @@
+= heading "Responsive Cell Sizing"
+p Grid cells sizes can be set based on predefined browser size breakpoints. 
+
+code: slim
+  - grid do |g|
+    /sizes:  450px          600px         750px          900px         1200px
+    = g.cell xsmall: [1,2], small: [1,3], medium: [1,4], large: [1,5], xlarge: [1,6]
+
+p Here's a demo. Resize your browser to see the grid cells realign themselves
+
+.cell-size-demo
+  = demo_box "Responsive Cell Sizes"
+    - args = { xsmall: [1,2], small: [1,3], medium: [1,4], large: [1,5], xlarge: [1,6] }
+    - grid gutters: :small do |g|
+      = g.cell args
+        code test
+      = g.cell args
+        code test
+      = g.cell args
+        code test
+      = g.cell args
+        code test
+      = g.cell args
+        code test
+      = g.cell args
+        code test
+      = g.cell args
+        code test
+      = g.cell args
+        code test

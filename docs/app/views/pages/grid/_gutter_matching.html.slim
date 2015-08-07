@@ -1,0 +1,71 @@
+= heading 'Gutter Matching'
+p By default grid gutters allow the margin of their contents to "leak" out and affect the vertical position of other grid cells. Here's an example where a <code>&lt;p></code> tag pushes the grid cells apart with margin.
+
+.cell-size-demo
+  = demo_box "\"Leaky\" Gutters (default)", padded: false
+    .demo-box-row
+      - grid match_gutters: false, gutters: :none do |g|
+        = g.cell 1,3
+          p: code=width 1,3
+        = g.cell 2,3
+          p: code=width 2,3
+        = g.cell 3,5
+          p: code=width 3,5
+        = g.cell 2,5
+          p: code=width 2,5
+    .demo-box-row
+      - grid match_gutters: false, gutters: :small do |g|
+        = g.cell 1,3
+          p: code=width 1,3
+        = g.cell 2,3
+          p: code=width 2,3
+        = g.cell 3,5
+          p: code=width 3,5
+        = g.cell 2,5
+          p: code=width 2,5
+    .demo-box-row
+      - grid match_gutters: false do |g|
+        = g.cell 1,3
+          p: code=width 1,3
+        = g.cell 2,3
+          p: code=width 2,3
+        = g.cell 3,5
+          p: code=width 3,5
+        = g.cell 2,5
+          p: code=width 2,5
+
+p To prevent margins from leaking, set <code>match_gutters: true</code> and your grid's vertical and horizontal gutters will match. Here's a look.
+
+.cell-size-demo
+  = demo_box "Matching Gutters", padded: false
+    .demo-box-row
+      - grid match_gutters: true, gutters: :none do |g|
+        = g.cell 1,3
+          p: code=width 1,3
+        = g.cell 2,3
+          p: code=width 2,3
+        = g.cell 3,5
+          p: code=width 3,5
+        = g.cell 2,5
+          p: code=width 2,5
+    .demo-box-row
+      - grid match_gutters: true, gutters: :small do |g|
+        = g.cell 1,3
+          p: code=width 1,3
+        = g.cell 2,3
+          p: code=width 2,3
+        = g.cell 3,5
+          p: code=width 3,5
+        = g.cell 2,5
+          p: code=width 2,5
+    .demo-box-row
+      - grid match_gutters: true do |g|
+        = g.cell 1,3
+          p: code=width 1,3
+        = g.cell 2,3
+          p: code=width 2,3
+        = g.cell 3,5
+          p: code=width 3,5
+        = g.cell 2,5
+          p: code=width 2,5
+

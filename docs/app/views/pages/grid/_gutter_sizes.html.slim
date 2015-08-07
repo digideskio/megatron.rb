@@ -1,0 +1,48 @@
+= heading 'Gutter Sizing'
+
+p By default, grid cells are given a 4% width gutter. Set the gutter size with the grid's <code>gutter</code> option.
+
+code: slim
+  - grid gutters: :none    # 0
+  - grid gutters: :small   # 2%
+  - grid                   # 4% (Default)
+  - grid gutters: :large   # 8%
+
+p Here's an example of each gutter width.
+
+.gutter-demo
+  = demo_box 'No Gutter'
+    - grid gutters: :none do |g|
+      = g.cell 1, 3
+        code=width(1,3)
+      = g.cell 1, 3
+        code=width(1,3)
+      = g.cell 1, 3
+        code=width(1,3)
+
+  = demo_box 'Small Gutter'
+    - grid gutters: :small do |g|
+      = g.cell 1, 3
+        code=width(1,3)
+      = g.cell 1, 3
+        code=width(1,3)
+      = g.cell 1, 3
+        code=width(1,3)
+
+  = demo_box 'Default Gutter'
+    - grid do |g|
+      = g.cell 1, 3
+        code=width(1,3)
+      = g.cell 1, 3
+        code=width(1,3)
+      = g.cell 1, 3
+        code=width(1,3)
+
+  = demo_box 'Large Gutter'
+    - grid gutters: :large do |g|
+      = g.cell 1, 3
+        code=width(1,3)
+      = g.cell 1, 3
+        code=width(1,3)
+      = g.cell 1, 3
+        code=width(1,3)

@@ -1,0 +1,53 @@
+- main_header
+  h2 Grids
+
+- content_for :main
+  .grid-demo
+    = heading "Using Grids"
+    code: slim
+      - grid [options] do |g|       # You'll use the grid block
+        = g.cell [size], [options]  # and grid cells
+          p Content!
+    
+    = heading "Grid/Cell Options"
+
+    p Grid blocks can accept these options (defaults are listed first).
+
+    code: ruby
+      gutters: 'medium', 'none', 'small', 'large'
+      gutter_matching: false, true
+      align:   'left', 'center', 'right'
+      valign:  'top', 'middle', 'bottom'
+      
+    p Cells accept an optional size followed by a hash of options.
+
+    code: ruby
+      g.cell [1,2], [options]
+
+      # responsive size options
+      xsmall: []
+      small:  []
+      medium: []
+      large:  []
+      xlarge: []
+
+    p Here's an example:
+
+    = demo_box 'Simple grid'
+      - grid do |g|
+        = g.cell
+          code grid-cell
+        = g.cell [1, 3]
+          code=width(1,3)
+        = g.cell [1, 3]
+          code=width(1,3)
+        = g.cell [1, 3]
+          code=width(1,3)
+
+    = render "pages/grid/cell_sizes"
+    = render "pages/grid/responsive_cell_sizes"
+    = render "pages/grid/gutter_sizes"
+    = render "pages/grid/gutter_matching"
+    = render "pages/grid/nested_grids"
+    = render "pages/grid/horizontal_alignment"
+    = render "pages/grid/vertical_alignment"

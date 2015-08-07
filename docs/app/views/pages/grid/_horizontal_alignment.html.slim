@@ -1,0 +1,52 @@
+= heading "Horizontal Alignment"
+
+p By default, grid cells are left aligned. To center or right-align them, set the <code>align</code> grid option. This will align all nested grid cells.
+
+code: slim
+  - grid align: :right  
+  - grid align: :center
+
+= demo_box 'Left alignment (default)'
+  - grid match_gutters: true, gutters: :small do |g|
+    = g.cell 1,3
+      code=width 1,3
+    = g.cell 1,3
+      code=width 1,3
+    = g.cell
+      code grid-cell
+    = g.cell 1,4
+      code=width 1,4
+    = g.cell 1,4
+      code=width 1,4
+    = g.cell 1,4
+      code=width 1,4
+
+= demo_box 'Right alignment'
+  - grid align: :right, match_gutters: true, gutters: :small do |g|
+    = g.cell 1,3
+      code=width 1,3
+    = g.cell 1,3
+      code=width 1,3
+    = g.cell
+      code grid-cell
+    = g.cell 1,4
+      code=width 1,4
+    = g.cell 1,4
+      code=width 1,4
+    = g.cell 1,4
+      code=width 1,4
+
+= demo_box 'Center alignment'
+  - grid align: :center, match_gutters: true, gutters: :small do |g|
+    = g.cell 1,3
+      code=width 1,3
+    = g.cell 1,3
+      code=width 1,3
+    = g.cell
+      code grid-cell
+    = g.cell 1,4
+      code=width 1,4
+    = g.cell 1,4
+      code=width 1,4
+    = g.cell 1,4
+      code=width 1,4
