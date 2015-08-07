@@ -16,7 +16,7 @@ var Messages = {
     event.stopPropagation()
 
     // Track dismissal
-    request.get(event.currentTarget.getAttribute('href')).end(function(response){
+    request.get(event.currentTarget.getAttribute('href')).end(function(error, response){
       // Ask for any new messages
       self.fetch()
     })
