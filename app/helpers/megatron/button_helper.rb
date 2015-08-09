@@ -3,9 +3,13 @@ module Megatron
     def button(text, options = {})
       tag_name = options[:href].present? ? :a : :button
       opts = {
-        class: button_classes(options)
+        class: button_classes(options),
+        data: options[:data] || {}
       }
       opts[:href] = options[:href] if options[:href]
+      opts[:data][:toggle] = options[:toggle] if options[:toggle]
+      opts[:data].merge!(options[:dialog].merge(trigger: 'dialog')) if options[:dialog]
+
       content_tag tag_name, opts do
         if options[:icon]
           concat icon(options[:icon])
@@ -13,6 +17,14 @@ module Megatron
         end
         concat text
       end
+    end
+
+    def header_button(text, options = {})
+      button(text, {type: :header, flavor: 'btn'}.merge(options))
+    end
+
+    def primary_header_button(text, options = {})
+      button(text, options.merge(type: :header, flavor: 'primary-btn'))
     end
 
     def primary_button(text, options = {})
@@ -34,6 +46,8 @@ module Megatron
     def button_classes(options)
       button_type = options[:type] || options[:color]
       classes = button_type.present? ? ["#{button_type.to_s.gsub('_','-')}-btn"] : ["btn"]
+      classes << options[:flavor] if options[:flavor]
+      classes << options[:class] if options[:class]
       classes << options[:size].to_s.gsub(/xlarge/, 'x-large') if options[:size]
       classes << 'disabled' if options[:disabled]
       classes

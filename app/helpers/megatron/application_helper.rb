@@ -58,5 +58,28 @@ module Megatron
       string << " #{classes.join(' ')}"
       string
     end
+
+    def test_current_page(criteria)
+      return false unless criteria.present?
+      
+      test_params = criteria.delete(:params) || {}
+      test_params[:controller] ||= criteria[:controller] if criteria[:controller].present?
+      test_params[:action] ||= criteria[:action] if criteria[:action].present?
+
+      test_params.all? {|k, v| test_here_key_value(k, v) }
+
+    end
+
+    def test_here_key_value(key, value, check_params = params)
+      if value.is_a?(Hash)
+        value.all? {|k,v| params[k].present? && test_here_key_value(k, v, params[k]) }
+      elsif value.is_a?(Array)
+        value.detect {|v| test_here_key_value(key, v) }.present?
+      elsif value.is_a?(Regexp)
+        (check_params[key] =~ value) != nil
+      else
+        value == check_params[key]
+      end
+    end
   end
 end

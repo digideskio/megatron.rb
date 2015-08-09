@@ -1,8 +1,10 @@
 module Megatron
   module TabHelper
     class Tabs < BlockHelpers::Base
-      def tab(text, href)
-        content_tag :a, class: 'tab', href: href do
+      def tab(text, href, options = {})
+        options[:class] = add_class(options[:class], "tab")
+        options[:class] = add_class(options[:class], "here") if test_current_page(options[:here_if])
+        content_tag :a, class: options[:class], href: href do
           text
         end
       end

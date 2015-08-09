@@ -5,9 +5,9 @@ module Megatron
         options[:class] = add_class(options[:class], 'breadcrumb')
 
         if href.nil?
-          content_tag(:span, options) { text }
+          content_tag(:span, options) { text.to_s }
         else
-          link_to(href, options){ text }
+          link_to(href, options){ text.to_s }
         end
       end
 
