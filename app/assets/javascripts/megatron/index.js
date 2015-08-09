@@ -1,12 +1,12 @@
-import * as utils from './utils'
-import * as bean from 'bean'
-import * as Dialog from 'dialog'
+var utils = require('./utils')
+var bean = require('bean')
+var Dialog = require('dialog')
 var tap = require('tap-event')
-import * as Form from './form'
-import * as Link from './link'
-import * as _ from 'lodash'
-import * as notify from 'notify'
-import * as request from 'superagent'
+var Form = require('./form')
+var Link = require('./link')
+var _ = require('lodash')
+var notify = require('notify')
+var request = require('superagent')
 
 window.Megatron = module.exports = {
   Dialog: Dialog,
