@@ -52,7 +52,6 @@ module Megatron
           concat item(options[:text], '#', options)
         end
       end
-
     end
 
     class SecondaryNav < Nav
