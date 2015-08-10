@@ -9,8 +9,8 @@ module Megatron
     def megatron_assets_tags
       version = Megatron::VERSION
       favicon_link_tag(megatron_asset_path('favicon.ico')) + 
-      stylesheet_link_tag(megatron_asset_path("megatron-#{version}")) +
-      javascript_include_tag(megatron_asset_path("megatron-#{version}"))
+      stylesheet_link_tag(megatron_asset_path("megatron-#{version}.css")) +
+      javascript_include_tag(megatron_asset_path("megatron-#{version}.js"))
     end
 
     def icon(name)

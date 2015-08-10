@@ -19,6 +19,9 @@ clean:
 touch_empty:
 	touch node_modules/browserify/lib/_empty.js
 
-publish: install
+bundle:
+	bundle install
+
+publish: bundle install
 	gem build megatron.gemspec
 	gem push megatron-$(GEM_VERSION).gem
