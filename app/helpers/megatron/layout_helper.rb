@@ -1,8 +1,10 @@
 module Megatron
   module LayoutHelper
 
-    def megatron_layout(layout='application', options={}, &block)
+  def megatron_layout(options={}, &block)
       @custom_nav = options[:custom_nav]
+      @primary_nav_here = options[:primary_nav]
+      layout = options.delete(:layout) || 'application'
       yield
       render template: "layouts/megatron/#{layout}"
     end
