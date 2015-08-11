@@ -12,14 +12,17 @@ html
     = stylesheet_link_tag "application"
   body
     = render 'layouts/secondary_nav'
-    .site
-      main
-        - if content_for?(:secondary_nav)
-          nav.main-nav
-            = yield :secondary_nav
-        - if content_for?(:main)
-          .main-page
-            - if content_for?(:main_header)
-              = yield :main_header
-            = yield :main
+    .docs-site
+      .docs-site-content
+        .docs-site-head
+        .docs-site-main
+          .docs-page
+            - if content_for?(:secondary_nav)
+              nav.docs-page-nav
+                = yield :secondary_nav
+            - if content_for?(:main)
+              .docs-page-content
+                - if content_for?(:main_header)
+                  = yield :main_header
+                = yield :main
 

@@ -1,5 +1,9 @@
-.site {
+.docs-site {
+  height: 100%;
   transform: translate3d(0,0,0);
+}
+
+.docs-site-content {
   min-height: 100%;
   display: flex;
   flex-direction: column;
@@ -9,9 +13,13 @@
   align-items: stretch;
 }
 
-main {
+.docs-site-head {
+  min-height: 100%;
+  flex-shrink: 1;
+}
+
+.docs-site-main {
   flex-grow: 1;
-  width: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: row;
@@ -30,10 +38,25 @@ $secondary-nav-here-text-color: $text-color;
 $secondary-nav-here-bg: #fafafa;
 $secondary-nav-hover-bg: #f5f5f5;
 
-.main-nav {
+
+.docs-page {
+  width: 100%;
+  display: flex;
+  margin: 0 auto;
+  max-width: 1640px;
+}
+
+.docs-page-content {
+  background: $offwhite;
+  padding: 1px 2em 1em;
+}
+
+.docs-page-nav {
   background: $silver;
   min-height: 100%;
   border-right: 1px solid $secondary-nav-border;
+  white-space: nowrap;
+  min-width: 120px;
   a {
     white-space: nowrap;
     text-decoration: none;
@@ -44,9 +67,6 @@ $secondary-nav-hover-bg: #f5f5f5;
     padding: 3px 18px 3px 18px;
     font-size: 14px;
     line-height: 25px;
-    &:first-child {
-      border-top: 1px solid $secondary-nav-border;
-    }
 
     &:focus, &:hover, &.here {
       box-shadow: 1px 0 0 rgba(#000, .1), -1px 0 0 rgba(#000, .1);
@@ -59,10 +79,4 @@ $secondary-nav-hover-bg: #f5f5f5;
       }
     }
   }
-}
-
-.main-page {
-  width: 100%;
-  background: $offwhite;
-  padding: 1em 2em;
 }

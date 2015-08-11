@@ -18,6 +18,7 @@ gem 'rack-cors'
 gem 'puma'
 gem 'sass-rails', '5.0.3'
 gem 'redcarpet'
+gem 'autoprefixer-rails'
 
 group :development, :test do
   gem 'listen', '~> 3.0'
