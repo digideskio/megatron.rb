@@ -3,9 +3,14 @@
     border-color: $color;
     @extend %pill;
   }
+  .#{"" + unquote($name)}-tag {
+    background-color: $color;
+    color: rgba($white, .85);
+    @extend %tag;
+  }
   .#{"" + unquote($name)}-pill {
     background-color: $color;
-    color: $white;
+    color: rgba($white, .85);
   }
   .#{"" + unquote($name)}-outline-pill {
     color: $color;
@@ -41,4 +46,19 @@
     content: "\00a0";
     letter-spacing: .2em;
   }
+}
+
+%tag {
+  font-size: .6em;
+  border-radius: 4px;
+  line-height: 1.5em;
+  padding: 2px 4px;
+  vertical-align: middle;
+  font-weight: bold;
+}
+
+.new-tag {
+  @extend %tag;
+  background: $blue;
+  text-transform: uppercase;
 }
