@@ -7,7 +7,8 @@ module Megatron
 
       def display(body)
         @options[:body] = body
-        render partial: "megatron/shared/message_box", locals: @options
+        @options[:class] ||= ''
+        render partial: "megatron/shared/box_message", locals: { options: @options }
       end
     end
   end
