@@ -13,8 +13,9 @@ module Megatron
       javascript_include_tag(megatron_asset_path("megatron-#{version}.js"))
     end
 
-    def icon(name)
-      content_tag(:span, class: "#{name}_icon", 'aria-hidden' => true) {  }
+    def icon(name, options={})
+      options[:class] ||= ''
+      content_tag(:span, class: "#{name}_icon #{options[:class]}", 'aria-hidden' => true) {  }
     end
 
     def options_from_args(args)
