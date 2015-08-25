@@ -28,7 +28,7 @@ html lang="en"
           span.hidden_label Compose
       .site-content
         - if !@custom_nav
-          = render 'megatron/shared/primary_nav'
+          = render partial: 'megatron/shared/primary_nav'
         - if content_for?(:primary_nav)
           nav.primary_nav role="navigation" data-no-turbolink=true
             = yield :primary_nav
