@@ -22,7 +22,7 @@ touch_empty:
 bundle:
 	bundle install
 
-publish: check-env bundle install
+publish: bundle install
 	gem build megatron.gemspec
 	gem push megatron-$(GEM_VERSION).gem
 	bundle exec rake megatron:upload
