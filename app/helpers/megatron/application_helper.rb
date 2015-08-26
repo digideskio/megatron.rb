@@ -69,7 +69,7 @@ module Megatron
       end
 
       # fullpath = URI.parse(request.fullpath).path
-      check_params = params.to_unsafe_hash.symbolize_keys.merge(path: fullpath)
+      check_params = params.to_unsafe_hash.symbolize_keys#.merge(path: fullpath)
 
       test_params.all? {|k, v| test_here_key_value(k, v, check_params) }
 
