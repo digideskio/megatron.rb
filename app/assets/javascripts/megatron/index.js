@@ -7,6 +7,7 @@ var Link = require('./link')
 var _ = require('lodash')
 var notify = require('notify')
 var request = require('superagent')
+var NProgress = require('nprogress')
 
 window.Megatron = module.exports = {
   Dialog: Dialog,
@@ -24,6 +25,12 @@ bean.on(document, 'DOMContentLoaded', pageLoad)
 
 // Support rails turbolinks page load event
 bean.on(document, 'page:change', pageChange)
+
+NProgress.configure({showSpinner: false})
+
+bean.on(document, 'page:fetch', function() { NProgress.start() })
+bean.on(document, 'page:change', function() { NProgress.done() })
+bean.on(document, 'page:restore', function() { NProgress.remove() })
 
 function pageLoad(){
   utils.Toggler.listen()

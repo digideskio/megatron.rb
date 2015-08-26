@@ -78,3 +78,12 @@
     animation-delay: .75s;
   }
 }
+
+#nprogress {
+  .bar {
+    background: $babyblue;
+  }
+  .peg {
+    box-shadow: 0 0 10px $babyblue, 0 0 5px $babyblue;
+  }
+}
