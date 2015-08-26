@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    megatron (0.0.20)
+    megatron (0.0.21)
       block_helpers (~> 0.3.3)
       rails (~> 4)
       slim-rails
