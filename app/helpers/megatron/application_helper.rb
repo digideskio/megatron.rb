@@ -64,10 +64,14 @@ module Megatron
       return false unless criteria.present?
       
       test_params = criteria.delete(:params) || {}
-      test_params[:controller] ||= criteria[:controller] if criteria[:controller].present?
-      test_params[:action] ||= criteria[:action] if criteria[:action].present?
+      [:controller, :action, :path].each do |k|
+        test_params[k] ||= criteria[k] if criteria[k].present?
+      end
 
-      test_params.all? {|k, v| test_here_key_value(k, v) }
+      fullpath = URI.parse(request.fullpath).path
+      check_params = params.to_unsafe_hash.symbolize_keys.merge(path: fullpath)
+
+      test_params.all? {|k, v| test_here_key_value(k, v, check_params) }
 
     end
 

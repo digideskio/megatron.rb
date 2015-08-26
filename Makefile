@@ -22,6 +22,15 @@ touch_empty:
 bundle:
 	bundle install
 
-publish: bundle install
+publish: check-env bundle install
 	gem build megatron.gemspec
 	gem push megatron-$(GEM_VERSION).gem
+	bundle exec rake megatron:upload
+
+check-env:
+	ifndef ${AWS_KEY}
+		$(error AWS_KEY needs to be defined to upload assets to S3)
+	endif
+	ifndef ${AWS_SECRET}
+		$(error AWS_SECRET needs to be defined to upload assets to S3)
+	endif

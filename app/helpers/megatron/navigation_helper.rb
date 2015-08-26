@@ -3,7 +3,9 @@ module Megatron
     class Nav < BlockHelpers::Base
       def item(text, href, options = {})
         options[:class] = add_class(options[:class], "#{nav_class}-item")
-        options[:class] = add_class(options[:class], "here") if test_current_page(options[:here_if])
+        here_if = options.delete(:here_if])
+        here_if[:path] ||= URI.parse(href).path
+        options[:class] = add_class(options[:class], "here") if test_current_page(here_if)
         nav_icon = options.delete(:icon)
         link_to href, options do
           concat icon(nav_icon)

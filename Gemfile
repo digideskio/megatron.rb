@@ -19,6 +19,7 @@ gem 'puma'
 gem 'sass-rails', '5.0.3'
 gem 'redcarpet'
 gem 'autoprefixer-rails'
+gem 's3', require: false
 
 group :development, :test do
   gem 'listen', '~> 3.0'

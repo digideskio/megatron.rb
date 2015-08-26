@@ -1,4 +1,0 @@
-namespace :megatron do
-  
-
-end

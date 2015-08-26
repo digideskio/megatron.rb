@@ -63,3 +63,43 @@ end
 def version
   Gem.loaded_specs["megatron"].version
 end
+
+namespace :megatron do
+  
+  require 's3'
+
+  task :upload do
+
+    bucket = S3::Service.new(access_key_id: ENV['AWS_KEY'], secret_access_key: ENV['AWS_SECRET']).buckets.find('megatron-assets')
+
+    Dir.glob('public/assets/megatron/megatron-*') do |file|
+      name = file.split('/').last
+      obj = bucket.objects.build("assets/megatron/#{name}")
+
+      obj.acl = :public_read
+
+      obj.content_type = if name.end_with?('.js')
+        'application/javascript'
+      elsif name.end_with?('.css')
+        'text/css'
+      elsif name.end_with?('.json') || name.end_with?('.map')
+        'application/json'
+      else
+        'text/plain'
+      end
+      
+      obj.content = open(file)
+      
+      puts "Uploading #{file} to megatron-assets on S3..."
+
+      if obj.save
+        puts "Success!"
+      else
+        puts "Failure :("
+        exit 1
+      end
+    end
+
+  end
+
+end
