@@ -11,6 +11,9 @@ build.css:
 	bundle exec sass --style compressed app/assets/stylesheets/megatron/megatron.scss:public/assets/megatron/megatron-$(GEM_VERSION).css
 	./node_modules/postcss-cli/bin/postcss --use autoprefixer public/assets/megatron/megatron-$(GEM_VERSION).css -o public/assets/megatron/megatron-$(GEM_VERSION).css
 
+install:
+	echo "nothing to install"
+
 clean:
 	rm -f public/assets/megatron/megatron*
 
