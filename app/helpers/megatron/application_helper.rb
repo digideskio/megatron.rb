@@ -65,18 +65,18 @@ module Megatron
       
       test_params = criteria.delete(:params) || {}
       [:controller, :action, :path].each do |k|
-        test_params[k] ||= URI.parse(urlencode_path(criteria[k])).path if criteria[k].present?
+        test_params[k] ||= url_parse(criteria[k]) if criteria[k].present?
       end
 
-      fullpath = URI.parse(request.fullpath).path
+      fullpath = url_parse(request.fullpath)
       check_params = params.to_unsafe_hash.symbolize_keys.merge(path: fullpath)
 
       test_params.all? {|k, v| test_here_key_value(k, v, check_params) }
 
     end
 
-    def urlencode_path(path)
-      path.gsub(/}/,'%7B').gsub(/{/,'%7D')
+    def url_parse(path)
+      URI.parse(path.gsub(/(\?.+)/, '')).path
     end
 
     def test_here_key_value(key, value, check_params = params)
