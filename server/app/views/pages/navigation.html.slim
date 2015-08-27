@@ -45,6 +45,19 @@
       = t.tab 'Tab 2', '#'
       = t.tab 'Tab 3', '#'
 
+  = heading "Location Tracking"
+
+  p All navigation link helpers will automatically add a "here" class to the link element if the <code>href</code> to matches the current url. You can customize this by setting <code>here_if</code> options as you'll see below.
+
+  code: slim
+    / here_if accepts options to :path, :controller, :action
+
+    - secondary_nav do |nav|
+      = nav.item 'Accounts', account_path, here_if: { path: /accounts/ } # Match the current url
+      = nav.item 'Users',    users_path,   here_if: { controller: 'users', action: ['edit', 'show'] } # Match the controller and action(s)
+
+  p Note: each option for <code>here_if</code> accepts a string, a Regex, or an array.
+
   = heading "Breadcrumbs"
 
   p Breadcrubs help provide navigational context. These are used when you are "drilling down" into a naturally heiarchical series of pages.

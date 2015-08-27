@@ -3,12 +3,9 @@ module Megatron
     class Nav < BlockHelpers::Base
       def item(text, href, options = {})
         options[:class] = add_class(options[:class], "#{nav_class}-item")
-        here_if = options.delete(:here_if) || {}
-        here_if[:path] ||= href
-        options[:class] = add_class(options[:class], "here") if test_current_page(here_if)
         nav_icon = options.delete(:icon)
 
-        link_to href, options do
+        link_up href, options do
           concat icon(nav_icon)
           concat ' '
           if options[:link_label] == false
@@ -26,6 +23,7 @@ module Megatron
       def icon_label(text)
         content_tag(:span, class: 'icon_label') { text }
       end
+
     end
 
     class PrimaryNav < Nav
@@ -68,4 +66,5 @@ module Megatron
 
     end
   end
+  
 end

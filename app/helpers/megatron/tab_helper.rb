@@ -3,11 +3,8 @@ module Megatron
     class Tabs < BlockHelpers::Base
       def tab(text, href, options = {})
         options[:class] = add_class(options[:class], "tab")
-        here_if = options.delete(:here_if) || {}
-        here_if[:path] ||= href
-        options[:class] = add_class(options[:class], "here") if test_current_page(here_if)
 
-        content_tag :a, class: options[:class], href: href do
+        link_up href, options do
           text
         end
       end

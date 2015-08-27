@@ -6,6 +6,16 @@ module Megatron
       return "/assets/megatron/#{asset}"
     end
 
+    def link_up(name = nil, options = nil, html_options = nil, &block)
+      # append a class to html_options[:class] if the href thing works
+      options ||= {}
+      here_if = options.delete(:here_if) || {}
+      here_if[:path] ||= name
+      options[:class] = add_class(options[:class], "here") if test_current_page(here_if)
+
+      link_to(name, options, html_options, &block)
+    end
+
     def megatron_assets_tags
       version = Megatron::VERSION
       favicon_link_tag(megatron_asset_path('favicon.ico')) + 
