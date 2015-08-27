@@ -23,6 +23,7 @@ gem 's3', require: false
 
 group :development, :test do
   gem 'listen', '~> 3.0'
+  gem 'pry-byebug'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
