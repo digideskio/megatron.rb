@@ -72,7 +72,7 @@ namespace :megatron do
 
     bucket = S3::Service.new(access_key_id: ENV['AWS_KEY'], secret_access_key: ENV['AWS_SECRET']).buckets.find('megatron-assets')
 
-    Dir.glob('public/assets/megatron/megatron-*') do |file|
+    Dir.glob('public/assets/megatron/*') do |file|
       name = file.split('/').last
       obj = bucket.objects.build("assets/megatron/#{name}")
 
@@ -84,6 +84,8 @@ namespace :megatron do
         'text/css'
       elsif name.end_with?('.json') || name.end_with?('.map')
         'application/json'
+      elsif name.end_with?('.ico')
+        'image/x-icon'
       else
         'text/plain'
       end
