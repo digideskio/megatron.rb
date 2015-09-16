@@ -42,7 +42,7 @@ var dateToHtml = function (dateString, zone) {
     }
   }
 
-  str  = '<span class="date">'+y+'-'+mo+'-'+d+'</span>'
+  var str = '<span class="date">'+y+'-'+mo+'-'+d+'</span>'
   str += ' <span class="time">'+h+':'+m+':'+s+'</span>'
   str += ' <span class="timezone">'+zone+'</span>'
   return str
