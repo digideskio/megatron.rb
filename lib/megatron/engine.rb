@@ -5,9 +5,10 @@ module Megatron
       g.helper false
     end
 
-    initializer 'megatron.form_builder' do |app|
-      ActionView::Base.default_form_builder = Megatron::Form
-    end
+    # TODO: Maybe at some point...
+    # initializer 'megatron.form_builder' do |app|
+    #   ActionView::Base.default_form_builder = Megatron::Form
+    # end
 
     initializer 'megatron.assets' do |app|
       Rails.application.config.assets.paths << root.join('app', 'assets', 'stylesheets')
