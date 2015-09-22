@@ -1,5 +1,5 @@
 module Megatron
-  class Form < ActionView::Helpers::FormBuilder
+  class Form < ::ActionView::Helpers::FormBuilder
 
     attr_accessor :style
 
