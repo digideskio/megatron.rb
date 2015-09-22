@@ -18,6 +18,7 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency 'block_helpers', '~> 0.3.3'
   spec.add_runtime_dependency 'to_words', '~> 1.1.0'
+  spec.add_runtime_dependency 'actionview', '~> 4'
   spec.add_runtime_dependency 'slim-rails'
 
   spec.add_dependency "rails", "~> 4"
