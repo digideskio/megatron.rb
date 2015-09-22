@@ -1,8 +1,7 @@
 PATH
   remote: .
   specs:
-    megatron (0.1.13)
-      actionview (~> 4)
+    megatron (0.1.14)
       block_helpers (~> 0.3.3)
       rails (~> 4)
       slim-rails

@@ -1,4 +1,3 @@
-require "actionview"
 module Megatron
   class Form < ::ActionView::Helpers::FormBuilder
 
