@@ -11,7 +11,7 @@ var AutoNavigate = {
   trigger: function(event) {
     var target = event.target
     if (target.tagName.toLowerCase() != 'a') {
-      link = event.currentTarget.querySelector('a.navigate')
+      var link = event.currentTarget.querySelector('a.navigate')
       if (event.metaKey) {
         window.open(link)
       } else {
