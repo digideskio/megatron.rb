@@ -1,8 +1,10 @@
 - main_header
-  h2 Grids
+  h2 Icons
 
 - main
-
-  ul
-    - Esvg.icons.svgs.each do |k, v|
-      li== svg_icon k
+  - Esvg.icons.svgs.each do |k, v|
+    div
+      div
+        =svg_icon k
+        code: ruby
+          =svg_icon("#{k}")
