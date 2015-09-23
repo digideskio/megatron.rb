@@ -57,6 +57,7 @@ GEM
     coderay (1.1.0)
     columnize (0.9.0)
     erubis (2.7.0)
+    esvg (2.1.0)
     execjs (2.5.2)
     ffi (1.9.10)
     globalid (0.3.6)
@@ -162,6 +163,7 @@ PLATFORMS
 
 DEPENDENCIES
   autoprefixer-rails
+  esvg
   listen (~> 3.0)
   megatron!
   pry-byebug

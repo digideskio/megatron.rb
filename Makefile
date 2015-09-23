@@ -5,6 +5,7 @@ GEM_VERSION = `bundle exec ruby -e 'puts Gem.loaded_specs["megatron"].version'`
 build: build.js build.css
 
 build.js:
+	bundle exec esvg app/assets/esvg/megatron --output app/assets/javascripts/megatron
 	./node_modules/.bin/browserify app/assets/javascripts/megatron/index.js -t babelify --standalone Megatron -o public/assets/megatron/megatron-$(GEM_VERSION).js -d -p [ minifyify --map megatron-$(GEM_VERSION).map.json --output public/assets/megatron/megatron-$(GEM_VERSION).map.json ]
 
 build.css:
