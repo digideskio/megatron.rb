@@ -28,10 +28,10 @@ module Megatron
       content_tag(:span, class: "#{name}_icon #{options[:class]}", 'aria-hidden' => true) {  }
     end
 
-    def icon_font(name, options={})
+    def text_icon(name, options={})
       classname = options.delete(:class) || ''
       content_tag(:span, class: "#{classname}") do
-        options[:class] = 'svg-icon-font'
+        options[:class] = 'text-icon'
         Esvg.svg_icon(name.to_s, options).html_safe
       end
     end

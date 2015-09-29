@@ -1,4 +1,6 @@
-.svg-icon-font {
+// Text icons inherit properties from the parent element.
+// Namely size (based on font-size) and fill, based on currentColor
+.text-icon {
   clip: auto;
   background-size: auto 1em;
   background-repeat: no-repeat;
