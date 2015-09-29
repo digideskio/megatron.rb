@@ -1,6 +1,6 @@
 .box.text-center class=options[:class]
   - if options[:icon]
-    = icon(options[:icon], class: "box-message-icon")
+    = icon_font(options[:icon], class: "box-message-icon")
   .box-message-header
     h1= options[:title]
   .box-message-content= options[:body]
