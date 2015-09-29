@@ -1,3 +1,9 @@
 - main do
   - box_message title: 'How Awesome?', icon: 'question_line'
     p This awesome. BOOOOOOM!
+
+  - secondary_nav do |nav|
+    = nav.item 'Test', page_path(page: 'demo'), icon: 'power'
+    = nav.item 'Secondary', "#", icon: 'bell'
+    = nav.item 'Navigation', "#", icon: 'bubble'
+    = nav.item 'Icons', "#", icon: 'locked'

@@ -18,7 +18,7 @@ $header-pad: 15px;
   text-decoration: none;
   transition: .1s color ease-in-out;
   display: block;
-  padding: 10px 8px 6px;
+  padding: 10px 8px;
   border-bottom: 1px solid rgba(#fff, .1);
 
   &:hover, &:focus {
@@ -46,9 +46,8 @@ $header-pad: 15px;
       }
     }
 
-    #{icon-selector()} {
-      display: inline-block;
-      font-size: 26px;
+    .nav-icon {
+      font-size: 24px;
       width: 28px;
       text-align: center;
     }
@@ -56,24 +55,22 @@ $header-pad: 15px;
     .icon_label {
       line-height: 22px;
       position: relative;
-      top: -5px;
+      vertical-align: middle;
     }
     
   }
 
   @include at-least($medium) {
     width: map-get($primary-nav-width, large);
-    text-align: center;
     position: relative;
     border: none;
     padding: 0;
+    text-align: center;
+
     .nav-icon {
       display: block;
       width: 100%;
-      padding: 7px 0;
-    }
-
-    .text-icon {
+      padding: 4px 0;
       font-size: 35px;
     }
 
@@ -100,15 +97,12 @@ $header-pad: 15px;
       display: inline-block;
       margin-left: .8em;
       width: auto;
-      .nav-icon {
-        display: inline;
-      }
-      .text-icon {
-        display: inline;
-        font-size: 1.2em;
-        position: relative;
-        top: -.1em;
-      }
+    }
+    .nav-icon {
+      display: inline;
+      font-size: 1.2em;
+      position: relative;
+      top: -.1em;
     }
   }
 }

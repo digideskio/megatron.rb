@@ -1,15 +1,27 @@
-// Text icons inherit properties from the parent element.
-// Namely size (based on font-size) and fill, based on currentColor
-.text-icon {
+.flex-icon, %flex-icon {
   clip: auto;
-  background-size: auto 1em;
+  background-size: auto;
   background-repeat: no-repeat;
   background-position: center center;
   display: inline-block;
   overflow: hidden;
+}
+
+// Text icons inherit properties from the parent element.
+// Namely size (based on font-size) and fill, based on currentColor
+.text-icon {
+  @extend %flex-icon;
+  background-size: auto 1em;
   height: 1em;
   width: 1em;
   color: inherit;
   fill: currentColor;
   vertical-align: middle;
+  line-height: 1em;
+}
+
+@mixin size-icon($width, $height: $width) {
+  height: $width;
+  width: $height;
+  @extend %flex-icon;
 }
