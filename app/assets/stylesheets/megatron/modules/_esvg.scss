@@ -10,14 +10,19 @@
 // Text icons inherit properties from the parent element.
 // Namely size (based on font-size) and fill, based on currentColor
 .text-icon {
+  line-height: 0;
+}
+.text-icon svg {
   @extend %flex-icon;
   background-size: auto 1em;
+  background-position: center center;
   height: 1em;
   width: 1em;
   color: inherit;
   fill: currentColor;
   vertical-align: middle;
   line-height: 1em;
+  box-sizing: content-box;
 }
 
 @mixin size-icon($width, $height: $width) {

@@ -29,9 +29,13 @@ module Megatron
     end
 
     def text_icon(name, options={})
-      classname = options.delete(:class) || ''
-      content_tag(:span, class: "#{classname}") do
-        options[:class] = 'text-icon'
+      content_tag(:span, class: "text-icon") do
+        Esvg.svg_icon(name.to_s, options).html_safe
+      end
+    end
+
+    def nav_icon(name, options={})
+      content_tag(:span, class: "text-icon nav-icon") do
         Esvg.svg_icon(name.to_s, options).html_safe
       end
     end

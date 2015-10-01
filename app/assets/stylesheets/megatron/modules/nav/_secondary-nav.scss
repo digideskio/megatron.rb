@@ -50,7 +50,6 @@ $secondary-nav-width-small: 38px;
   .nav-icon {
     font-size: 20px;
     display: block;
-    text-align: center;
   }
 
   @include at-least($small) {
@@ -62,6 +61,8 @@ $secondary-nav-width-small: 38px;
     padding: 0;
     .nav-icon {
       padding: 3px 8px;
+      width: 100%;
+      text-align: center;
     }
     @include link-label(lighten($base-bg, 15), 30px);
   }

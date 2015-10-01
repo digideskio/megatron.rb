@@ -6,7 +6,7 @@ module Megatron
         nav_icon = options.delete(:icon)
 
         link_up href, options do
-          concat text_icon(nav_icon, class: 'nav-icon') unless nav_icon.nil?
+          concat nav_icon(nav_icon) unless nav_icon.nil?
           concat ' '
           if options[:link_label] == false
             concat icon_label(text)
