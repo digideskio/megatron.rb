@@ -27,8 +27,8 @@ bundle:
 	bundle install
 
 publish: bundle clean build
-	gem build megatron.gemspec
-	gem push megatron-$(GEM_VERSION).gem
+	rake build
+	rake release
 	bundle exec rake megatron:upload
 
 check-env:
