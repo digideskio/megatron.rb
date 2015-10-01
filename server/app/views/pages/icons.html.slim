@@ -1,0 +1,9 @@
+- main_header
+  h2 Icons
+
+- main
+  - Esvg.icons.svgs.each do |k, v|
+    .icon-test
+      =svg_icon k
+      code: ruby
+        =svg_icon("#{k}")

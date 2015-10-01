@@ -20,6 +20,7 @@ gem 'sass-rails', '5.0.3'
 gem 'redcarpet'
 gem 'autoprefixer-rails'
 gem 's3', require: false
+gem 'esvg'
 
 group :development, :test do
   gem 'listen', '~> 3.0'

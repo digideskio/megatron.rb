@@ -47,6 +47,11 @@ $secondary-nav-width-small: 38px;
     }
   }
 
+  .nav-icon {
+    font-size: 20px;
+    display: block;
+  }
+
   @include at-least($small) {
     text-align: left;
     display: block;
@@ -54,9 +59,10 @@ $secondary-nav-width-small: 38px;
 
   @include between($small, $large) {
     padding: 0;
-    [class*=_icon] {
-      display: inline-block;
-      padding: 3px 8px;
+    .nav-icon {
+      padding: 8px;
+      width: 100%;
+      text-align: center;
     }
     @include link-label(lighten($base-bg, 15), 30px);
   }
@@ -64,20 +70,15 @@ $secondary-nav-width-small: 38px;
   @include at-least($large) {
     padding: 3px 18px 3px 10px;
 
+    .nav-icon {
+      display: inline-block;
+    }
+
     .link_label {
       display: inline-block;
       font-size: 14px;
       transition: opacity ease-out .3s;
     }
-  }
-
-  #{icon-selector()} {
-    font-size: 20px;
-    width: 25px;
-    display: inline-block;
-    text-align: center;
-    position: relative;
-    top: 3px;
   }
 
 
@@ -98,7 +99,7 @@ $secondary-nav-width-small: 38px;
   &.here {
     background: $secondary-nav-here-bg;
 
-    #{icon-selector()} {
+    .nav-icon {
       color: $secondary-nav-here-icon-color;
     }
   }

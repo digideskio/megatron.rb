@@ -7,4 +7,6 @@ pkg/
 /node_modules
 
 /public/assets/megatron/megatron*
-docs/.sass-cache
+docs/
+.sass-cache
+.DS_Store

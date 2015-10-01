@@ -21,4 +21,5 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'slim-rails'
 
   spec.add_dependency "rails", "~> 4"
+  spec.add_dependency "esvg", "~> 2"
 end

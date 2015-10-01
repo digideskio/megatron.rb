@@ -46,7 +46,7 @@
     @include link-label-base($color, $offset, $direction); 
   }
 
-  [class*=_icon]:hover {
+  .nav-icon:hover {
     @include link-label-hover;
   }
 }

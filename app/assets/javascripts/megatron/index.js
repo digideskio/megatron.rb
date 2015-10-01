@@ -8,6 +8,7 @@ var _ = require('lodash')
 var notify = require('notify')
 var request = require('superagent')
 var NProgress = require('nprogress')
+var esvg = require('./esvg')
 
 window.Megatron = module.exports = {
   Dialog: Dialog,
@@ -18,6 +19,7 @@ window.Megatron = module.exports = {
   Form: Form,
   request: request,
   Link: Link,
+  esvg: esvg,
   _: _
 }
 

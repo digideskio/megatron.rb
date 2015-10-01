@@ -18,7 +18,7 @@ $header-pad: 15px;
   text-decoration: none;
   transition: .1s color ease-in-out;
   display: block;
-  padding: 10px 8px 6px;
+  padding: 10px 8px;
   border-bottom: 1px solid rgba(#fff, .1);
 
   &:hover, &:focus {
@@ -46,34 +46,38 @@ $header-pad: 15px;
       }
     }
 
-    #{icon-selector()} {
-      display: inline-block;
-      font-size: 26px;
+    .nav-icon {
       width: 28px;
       text-align: center;
+      font-size: 0;
+    }
+
+    .text-icon {
+      font-size: 24px;
     }
 
     .icon_label {
-      line-height: 22px;
+      line-height: 24px;
       position: relative;
-      top: -5px;
+      vertical-align: bottom;
     }
     
   }
 
   @include at-least($medium) {
     width: map-get($primary-nav-width, large);
-    text-align: center;
     position: relative;
     border: none;
     padding: 0;
-    [class*=_icon] {
+    text-align: center;
+
+    .nav-icon {
       display: block;
       width: 100%;
       padding: 7px 0;
+      font-size: 0;
     }
-
-    #{icon-selector()} {
+    .text-icon {
       font-size: 35px;
     }
 
@@ -100,15 +104,18 @@ $header-pad: 15px;
       display: inline-block;
       margin-left: .8em;
       width: auto;
-      [class*=_icon] {
-        display: inline;
-      }
-      #{icon-selector()} {
-        display: inline;
-        font-size: 1.2em;
-        position: relative;
-        top: .1em;
-      }
+    }
+    .nav-icon {
+      display: inline;
+      position: relative;
+      font-size: 0;
+    }
+    .text-icon {
+      font-size: 18px;
+    }
+    .icon_label {
+      line-height: 18px;
+      vertical-align: bottom;
     }
   }
 }
