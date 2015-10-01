@@ -29,13 +29,17 @@ module Megatron
     end
 
     def text_icon(name, options={})
-      content_tag(:span, class: "text-icon") do
+      options[:class] ||= ''
+      options[:class] << " text-icon"
+      content_tag(:span, class: "text-icon-wrapper") do
         Esvg.svg_icon(name.to_s, options).html_safe
       end
     end
 
     def nav_icon(name, options={})
-      content_tag(:span, class: "text-icon nav-icon") do
+      options[:class] ||= ''
+      options[:class] << " text-icon"
+      content_tag(:span, class: "text-icon-wrapper nav-icon") do
         Esvg.svg_icon(name.to_s, options).html_safe
       end
     end

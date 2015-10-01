@@ -9,10 +9,11 @@
 
 // Text icons inherit properties from the parent element.
 // Namely size (based on font-size) and fill, based on currentColor
-.text-icon {
+.text-icon-wrapper {
   line-height: 0;
 }
-.text-icon svg {
+
+.text-icon {
   @extend %flex-icon;
   background-size: auto 1em;
   background-position: center center;

@@ -60,7 +60,7 @@ $secondary-nav-width-small: 38px;
   @include between($small, $large) {
     padding: 0;
     .nav-icon {
-      padding: 3px 8px;
+      padding: 8px;
       width: 100%;
       text-align: center;
     }
