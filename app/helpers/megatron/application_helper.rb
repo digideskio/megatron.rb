@@ -6,14 +6,12 @@ module Megatron
       return "/assets/megatron/#{asset}"
     end
 
-    def link_up(name = nil, options = nil, html_options = nil, &block)
-      # append a class to html_options[:class] if the href thing works
-      options ||= {}
+    def link_up(href = nil, options = {}, html_options = nil, &block)
       here_if = options.delete(:here_if) || {}
-      here_if[:path] ||= name
+      here_if[:path] = href if here_if.blank?
       options[:class] = add_class(options[:class], "here") if test_current_page(here_if)
 
-      link_to(name, options, html_options, &block)
+      link_to(href, options, &block)
     end
 
     def megatron_assets_tags

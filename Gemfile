@@ -29,6 +29,11 @@ group :development, :test do
   gem 'spring'
 end
 
+group :test do
+  gem 'combustion', '~> 0.5.3'
+  gem 'rspec-rails', '~> 3.3.0'
+end
+
 group :production do
   gem 'rails_12factor'
 end
