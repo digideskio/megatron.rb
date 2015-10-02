@@ -2,10 +2,6 @@ machine:
   ruby:
     version: 2.1.6
 
-test:
-  override:
-    - echo "no tests yet."
-
 deployment:
   rubygems:
     branch: master
