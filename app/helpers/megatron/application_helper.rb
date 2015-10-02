@@ -23,27 +23,6 @@ module Megatron
       javascript_include_tag(megatron_asset_path("megatron-#{version}.js"))
     end
 
-    def icon(name, options={})
-      options[:class] ||= ''
-      content_tag(:span, class: "#{name}_icon #{options[:class]}", 'aria-hidden' => true) {  }
-    end
-
-    def text_icon(name, options={})
-      options[:class] ||= ''
-      options[:class] << " text-icon"
-      content_tag(:span, class: "text-icon-wrapper") do
-        Esvg.svg_icon(name.to_s, options).html_safe
-      end
-    end
-
-    def nav_icon(name, options={})
-      options[:class] ||= ''
-      options[:class] << " text-icon"
-      content_tag(:span, class: "text-icon-wrapper nav-icon") do
-        Esvg.svg_icon(name.to_s, options).html_safe
-      end
-    end
-
     def options_from_args(args)
       if args.last.is_a? Hash
         args.pop

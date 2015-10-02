@@ -26,8 +26,7 @@ touch_empty:
 bundle:
 	bundle install
 
-publish: bundle clean build
-	rake build
+publish: clean build
 	rake release
 	bundle exec rake megatron:upload
 
