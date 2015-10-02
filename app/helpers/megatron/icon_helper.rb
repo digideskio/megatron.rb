@@ -1,6 +1,6 @@
 module Megatron
   module IconHelper
-    def icons
+    def iconset
       @icons ||= Esvg::SVG.new(path: File.expand_path('../../assets/esvg/megatron', File.dirname(__FILE__)))
 
       if Rails.env != 'production' && @icons.modified?
@@ -10,29 +10,35 @@ module Megatron
       @icons
     end
 
-    def embed_icon(name, options)
-      icons.svg_icon(name.to_s, options).html_safe
+    def embed_icon(name, options={})
+      iconset.svg_icon(name.to_s, options).html_safe
     end
 
     def icon(name, options={})
-      options[:class] ||= ''
-      content_tag(:span, class: "#{name}_icon #{options[:class]}", 'aria-hidden' => true) {  }
+      options[:class] = default_class(options[:class], "#{name}_icon")
+      content_tag(:span, class: options[:class], 'aria-hidden' => true) {  }
     end
 
     def text_icon(name, options={})
-      options[:class] ||= ''
-      options[:class] << " text-icon"
-      content_tag(:span, class: "text-icon-wrapper") do
-        embed_icon(name.to_s, options).html_safe
+      options[:class] = default_class(options[:class], "text-icon")
+      options[:wrapper] = default_class(options[:wrapper], "icon-wrapper")
+      svg = embed_icon(name.to_s, options).html_safe
+
+      content_tag(:span, class: options[:wrapper]) do
+        svg
       end
     end
 
     def nav_icon(name, options={})
-      options[:class] ||= ''
-      options[:class] << " text-icon"
-      content_tag(:span, class: "text-icon-wrapper nav-icon") do
-        embed_icon(name.to_s, options).html_safe
+      options[:wrapper] = default_class(options[:wrapper], "nav-icon")
+      text_icon(name, options)
+    end
+
+    def default_class(classnames, default)
+      if classnames.nil? || !classnames.is_a?(String)
+        classnames = ''
       end
+      classnames.to_s << " #{default}"
     end
   end
 end

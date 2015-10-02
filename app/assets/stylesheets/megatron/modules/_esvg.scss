@@ -9,8 +9,8 @@
 
 // Text icons inherit properties from the parent element.
 // Namely size (based on font-size) and fill, based on currentColor
-.text-icon-wrapper {
-  line-height: 0;
+.icon-wrapper {
+  line-height: .0001em;
 }
 
 .text-icon {

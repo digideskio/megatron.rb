@@ -1,5 +1,6 @@
 @import "lib/codemirror";
 @import "lib/nprogress";
+@import "esvg";
 @import "core/index";
 @import "app/index";
 @import "nav/index";
@@ -20,4 +21,3 @@
 @import "crop-height";
 @import "widgets/index";
 @import "core/colored-items";
-@import "esvg";
