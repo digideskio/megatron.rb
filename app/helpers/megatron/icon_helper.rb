@@ -10,11 +10,11 @@ module Megatron
       @icons
     end
 
-    def embed_icon(name, options={})
+    def icon(name, options={})
       iconset.svg_icon(name.to_s, options).html_safe
     end
 
-    def icon(name, options={})
+    def font_icon(name, options={})
       options[:class] = default_class(options[:class], "#{name}_icon")
       content_tag(:span, class: options[:class], 'aria-hidden' => true) {  }
     end
@@ -22,10 +22,9 @@ module Megatron
     def text_icon(name, options={})
       options[:class] = default_class(options[:class], "text-icon")
       options[:wrapper] = default_class(options[:wrapper], "icon-wrapper")
-      svg = embed_icon(name.to_s, options).html_safe
 
       content_tag(:span, class: options[:wrapper]) do
-        svg
+        icon(name.to_s, options)
       end
     end
 
