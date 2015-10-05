@@ -1,6 +1,8 @@
 - main do
-  - box_message title: 'How Awesome?', icon: 'question_line'
-    p This awesome. BOOOOOOM!
+  - box_message title: "Preparing your MongoDB deployment"
+    .loading-graphic-wrapper
+      .loading-graphic
+    p.lightgray-text.deployment-status-message This may take a couple minutes.
 
   - secondary_nav do |nav|
     = nav.item 'Test', page_path(page: 'demo'), icon: 'deployment-small'
