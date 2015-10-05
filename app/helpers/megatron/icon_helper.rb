@@ -22,33 +22,45 @@ module Megatron
     def text_icon(name, options={})
       options = set_icon_classes(options, class: 'text-icon', wrapper: 'icon-wrapper')
 
-      content_tag(:span, class: options[:wrapper]) do
+      if options[:wrapper]
+        content_tag(:span, class: options[:wrapper].strip) do
+          icon(name.to_s, options)
+        end
+      else
         icon(name.to_s, options)
       end
     end
 
     def nav_icon(name, options={})
-      options[:wrapper] = (options[:wrapper] || '') << " nav-icon"
+      options[:wrapper] = "nav-icon"
       text_icon(name, options)
     end
 
     def set_icon_classes(options, defaults={})
-      options[:class] || (options[:class] || '') << " #{defaults[:class]}"
-      options[:wrapper] = (options[:wrapper] || '') << " #{defaults[:wrapper]}"
+      options[:class] = (options[:class] || '') << " #{defaults[:class]}"
+
+      if options[:wrapper]
+        options[:wrapper] = '' unless options[:wrapper].is_a?(String)
+        options[:wrapper] = (options[:wrapper] || '') << " #{defaults[:wrapper]}"
+      end
 
       # Automate adding color classes, blue becomes blue-text
       # This should allow us to change it later more easily if necessary
       if options[:color]
-        options[:class] << " #{options[:color]+='-text'}"
+        options[:class] << " #{options[:color].to_s.strip}-text"
       end
 
       # Automate adding size classes, x-small becomes x-small-text
       # This should allow us to change it later more easily if necessary
       if options[:size]
-        options[:class] << " #{options[:size]+='-text'}"
+        options[:class] << " #{dasherize(options[:size].to_s.strip)}-text"
       end
 
       options
+    end
+
+    def dasherize(input)
+      input.gsub(/[\W,_]/, '-').gsub(/-{2,}/, '-')
     end
 
     def default_class(classnames, default)
