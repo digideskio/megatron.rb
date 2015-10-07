@@ -3,7 +3,7 @@
 
 let Timeago = {
   // setup HTML templates
-  setup: function() {
+  setup: function timeagoSetup() {
 
     var timeEls = document.querySelectorAll('.timeago[datetime]')
 
@@ -15,11 +15,11 @@ let Timeago = {
   },
 
   // If a browser can't handle dates, bail.
-  browserSupport: function() {
+  browserSupport: function timeagoBrowserSupport() {
     return !isNaN(new Date("2014-01-29T18:14:29+00:00").getDate())
   },
 
-  parse: function(time, style) {
+  parse: function timeagoParse(time, style) {
 
     style = style || "normal"
     if (typeof(time) == 'string') {

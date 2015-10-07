@@ -10,7 +10,7 @@ var MegatronForm = module.exports = RemoteForm.extend({
     error: 'Something went wrong.'
   },
 
-  messageFor: function(type){
+  messageFor: function formMessageFor(type){
     if (this.el.dataset[type])
       return this.el.dataset[type]
     else {
@@ -22,15 +22,15 @@ var MegatronForm = module.exports = RemoteForm.extend({
     }
   },
 
-  beforeSend: function(req){
+  beforeSend: function formBeforeSend(req){
     notify.progress(this.messageFor('beforeSend'))
   },
   
-  success: function(body, status, xhr){
+  success: function formSuccessHandler(body, status, xhr){
     notify.success(this.messageFor('success'))
   },
 
-  error: function(xhr, error){
+  error: function formErrorHandler(xhr, error){
     notify.error(this.messageFor('error'))
   }
 })

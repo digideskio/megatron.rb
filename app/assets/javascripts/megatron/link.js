@@ -9,7 +9,7 @@ var DEFAULT_CONTINUE_BUTTON = 'Yes'
 
 function Link(){}
 
-Link.click = function(event){
+Link.click = function linkClick(event){
   event.preventDefault()
   var el = event.currentTarget
   var form = null
@@ -42,7 +42,7 @@ Link.click = function(event){
   }
 }
 
-Link.buildForm = function(el){
+Link.buildForm = function buildForm(el){
   var method = el.dataset.method || 'post'
   var csrfToken = document.querySelector('meta[name=csrf-token]')
   var csrfParam = document.querySelector('meta[name=csrf-param]')

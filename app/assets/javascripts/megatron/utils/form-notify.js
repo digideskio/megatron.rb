@@ -2,7 +2,7 @@ var bean = require('bean')
 var notify = require('notify')
 
 module.exports = {
-  notify: function(el, type){
+  notify: function formNotify(el, type){
     if(type == 'success')
       notify.success(this.getMessage(el, 'success'))
     else if(type == 'error')
@@ -11,7 +11,7 @@ module.exports = {
       notify.progress(this.getMessage(el, 'beforeSend'))
   },
 
-  getMessage: function(el, type){
+  getMessage: function formGetMessage(el, type){
     if (el.dataset[type])
       return el.dataset[type]
     else {
@@ -27,7 +27,7 @@ module.exports = {
     }
   },
 
-  listen: function() {
+  listen: function formListen() {
     bean.on(document.querySelector('body'), 'submit', 'form', function(event){
       if(!event.target.dataset['remote']) {
         event.preventDefault()

@@ -7,7 +7,7 @@
 // Returns: HTML which is "2014-01-28 18:00:00 CST", separated and wrapped with spans
 // with classnames: date, time and timezone
 //
-var dateToHtml = function (dateString, zone) {
+var dateToHtml = function dateToHtml(dateString, zone) {
 
   if(isNaN(new Date("2014-01-29T18:14:29+00:00").getDate())) {
     return false
@@ -48,7 +48,7 @@ var dateToHtml = function (dateString, zone) {
   return str
 }
 
-var pad = function(num, pad){
+var pad = function datePad(num, pad){
   pad = pad || 2
   while(String(num).length < pad) {
     num = '0' + num

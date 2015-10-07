@@ -6,18 +6,18 @@ require('compose-tap-event')
 require('compose-dataset-shim')
 
 var Toggler = {
-  listen: function(){
+  listen: function togglerListen(){
     bean.on(document, "click", "[data-toggle], [data-show], [data-hide]", Toggler.trigger)
     bean.on(document, "change", ".select-toggler", Toggler.trigger)
   },
 
-  refresh: function(){
+  refresh: function togglerRefresh(){
     Toggler.toggleRadios()
     Toggler.toggleCheckboxes()
     Toggler.setupSelects()
   },
 
-  trigger: function(event) {
+  trigger: function togglerTrigger(event) {
 
     var target = event.currentTarget
 
@@ -39,13 +39,13 @@ var Toggler = {
     }
   },
 
-  dispatch: function(el, type, force) {
+  dispatch: function togglerDispatch(el, type, force) {
     if (el.dataset[type]){
       Toggler.setState(el.dataset[type], type)
     }
   },
 
-  setState: function(selectors, state) {
+  setState: function toggletSetState(selectors, state) {
     var matches = document.querySelectorAll(selectors)
     if (typeof(state) == 'boolean') {
       state = (state ? 'show' : 'hide')
@@ -56,7 +56,7 @@ var Toggler = {
     })
   },
 
-  toggle: function(el) {
+  toggle: function togglerToggle(el) {
 
     if (el.offsetParent === null) {
       Toggler.show(el)
@@ -66,7 +66,7 @@ var Toggler = {
 
   },
 
-  show: function(el) {
+  show: function togglerShow(el) {
     classie.remove(el, 'hidden')
     classie.add(el, 'visible')
     var focusEl = el.querySelector('[data-focus]')
@@ -76,12 +76,12 @@ var Toggler = {
     }
   },
 
-  hide: function(el) {
+  hide: function togglerHide(el) {
     classie.remove(el, 'visible')
     classie.add(el, 'hidden')
   },
 
-  toggleRadios: function(radios) {
+  toggleRadios: function togglerToggleRadio(radios) {
     var radios = radios || 'input[type=radio][data-show]'
 
     Array.prototype.forEach.call(document.querySelectorAll(radios), function(radio) {
@@ -89,19 +89,19 @@ var Toggler = {
     })
   },
 
-  toggleCheckbox: function(checkbox) {
+  toggleCheckbox: function togglerToggeCheckbox(checkbox) {
     Toggler.setState(checkbox.dataset.hide, !checkbox.checked)
     Toggler.setState(checkbox.dataset.toggle, 'toggle')
     Toggler.setState(checkbox.dataset.show, checkbox.checked)
   },
 
-  toggleSelect: function(select) {
+  toggleSelect: function togglerToggleSelect(select) {
     var option = select.selectedOptions[0]
     Toggler.dispatch(option, 'hide')
     Toggler.dispatch(option, 'show')
   },
 
-  toggleCheckboxes: function() {
+  toggleCheckboxes: function togglerToggleCheckboxes() {
     var checkboxes = 'input[type=checkbox][data-toggle]'
     Array.prototype.forEach.call(document.querySelectorAll(checkboxes), Toggler.toggleCheckbox)
   },
@@ -109,7 +109,7 @@ var Toggler = {
   // Add data-hide to each <option> containing the selectors from other
   // option's data-show. This makes the toggling of elements exclusive.
   //
-  setupSelects: function(select){
+  setupSelects: function togglerSetupSelects(select){
     Array.prototype.forEach.call(document.querySelectorAll('option[data-show]'), function(option){
       if (!option.dataset.hide) {
 
@@ -133,7 +133,7 @@ var Toggler = {
 
   // Find parent <select> for an option (accounts for option groups)
   //
-  getSelectFromOption: function(el) {
+  getSelectFromOption: function togglerGetSelectFromOption(el) {
     var p = el.parentElement
 
     if (p.tagName.toLowerCase() == 'select') {
@@ -145,13 +145,13 @@ var Toggler = {
 
   // Return an array of all data-show values from elements
   //
-  showAttributes: function(elements) {
+  showAttributes: function togglerShowAttributes(elements) {
     return Array.prototype.map.call(elements, function(el) { 
       return el.dataset.show
     })
   },
 
-  toggleSelects: function(selects) {
+  toggleSelects: function togglerToggleSelects(selects) {
     var selects = selects || 'option[data-show]'
 
     Array.prototype.forEach.call(document.querySelectorAll(radios), function(radio) {

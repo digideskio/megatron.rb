@@ -2,15 +2,15 @@ var request = require('superagent')
 var bean = require('bean')
 
 var Messages = {
-  el: function(){
+  el: function messagesEl(){
     return document.querySelector('.pop-message')
   },
 
-  fetch: function(){
+  fetch: function messagesFetch(){
     request.get('/messages.json').end(this.end.bind(this));
   },
 
-  dismiss: function(event){
+  dismiss: function messagesDismiss(event){
     self = this
     event.preventDefault()
     event.stopPropagation()
@@ -27,7 +27,7 @@ var Messages = {
 
   },
 
-  end: function(error, response) {
+  end: function messagesEnd(error, response) {
     if (error || response.serverError) {
       return
     } else {
@@ -41,7 +41,7 @@ var Messages = {
     }
   },
 
-  messageHTML: function(options){
+  messageHTML: function messagesMessageHTML(options){
     options.style = options.style || ''
     var classnames = "message-content "
     if (options.style) 
@@ -65,11 +65,11 @@ var Messages = {
     return html
   },
 
-  saveMessage: function(content){
+  saveMessage: function messagesSaveMessage(content){
     window.Megatron.accountMessage = content
   },
 
-  showMessage: function(content) {
+  showMessage: function messagesShowMessage(content) {
     if(this.el()) {
       this.el().innerHTML = content
     } else {
@@ -82,7 +82,7 @@ var Messages = {
     }
   },
 
-  load: function(){
+  load: function messagesLoad(){
     if(window.location.hostname.match(/app\.compose\.(io|dev)/)){
       var message = window.Megatron.accountMessage
       if(!message) {

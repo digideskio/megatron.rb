@@ -8,7 +8,7 @@ require('compose-dataset-shim')
 var TimeSwitch = {
 
   // Attach listeners, setup HTML templates
-  setup: function() {
+  setup: function timeSwitchSetup() {
     if(!timeago.browserSupport()) return false
     if(!this.listening)   this.listen()
 
@@ -25,13 +25,13 @@ var TimeSwitch = {
   },
 
   // Attach listeners to toggle time zones whine clicked
-  listen: function() {
+  listen: function timeSwitchListen() {
     bean.on(document, "click", ".time-switch", TimeSwitch.toggle)
     this.listening = true
   },
 
   // Switch between UTC and local time
-  toggle: function(event) {
+  toggle: function timeSwitchToggle(event) {
     var timeEls = document.querySelectorAll('.time-switch')
 
     Array.prototype.forEach.call(timeEls, function(el) {
@@ -45,7 +45,7 @@ var TimeSwitch = {
   //  - date (a date object)
   //  - timeagoPosition, String, either 'before' or 'after'
   //
-  template: function(date, timeagoPosition, timeagoStyle) {
+  template: function timeSwitchTemplate(date, timeagoPosition, timeagoStyle) {
     var utc = dateToHtml(date, 'UTC')
     var local = dateToHtml(date)
     var t = '';
@@ -67,7 +67,7 @@ var TimeSwitch = {
   },
 
   // Converts a date to relative time string wrapped in a span
-  timeagoTemplate: function(date, position, style) {
+  timeagoTemplate: function timeSwitchTimeagoTemplate(date, position, style) {
     var relative = timeago.parse(date, style)
     var dash = "<span class='dash'>&nbsp;-&nbsp;</span>"
     var html = ''

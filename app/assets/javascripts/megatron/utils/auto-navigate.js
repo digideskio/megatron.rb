@@ -4,11 +4,11 @@ var classie = require('classie')
 require('compose-tap-event')
 
 var AutoNavigate = {
-  listen: function(){
+  listen: function autoNavigateListen(){
     bean.on(document, "click", ".auto-navigate", AutoNavigate.trigger)
   },
 
-  trigger: function(event) {
+  trigger: function autoNavigateTrigger(event) {
     var target = event.target
     if (target.tagName.toLowerCase() != 'a') {
       var link = event.currentTarget.querySelector('a.navigate')
