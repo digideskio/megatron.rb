@@ -14,58 +14,11 @@ RDoc::Task.new(:rdoc) do |rdoc|
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
 
-load 'rails/tasks/statistics.rake'
-
 Bundler::GemHelper.install_tasks
-
-desc "Pick a random user as the winner"
-task :sass_watch do
-  require 'listen'
-  listen
-end
-
-def listen
-  listener = Listen.to('app/assets/stylesheets/megatron/', only: /\.scss$/) do |modified, added, removed|
-    output_paths("Changes detected to", modified)
-    output_paths("Added", added)
-    output_paths("Removed", removed)
-
-    build
-  end
-
-  build
-
-  listener.start # not blocking
-  sleep
-end
-
-def output_paths(prefix, paths)
-  unless paths.empty?
-    paths.map! { |p| localize_path(p) }
-    puts "#{prefix}: #{paths.join("\n")}"
-  end
-end
-
-def localize_path(path)
-  path.sub(/#{Dir.pwd}\//, '')
-end
-
-def destination
-  "public/assets/megatron/megatron-#{version}.css"
-end
-
-def build
-  system "sass app/assets/stylesheets/megatron/megatron.scss:#{destination}"
-  system "./node_modules/postcss-cli/bin/postcss --use autoprefixer #{destination} -o #{destination}"
-  puts "Built: #{destination}"
-end
-
-def version
-  Gem.loaded_specs["megatron"].version
-end
 
 namespace :megatron do
   
+  require 'megatron'
   require 's3'
 
   task :upload do
@@ -104,4 +57,58 @@ namespace :megatron do
 
   end
 
+  namespace :css do
+
+    task :watch do
+
+      require 'listen'
+
+      listener = Listen.to('app/assets/stylesheets/megatron/', only: /\.scss$/) do |modified, added, removed|
+        build_css
+      end
+
+      build_css
+
+      puts "Initial CSS build, done. Listening for changes..."
+
+      listener.start # not blocking
+      sleep
+
+    end
+
+  end
+
+  namespace :svg do
+
+    task :watch do
+      require 'listen'
+      require 'esvg'
+
+      listener = Listen.to('app/assets/esvg/megatron/', only: /\.svg$/) do |modified, added, removed|
+        build_svg
+      end
+
+      build_svg
+
+      puts "Initial SVG build, done. Listening for changes..."
+
+      listener.start # not blocking
+      sleep
+
+    end
+
+  end
+
+end
+
+def build_css
+  destination = "public/assets/megatron/megatron-#{Megatron::VERSION}.css"
+  system "sass app/assets/stylesheets/megatron/megatron.scss:#{destination}"
+  system "./node_modules/postcss-cli/bin/postcss --use autoprefixer #{destination} -o #{destination}"
+  puts "Built: #{destination}"
+end
+
+def build_svg
+  puts "building svg..."
+  Esvg::SVG.new(path: 'app/assets/esvg/megatron', output_path: 'app/assets/javascripts/megatron').write
 end

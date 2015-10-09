@@ -22,8 +22,12 @@ gem 'autoprefixer-rails'
 gem 's3', require: false
 gem 'esvg'
 
-group :development, :test do
+group :development do
   gem 'listen', '~> 3.0'
+  gem 'foreman'
+end
+
+group :development, :test do
   gem 'pry-byebug'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
