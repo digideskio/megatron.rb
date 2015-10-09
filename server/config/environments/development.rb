@@ -15,4 +15,9 @@ Rails.application.configure do
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
+
+  # Ensure that megatron is served from 
+  if ENV['MEGATRONDEV']
+    ENV['MEGATRON_ASSET_HOST']='http://megatron.compose.devkit'
+  end
 end
