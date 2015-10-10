@@ -7,7 +7,7 @@ require('compose-dataset-shim')
 
 var Toggler = {
   listen: function togglerListen(){
-    bean.on(document, "click", "[data-toggle], [data-show], [data-hide]", Toggler.trigger)
+    bean.on(document, "click", "[data-toggle], [data-show], [data-hide], [data-toggle-class], [data-add-class], [data-remove-class]", Toggler.trigger)
     bean.on(document, "change", ".select-toggler", Toggler.trigger)
   },
 
@@ -18,7 +18,6 @@ var Toggler = {
   },
 
   trigger: function togglerTrigger(event) {
-
     var target = event.currentTarget
 
     if (target.tagName.toLowerCase() == 'a' && target.getAttribute('href') == "#") {
@@ -36,13 +35,48 @@ var Toggler = {
       Toggler.dispatch(target, 'hide')
       Toggler.dispatch(target, 'toggle')
       Toggler.dispatch(target, 'show')
+      Toggler.dispatch(target, 'addClass')
+      Toggler.dispatch(target, 'removeClass')
+      Toggler.dispatch(target, 'toggleClass')
     }
   },
 
   dispatch: function togglerDispatch(el, type, force) {
     if (el.dataset[type]){
-      Toggler.setState(el.dataset[type], type)
+      if (type.match(/class/i)){
+        Toggler.setClass(el, type)
+      } else {
+        Toggler.setState(el.dataset[type], type)
+      }
     }
+  },
+
+  // Add, remove, or toggle classnames, triggered by elements with:
+  //  data-hide-class, data-show-class, and data-toggle-class values
+  //   
+  //  Data value examples:
+  //   - "classname" - add/remove/toggle classname on current element
+  //   - "foo bar"   - multiple classnames, separated by spaces (like html class property)
+  //   - "foo bar; selector" - change classnames on elements matched by selector
+  //   - "foo bar; selector, selector" - match multiple selectors
+  setClass: function (el, action){
+    // Get selector and classnames, format: "classname classname; selector,selector"
+    var settings = el.dataset[action].split(';')
+    var classnames = settings[0].trim()
+
+    // If no slectors are present, use the current el for classnames
+    var matches = document.querySelectorAll(settings[1])
+    if (matches.length == 0) matches = [el]
+
+    if (typeof(action) == 'boolean') {
+      action = (action ? 'addClass' : 'removeClass')
+    }
+
+    Array.prototype.forEach.call(matches, function(match){
+      Array.prototype.forEach.call(classnames.split(' '), function(classname) {
+        classie[action](match, classname)
+      })
+    })
   },
 
   setState: function toggletSetState(selectors, state) {
