@@ -35,9 +35,9 @@ var Toggler = {
       Toggler.dispatch(target, 'hide')
       Toggler.dispatch(target, 'toggle')
       Toggler.dispatch(target, 'show')
-      Toggler.dispatch(target, 'addClass')
       Toggler.dispatch(target, 'removeClass')
       Toggler.dispatch(target, 'toggleClass')
+      Toggler.dispatch(target, 'addClass')
     }
   },
 
