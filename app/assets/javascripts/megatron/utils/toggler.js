@@ -44,7 +44,7 @@ var Toggler = {
   dispatch: function togglerDispatch(el, type, force) {
     if (el.dataset[type]){
       if (type.match(/class/i)){
-        Toggler.setClass(el, type)
+        Toggler.setClass(el.dataset[type], type, el)
       } else {
         Toggler.setState(el.dataset[type], type)
       }
@@ -59,17 +59,28 @@ var Toggler = {
   //   - "foo bar"   - multiple classnames, separated by spaces (like html class property)
   //   - "foo bar; selector" - change classnames on elements matched by selector
   //   - "foo bar; selector, selector" - match multiple selectors
-  setClass: function (el, action){
-    // Get selector and classnames, format: "classname classname; selector,selector"
-    var settings = el.dataset[action].split(';')
-    var classnames = settings[0].trim()
+  //
 
-    // If no slectors are present, use the current el for classnames
-    var matches = document.querySelectorAll(settings[1])
-    if (matches.length == 0) matches = [el]
-
+  setClass: function (selectors, action, el){
     if (typeof(action) == 'boolean') {
       action = (action ? 'addClass' : 'removeClass')
+    }
+
+    // Get selector and classnames, format: "classname classname; selector,selector"
+    var settings = selectors.split(';')
+    var classnames = settings[0].trim()
+    var matches = []
+    selectors = settings[1] || ''
+
+    // If no slectors are present, use the current el for classnames
+    if (selectors) {
+      matches = document.querySelectorAll(selectors)
+    }
+    if (matches.length == 0) {
+      if (typeof(el) == 'undefined') {
+        return console.error('Cannot '+ action +' for elements matching '+selectors+'.')
+      }
+      matches = [el]
     }
 
     Array.prototype.forEach.call(matches, function(match){
@@ -79,7 +90,7 @@ var Toggler = {
     })
   },
 
-  setState: function toggletSetState(selectors, state) {
+  setState: function togglerSetState(selectors, state) {
     var matches = document.querySelectorAll(selectors)
     if (typeof(state) == 'boolean') {
       state = (state ? 'show' : 'hide')
@@ -116,23 +127,41 @@ var Toggler = {
   },
 
   toggleRadios: function togglerToggleRadio(radios) {
-    var radios = radios || 'input[type=radio][data-show]'
+    var radios = radios || 'input[type=radio][data-show], input[type=radio][data-add-class]'
 
     Array.prototype.forEach.call(document.querySelectorAll(radios), function(radio) {
-      Toggler.setState(radio.dataset.show, radio.checked)
+      if (radio.dataset.show)
+        Toggler.setState(radio.dataset.show, radio.checked)
+
+      if (radio.dataset.addClass)
+        Toggler.setClass(radio.dataset.addClass, radio.checked)
     })
   },
 
   toggleCheckbox: function togglerToggeCheckbox(checkbox) {
-    Toggler.setState(checkbox.dataset.hide, !checkbox.checked)
-    Toggler.setState(checkbox.dataset.toggle, 'toggle')
-    Toggler.setState(checkbox.dataset.show, checkbox.checked)
+    // Visibility toggling
+    if (checkbox.dataset.hide)
+      Toggler.setState(checkbox.dataset.hide, !checkbox.checked)
+    if (checkbox.dataset.toggle)
+      Toggler.setState(checkbox.dataset.toggle, 'toggle')
+    if (checkbox.dataset.show)
+      Toggler.setState(checkbox.dataset.show, checkbox.checked)
+
+    // Class toggling
+    if (checkbox.dataset.removeClass)
+      Toggler.setClass(checkbox.dataset.removeClass, !checkbox.checked, checkbox)
+    if (checkbox.dataset.toggleClass)
+      Toggler.setClass(checkbox.dataset.toggleClass, 'toggleClass', checkbox)
+    if (checkbox.dataset.addClass)
+      Toggler.setClass(checkbox.dataset.addClass, checkbox.checked, checkbox)
   },
 
   toggleSelect: function togglerToggleSelect(select) {
     var option = select.selectedOptions[0]
     Toggler.dispatch(option, 'hide')
     Toggler.dispatch(option, 'show')
+    Toggler.dispatch(option, 'addClass')
+    Toggler.dispatch(option, 'removeClass')
   },
 
   toggleCheckboxes: function togglerToggleCheckboxes() {

@@ -4,8 +4,17 @@
 - main
   = heading "Toggle Classes"
   p
-    button.btn.that-button data-toggle-class='primary-btn' Toggle
-    button.btn.this-button data-add-class='primary-btn; .that-button' Add
-    button.btn.this-button data-remove-class='primary-btn; .that-button' Remove
+    button.btn.test-button data-toggle-class='primary-btn' Toggle
+    button.btn data-add-class='primary-btn; .test-button' Add
+    button.btn data-remove-class='primary-btn; .test-button' Remove
  
+  p
+    input type='checkbox' id='toggle-checkbox' data-toggle-class='primary-btn; .test-button'
+    label for='toggle-checkbox' Toggle
+
+    input type='checkbox' id='add-checkbox' data-add-class='primary-btn; .test-button'
+    label for='add-checkbox' Add
+
+    input type='checkbox' id='remove-checkbox' data-remove-class='primary-btn; .test-button'
+    label for='remove-checkbox' Remove
 
