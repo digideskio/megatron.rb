@@ -27,6 +27,7 @@ var Toggler = {
 
     if (target.type == 'radio') {
       Toggler.toggleRadios('input[name="'+ target.name +'"]')
+      Toggler.dispatch(target, 'addClass')
     } else if (target.type == 'checkbox') {
       Toggler.toggleCheckbox(target)
     } else if (target.tagName.toLowerCase() == 'select') {
@@ -128,14 +129,24 @@ var Toggler = {
 
   toggleRadios: function togglerToggleRadio(radios) {
     var radios = radios || 'input[type=radio][data-show], input[type=radio][data-add-class]'
-
-    Array.prototype.forEach.call(document.querySelectorAll(radios), function(radio) {
+    var checked = []
+    var process = function(radio) {
       if (radio.dataset.show)
         Toggler.setState(radio.dataset.show, radio.checked)
 
       if (radio.dataset.addClass)
         Toggler.setClass(radio.dataset.addClass, radio.checked)
+    }
+
+    Array.prototype.forEach.call(document.querySelectorAll(radios), function(radio){
+      if (radio.checked) {
+        checked.push(radio)
+      } else {
+        process(radio)
+      }
     })
+
+    Array.prototype.forEach.call(checked, process)
   },
 
   toggleCheckbox: function togglerToggeCheckbox(checkbox) {
