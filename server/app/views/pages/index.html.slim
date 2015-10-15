@@ -1,19 +1,11 @@
 - main_header
-  h2 Megatron Setup
+  h2 Megatron v#{Megatron::VERSION}
 
 - main
-  p Add the `megatron.rb` gem to your gemfile:
+  p Add the <code>megatron</code> gem to your gemfile:
 
   code: ruby
-    source 'https://gems.gemfury.com/Gqx3RZsppEheCrtxkFQ5'
-    gem 'megatron.rb'
-    
-  
-  p In your app's <code>config/application.rb</code>.
-  
-  code: ruby, title: asdfasfd
-     require 'megatron'
-
+    gem 'megatron', '~> #{Megatron::VERSION}'
 
   = heading "Layouts"
 
@@ -32,12 +24,12 @@
       - stylesheets do
         = stylesheet_link_tag "application"
 
-      - page_header "megatron.rb"
+      - page_header "Your Page Title"
 
 
-  - sidebar do
-    = heading "Sidebar"
-    p Add a sidebar to your pages with the sidebar helper.
-    code: slim
-      - sidebar do
-        p sidebar
+- sidebar do
+  = heading "Sidebar"
+  p Add a sidebar to your pages with the sidebar helper.
+  code: slim
+    - sidebar do
+      p sidebar

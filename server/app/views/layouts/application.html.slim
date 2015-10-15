@@ -1,29 +1,38 @@
-<!DOCTYPE html>
-html
-  head
-    - if @title.present?
-      title #{@title} | Compose
-    - else
-      title Compose
-    meta name="viewport" content="width=device-width,initial-scale=1"
-    meta charset="utf-8"
-    = csrf_meta_tags
-    = megatron_assets_tags
+= megatron_layout custom_nav: true
+  - javascripts do
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+  - stylesheets do
     = stylesheet_link_tag "application"
-    = javascript_include_tag "application"
-  body
-    = render 'layouts/secondary_nav'
-    .docs-site
-      .docs-site-content
-        .docs-site-head
-        .docs-site-main
-          .docs-page
-            - if content_for?(:secondary_nav)
-              nav.docs-page-nav
-                = yield :secondary_nav
-            - if content_for?(:main)
-              .docs-page-content
-                - if content_for?(:main_header)
-                  = yield :main_header
-                = yield :main
+
+  = render 'layouts/secondary_nav'
+  - page_header "Megatron Documentation"
+
+/ <!DOCTYPE html>
+/ html
+/   head
+/     - if @title.present?
+/       title #{@title} | Compose
+/     - else
+/       title Compose
+/     meta name="viewport" content="width=device-width,initial-scale=1"
+/     meta charset="utf-8"
+/     = csrf_meta_tags
+/     = megatron_assets_tags
+/     = stylesheet_link_tag "application"
+/     = javascript_include_tag "application"
+/   body
+/     = render 'layouts/secondary_nav'
+/     .docs-site
+/       .docs-site-content
+/         .docs-site-head
+/         .docs-site-main
+/           .docs-page
+/             - if content_for?(:secondary_nav)
+/               nav.docs-page-nav
+/                 = yield :secondary_nav
+/             - if content_for?(:main)
+/               .docs-page-content
+/                 - if content_for?(:main_header)
+/                   = yield :main_header
+/                 = yield :main
 
