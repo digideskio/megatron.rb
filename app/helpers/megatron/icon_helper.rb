@@ -3,15 +3,19 @@ module Megatron
     def iconset
       @icons ||= Esvg::SVG.new(path: File.expand_path('../../assets/esvg/megatron', File.dirname(__FILE__)))
 
-      if Rails.env != 'production' && @icons.modified?
-        @icons.read_icons
+      if Rails.env != 'production'
+        @icons.read_files
       end
 
       @icons
     end
 
     def icon(name, options={})
-      iconset.svg_icon(name.to_s, options).html_safe
+      begin
+        iconset.svg_icon(name, options).html_safe
+      rescue
+        byebug
+      end
     end
 
     def font_icon(name, options={})

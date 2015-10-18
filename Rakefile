@@ -109,6 +109,12 @@ def build_css
 end
 
 def build_svg
-  puts "building svg..."
-  Esvg::SVG.new(path: 'app/assets/esvg/megatron', output_path: 'app/assets/javascripts/megatron').write
+  if @svg.nil? 
+    @svg = Esvg::SVG.new(path: 'app/assets/esvg/megatron', output_path: 'app/assets/javascripts/megatron')
+  else
+    @svg.read_files
+  end
+
+  @svg.write
+  puts "Svg written"
 end
