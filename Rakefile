@@ -110,7 +110,7 @@ end
 
 def build_svg
   if @svg.nil? 
-    @svg = Esvg::SVG.new(path: 'app/assets/esvg/megatron', output_path: 'app/assets/javascripts/megatron')
+    @svg = Esvg::SVG.new(path: 'app/assets/esvg/megatron', output_path: 'app/assets/javascripts/megatron', optimize: true)
   else
     @svg.read_files
   end

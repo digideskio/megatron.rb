@@ -71,16 +71,12 @@ var Toggler = {
     var settings = selectors.split(';')
     var classnames = settings[0].trim()
     var matches = []
-    selectors = settings[1] || ''
+    selectors = settings[1]
 
     // If no slectors are present, use the current el for classnames
     if (selectors) {
       matches = document.querySelectorAll(selectors)
-    }
-    if (matches.length == 0) {
-      if (typeof(el) == 'undefined') {
-        return console.error('Cannot '+ action +' for elements matching '+selectors+'.')
-      }
+    } else {
       matches = [el]
     }
 

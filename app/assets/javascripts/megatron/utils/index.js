@@ -4,6 +4,7 @@ var classie = require('classie')
 var Toggler = require('./toggler')
 var Messages = require('./messages')
 var AutoNavigate = require('./auto-navigate')
+var TextHelpers = require('./text-helpers')
 var Timeago = require('./time/timeago')
 var TimeSwitch = require('./time/time-switch')
 var notify = require('notify')
@@ -24,6 +25,7 @@ module.exports = {
   Toggler: Toggler,
   Messages: Messages,
   AutoNavigate: AutoNavigate,
+  TextHelpers: TextHelpers,
 
   toggleActiveNav: function toggleActiveNav(){
     Array.prototype.forEach.call(document.querySelectorAll('[data-match-url]'), function(node){

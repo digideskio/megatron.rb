@@ -2,11 +2,20 @@
   h2 Icons
 
 - main
-  = text_icon('deployments')
-  = text_icon('deployments', wrapper: true, color: :blue)
-  = text_icon('deployments', wrapper: 'awesome')
+  = heading "Text icons"
+  p Text icons sit inline with other text and respond to text size and colors
+  code: ruby
+    =text_icon("deployments")
+
+  = heading "Graphic icons"
+  p Graphic icons are sized and colored based on the natural size of their source svg.
+  code: ruby
+    =icon("deployments")
+
+  = heading "Icon library"
+  markdown:
+    The following icons come with Megatron, if you need an icon which is not here, [create a ticket](https://git.compose.io/compose/hq/issues) and tag it "icon-request".
   - iconset.svgs.each do |k, v|
-    .icon-test
-      =icon k
-      code: ruby
-        =icon("#{k}")
+    .test-icon data-name="#{k}" 
+      span.test-icon-wrapper=icon k
+      .test-icon-name.click-select contenteditable=true data-icon="#{k}" =k

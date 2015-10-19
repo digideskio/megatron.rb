@@ -37,6 +37,7 @@ bean.on(document, 'page:restore', function() { NProgress.remove() })
 function pageLoad(){
   utils.Toggler.listen()
   utils.AutoNavigate.listen()
+  utils.TextHelpers.load()
   if(!window.Turbolinks) {
     pageChange()
   }

@@ -11,10 +11,15 @@ module Megatron
     end
 
     def icon(name, options={})
-      begin
-        iconset.svg_icon(name, options).html_safe
-      rescue
-        byebug
+      name = dasherize(name)
+      i = iconset.svg_icon(name, options).html_safe
+
+      if options[:wrapper]
+        content_tag(:span, class: options[:wrapper].strip) do
+          i
+        end
+      else
+        i
       end
     end
 
