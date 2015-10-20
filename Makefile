@@ -7,13 +7,8 @@ build: build.svg build.js build.css
 build.js:
 	./node_modules/.bin/browserify app/assets/javascripts/megatron/index.js -t babelify --standalone Megatron -o public/assets/megatron/megatron-$(GEM_VERSION).js -d -p [ minifyify --map megatron-$(GEM_VERSION).map.json --output public/assets/megatron/megatron-$(GEM_VERSION).map.json ]
 
-build.svg: optimize.svg esvg
-	
-esvg:
+build.svg:
 	bundle exec esvg app/assets/esvg/megatron --output app/assets/javascripts/megatron
-
-optimize.svg:
-	./node_modules/.bin/svgo app/assets/esvg/megatron
 
 build.css:
 	bundle exec sass --style compressed app/assets/stylesheets/megatron/megatron.scss:public/assets/megatron/megatron-$(GEM_VERSION).css
