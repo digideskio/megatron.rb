@@ -76,6 +76,10 @@ namespace :megatron do
 
     end
 
+    task :build do
+      build_css
+    end
+
   end
 
   namespace :svg do
@@ -103,14 +107,14 @@ end
 
 def build_css
   destination = "public/assets/megatron/megatron-#{Megatron::VERSION}.css"
-  system "sass app/assets/stylesheets/megatron/megatron.scss:#{destination}"
-  system "./node_modules/postcss-cli/bin/postcss --use autoprefixer #{destination} -o #{destination}"
+  system "sass app/assets/stylesheets/megatron/megatron.scss:#{destination} -r megatron"
+  #system "./node_modules/postcss-cli/bin/postcss --use autoprefixer #{destination} -o #{destination}"
   puts "Built: #{destination}"
 end
 
 def build_svg
   if @svg.nil? 
-    @svg = Esvg::SVG.new(path: 'app/assets/esvg/megatron', output_path: 'app/assets/javascripts/megatron', optimize: true)
+    @svg = Esvg::SVG.new(path: 'app/assets/esvg/megatron', output_path: 'app/assets/javascripts/megatron')
   else
     @svg.read_files
   end
