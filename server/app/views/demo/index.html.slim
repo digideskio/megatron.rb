@@ -4,12 +4,6 @@
       .loading-graphic
     p.lightgray-text.deployment-status-message This may take a couple minutes.
 
-  - primary_nav do |nav|
-    = nav.item 'Deployments', page_path(page: 'deployments'), icon: 'deployments'
-    = nav.item 'Clusters', page_path(page: 'deployments'), icon: 'deployment-cluster', class: 'here'
-    /= nav.item 'Clusters', page_path(page: 'clusters'), icon: 'deployment-cluster'
-    = nav.item 'Account', "#", icon: 'account-circle'
-    = nav.item 'Support', "#", icon: 'question-line'
   - secondary_nav do |nav|
     = nav.item 'Test', page_path(page: 'demo'), icon: 'deployment'
     = nav.item 'Secondary', "#", icon: 'bell'

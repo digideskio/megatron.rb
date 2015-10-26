@@ -59,16 +59,16 @@ module SassJSONVars
 end
 
 class Sass::Engine
-  #alias initialize_without_json_importer initialize
+  alias initialize_without_json_importer initialize
 
-  #def initialize(template, options={})
-    #initialize_without_json_importer(template, options)
+  def initialize(template, options={})
+    initialize_without_json_importer(template, options)
 
-    #json_importer = self.options[:load_paths].find {|lp| lp.is_a?(SassJSONVars::Importer) }
+    json_importer = self.options[:load_paths].find {|lp| lp.is_a?(SassJSONVars::Importer) }
 
-    #unless json_importer
-      #root = File.dirname(options[:filename] || ".")
-      #self.options[:load_paths] << SassJSONVars::Importer.new(root)
-    #end
-  #end
+    unless json_importer
+      root = File.dirname(options[:filename] || ".")
+      self.options[:load_paths] << SassJSONVars::Importer.new(root)
+    end
+  end
 end
