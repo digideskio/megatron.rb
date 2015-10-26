@@ -30,14 +30,7 @@ module Megatron
 
     def text_icon(name, options={})
       options = set_icon_classes(options, class: 'text-icon', wrapper: 'icon-wrapper')
-
-      if options[:wrapper]
-        content_tag(:span, class: options[:wrapper].strip) do
-          icon(name.to_s, options)
-        end
-      else
-        icon(name.to_s, options)
-      end
+      icon(name.to_s, options)
     end
 
     def nav_icon(name, options={})
