@@ -76,13 +76,16 @@ namespace :megatron do
 
     end
 
+    task :build do
+      build_css
+    end
+
   end
 
   namespace :svg do
 
     task :watch do
       require 'listen'
-      require 'esvg'
 
       listener = Listen.to('app/assets/esvg/megatron/', only: /\.svg$/) do |modified, added, removed|
         build_svg
@@ -97,6 +100,10 @@ namespace :megatron do
 
     end
 
+    task :build do
+      build_svg
+    end
+
   end
 
 end
@@ -109,6 +116,7 @@ def build_css
 end
 
 def build_svg
+  require 'esvg'
   if @svg.nil? 
     @svg = Esvg::SVG.new(path: 'app/assets/esvg/megatron', output_path: 'app/assets/javascripts/megatron', optimize: true)
   else

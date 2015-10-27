@@ -8,11 +8,10 @@ build.js:
 	./node_modules/.bin/browserify app/assets/javascripts/megatron/index.js -t babelify --standalone Megatron -o public/assets/megatron/megatron-$(GEM_VERSION).js -d -p [ minifyify --map megatron-$(GEM_VERSION).map.json --output public/assets/megatron/megatron-$(GEM_VERSION).map.json ]
 
 build.svg:
-	bundle exec esvg app/assets/esvg/megatron --output app/assets/javascripts/megatron
+	rake megatron:svg:build
 
 build.css:
-	bundle exec sass --style compressed app/assets/stylesheets/megatron/megatron.scss:public/assets/megatron/megatron-$(GEM_VERSION).css
-	./node_modules/postcss-cli/bin/postcss --use autoprefixer public/assets/megatron/megatron-$(GEM_VERSION).css -o public/assets/megatron/megatron-$(GEM_VERSION).css
+	rake megatron:css:build
 
 install: touch_empty clean build
 
