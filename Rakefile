@@ -57,6 +57,16 @@ namespace :megatron do
 
   end
 
+  namespace :js do
+    task :watch do
+      system "./node_modules/.bin/watchify app/assets/javascripts/megatron/index.js --poll --debug -t babelify -o public/assets/megatron/megatron-#{Megatron::VERSION}.js -v"
+    end
+
+    task :build do
+      build_js
+    end
+  end
+
   namespace :css do
 
     task :watch do
@@ -113,6 +123,10 @@ def build_css
   system "sass app/assets/stylesheets/megatron/megatron.scss:#{destination}"
   system "./node_modules/postcss-cli/bin/postcss --use autoprefixer #{destination} -o #{destination}"
   puts "Built: #{destination}"
+end
+
+def build_js
+  system "./node_modules/.bin/browserify app/assets/javascripts/megatron/index.js -t babelify --standalone Megatron -o public/assets/megatron/megatron-#{Megatron::VERSION}.js -d -p [ minifyify --map megatron-#{Megatron::VERSION}.map.json --output public/assets/megatron/megatron-#{Megatron::VERSION}.map.json ]"
 end
 
 def build_svg
