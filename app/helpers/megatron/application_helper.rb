@@ -16,9 +16,17 @@ module Megatron
 
     def megatron_assets_tags
       version = Megatron::VERSION
-      favicon_link_tag(megatron_asset_path('favicon.ico')) + 
-      stylesheet_link_tag(megatron_asset_path("megatron-#{version}.css")) +
-      javascript_include_tag(megatron_asset_path("megatron-#{version}.js"))
+      ext_suffix = Rails.env.production? ? '.gz' : ''
+
+      favicon_link_tag(
+        megatron_asset_path('favicon.ico')
+      ) +
+      stylesheet_link_tag(
+        megatron_asset_path("megatron-#{version}.css#{ext_suffix}")
+      ) +
+      javascript_include_tag(
+        megatron_asset_path("megatron-#{version}.js#{ext_suffix}")
+      )
     end
 
     def options_from_args(args)
