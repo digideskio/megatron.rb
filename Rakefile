@@ -31,9 +31,9 @@ namespace :megatron do
 
       obj.acl = :public_read
 
-      obj.content_type = if name.end_with?('.js')
+      obj.content_type = if name.end_with?('.js') || name.end_with?('.js.gz')
         'application/javascript'
-      elsif name.end_with?('.css')
+      elsif name.end_with?('.css') || name.end_with?('.css.gz')
         'text/css'
       elsif name.end_with?('.json') || name.end_with?('.map')
         'application/json'
@@ -43,6 +43,7 @@ namespace :megatron do
         'text/plain'
       end
       
+      obj.content_encoding = 'gzip' if name.end_with?('.gz')
       obj.content = open(file)
       
       puts "Uploading #{file} to megatron-assets on S3..."
@@ -64,6 +65,10 @@ namespace :megatron do
 
     task :build do
       build_js
+    end
+
+    task :gzip do
+      gzip("public/assets/megatron/*.js")
     end
   end
 
@@ -88,6 +93,10 @@ namespace :megatron do
 
     task :build do
       build_css
+    end
+
+    task :gzip do
+      gzip("public/assets/megatron/*.css")
     end
 
   end
@@ -139,4 +148,25 @@ def build_svg
 
   @svg.write
   puts "Svg written"
+end
+
+ZIP_TYPES = /\.(?:css|html|js|otf|svg|txt|xml)$/
+
+def gzip(glob)
+  Dir["#{Dir.pwd}/#{glob}"].each do |f|
+    next unless f =~ ZIP_TYPES
+
+    mtime = File.mtime(f)
+    gz_file = "#{f}.gz"
+    next if File.exist?(gz_file) && File.mtime(gz_file) >= mtime
+
+    File.open(gz_file, "wb") do |dest|
+      gz = Zlib::GzipWriter.new(dest, Zlib::BEST_COMPRESSION)
+      gz.mtime = mtime.to_i
+      IO.copy_stream(open(f), gz)
+      gz.close
+    end
+
+    File.utime(mtime, mtime, gz_file)
+  end
 end
