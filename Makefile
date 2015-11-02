@@ -8,12 +8,20 @@ build.js:
 	bundle exec rake megatron:js:build
 	bundle exec rake megatron:js:gzip
 
+build.js.lite:
+	bundle exec rake megatron:js:build
+
 build.svg:
 	bundle exec rake megatron:svg:build
 
 build.css:
 	bundle exec rake megatron:css:build
 	bundle exec rake megatron:css:gzip
+
+build.css.lite:
+	bundle exec rake megatron:css:build
+
+build.lite: build.svg build.js.lite build.css.lite
 
 install: touch_empty clean build
 
