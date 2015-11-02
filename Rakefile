@@ -1,3 +1,5 @@
+$stdout.sync = true
+
 begin
   require 'bundler/setup'
 rescue LoadError
@@ -102,6 +104,7 @@ namespace :megatron do
   end
 
   namespace :svg do
+    require 'esvg'
 
     task :watch do
       require 'listen'
@@ -129,7 +132,7 @@ end
 
 def build_css
   destination = "public/assets/megatron/megatron-#{Megatron::VERSION}.css"
-  system "sass app/assets/stylesheets/megatron/megatron.scss:#{destination}"
+  system "bundle exec sass app/assets/stylesheets/megatron/megatron.scss:#{destination}"
   system "./node_modules/postcss-cli/bin/postcss --use autoprefixer #{destination} -o #{destination}"
   puts "Built: #{destination}"
 end
@@ -139,7 +142,6 @@ def build_js
 end
 
 def build_svg
-  require 'esvg'
   if @svg.nil? 
     @svg = Esvg::SVG.new(path: 'app/assets/esvg/megatron', output_path: 'app/assets/javascripts/megatron', optimize: true)
   else
