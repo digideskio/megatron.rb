@@ -123,7 +123,7 @@ namespace :megatron do
     end
 
     task :build do
-      build_svg
+      build_svg(true)
     end
 
   end
@@ -141,15 +141,14 @@ def build_js
   system "./node_modules/.bin/browserify app/assets/javascripts/megatron/index.js -t babelify --standalone Megatron -o public/assets/megatron/megatron-#{Megatron::VERSION}.js -d -p [ minifyify --map megatron-#{Megatron::VERSION}.map.json --output public/assets/megatron/megatron-#{Megatron::VERSION}.map.json ]"
 end
 
-def build_svg
+def build_svg(optimize=false)
   if @svg.nil? 
-    @svg = Esvg::SVG.new(path: 'app/assets/esvg/megatron', output_path: 'app/assets/javascripts/megatron', optimize: true)
+    @svg = Esvg::SVG.new(path: 'app/assets/esvg/megatron', output_path: 'app/assets/javascripts/megatron', optimize: optimize, cli: true)
   else
     @svg.read_files
   end
 
   @svg.write
-  puts "Svg written"
 end
 
 ZIP_TYPES = /\.(?:css|html|js|otf|svg|txt|xml)$/
