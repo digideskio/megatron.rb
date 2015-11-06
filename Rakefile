@@ -128,6 +128,15 @@ namespace :megatron do
 
   end
 
+  # Run the server first, then run this rake task to write error messages to disk
+  #
+  task :build_errors do
+    FileUtils.mkdir_p('server/tmp/errors')
+    [408, 502, 503, 504].each do |code|
+      system "curl http://localhost:5000/errors/#{code} > server/tmp/errors/#{code}.html"
+    end
+  end
+
 end
 
 def build_megatron_css
