@@ -81,10 +81,10 @@ namespace :megatron do
       require 'listen'
 
       listener = Listen.to('app/assets/stylesheets/megatron/', only: /\.scss$/) do |modified, added, removed|
-        build_css
+        build_megatron_css
       end
 
-      build_css
+      build_megatron_css
 
       puts "Initial CSS build, done. Listening for changes..."
 
@@ -94,7 +94,7 @@ namespace :megatron do
     end
 
     task :build do
-      build_css
+      build_megatron_css
     end
 
     task :gzip do
@@ -128,11 +128,29 @@ namespace :megatron do
 
   end
 
+  # Run the server first, then run this rake task to write error messages to disk
+  #
+  task :build_errors do
+    dir = 'server/tmp/error_pages'
+    zip = 'error_pages.zip'
+    FileUtils.mkdir_p(dir)
+    FileUtils.rm(zip) if File.exist?(zip)
+    [408, 502, 503, 504].each do |code|
+      system "curl http://localhost:5000/errors/#{code} > #{dir}/#{code}.html"
+      system "zip -r -X #{zip} #{dir}"
+    end
+  end
+
 end
 
-def build_css
-  destination = "public/assets/megatron/megatron-#{Megatron::VERSION}.css"
-  system "bundle exec sass app/assets/stylesheets/megatron/megatron.scss:#{destination}"
+def build_megatron_css
+  build_css("megatron")
+  build_css('megatron-error-pages', 'compressed', 'none')
+end
+
+def build_css(file, style='nested', sourcemap='auto')
+  destination = "public/assets/megatron/#{file}-#{Megatron::VERSION}.css"
+  system "bundle exec sass app/assets/stylesheets/megatron/#{file}.scss:#{destination} --style #{style} --sourcemap=#{sourcemap}"
   system "./node_modules/postcss-cli/bin/postcss --use autoprefixer #{destination} -o #{destination}"
   puts "Built: #{destination}"
 end

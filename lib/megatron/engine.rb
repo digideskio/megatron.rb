@@ -18,5 +18,12 @@ module Megatron
     initializer "megatron.static_assets" do |app|
       app.middleware.insert_before(::ActionDispatch::Static, ::ActionDispatch::Static, "#{root}/public")
     end
+
+    initializer "megatron.errors" do |app|
+      Gaffe.configure do |config|
+        config.errors_controller = 'Megatron::ErrorsController'
+      end
+      Gaffe.enable!
+    end
   end
 end

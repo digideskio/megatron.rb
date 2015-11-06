@@ -22,4 +22,5 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "rails", "~> 4"
   spec.add_dependency "esvg", "~> 2"
+  spec.add_dependency "gaffe", "~> 1"
 end
