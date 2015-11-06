@@ -131,9 +131,13 @@ namespace :megatron do
   # Run the server first, then run this rake task to write error messages to disk
   #
   task :build_errors do
-    FileUtils.mkdir_p('server/tmp/errors')
+    dir = 'server/tmp/error_pages'
+    zip = 'error_pages.zip'
+    FileUtils.mkdir_p(dir)
+    FileUtils.rm(zip) if File.exist?(zip)
     [408, 502, 503, 504].each do |code|
-      system "curl http://localhost:5000/errors/#{code} > server/tmp/errors/#{code}.html"
+      system "curl http://localhost:5000/errors/#{code} > #{dir}/#{code}.html"
+      system "zip -r -X #{zip} #{dir}"
     end
   end
 
