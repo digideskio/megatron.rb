@@ -5,14 +5,7 @@ html.error-layout
     meta name="viewport" content="width=device-width,initial-scale=1"
     meta charset="utf-8"
     = favicon_link_tag(megatron_asset_path('favicon.ico'))
-
-    / Embed styles directly for these error codes since they are served from haproxy
-    / and are likely to be served when the stylesheet server cannot be reached
-    /
-    - if [408, 502, 503, 504].include?(@status_code)
-      style== File.read("../public/assets/megatron/megatron-error-pages-#{Megatron::VERSION}.css")
-    - else
-      = stylesheet_link_tag(megatron_asset_path('megatron-error-pages'))
+    = megatron_error_asset_tag
 
   body
     .error-page class="error-#{@status_code} #{('reverse-stack' if @status_code == 404)}"

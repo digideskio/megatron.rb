@@ -30,6 +30,22 @@ module Megatron
       )
     end
 
+    def megatron_error_asset_tag
+      version = Megatron::VERSION
+      ext_suffix = Rails.env.production? ? '.gz' : ''
+
+      # Embed styles directly for these error codes since they are served from haproxy
+      # and are likely to be served when the stylesheet server cannot be reached
+      #
+      if [408, 502, 503, 504].include?(@status_code)
+        style== File.read("../public/assets/megatron/megatron-error-pages-#{version}.css")
+      else
+        stylesheet_link_tag(
+          megatron_asset_path("megatron-error-pages-#{version}.css#{ext_suffix}")
+        )
+      end
+    end
+
     def options_from_args(args)
       if args.last.is_a? Hash
         args.pop
