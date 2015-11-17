@@ -41,6 +41,8 @@ namespace :megatron do
         'application/json'
       elsif name.end_with?('.ico')
         'image/x-icon'
+      elsif name.end_with?('.svg')
+        'image/svg+xml'
       else
         'text/plain'
       end
