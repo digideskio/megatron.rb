@@ -19,6 +19,9 @@ module Megatron
       version = Megatron::VERSION
       ext_suffix = Rails.env.production? ? '.gz' : ''
 
+      pin_tab_icon(
+        megatron_asset_path('logo.svg')
+      ) +
       favicon_link_tag(
         megatron_asset_path('favicon.ico')
       ) +
@@ -28,6 +31,10 @@ module Megatron
       javascript_include_tag(
         megatron_asset_path("megatron-#{version}.js#{ext_suffix}")
       )
+    end
+
+    def pin_tab_icon(path)
+      %Q{<link rel="mask-icon" mask href="#{path}" color="black">}.html_safe
     end
 
     def megatron_error_asset_tag
