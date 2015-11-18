@@ -151,6 +151,7 @@ def build_megatron_css
 end
 
 def build_css(file, style='nested', sourcemap='auto')
+  style = "compressed" if ENV['CI']
   destination = "public/assets/megatron/#{file}-#{Megatron::VERSION}.css"
   system "bundle exec sass app/assets/stylesheets/megatron/#{file}.scss:#{destination} --style #{style} --sourcemap=#{sourcemap}"
   system "./node_modules/postcss-cli/bin/postcss --use autoprefixer #{destination} -o #{destination}"
