@@ -1,7 +1,7 @@
 FROM mhart/alpine-node:5.0
 
-ENV BUILD_PACKAGES bash curl-dev ruby-dev build-base libffi-dev libpq postgresql-dev git
-ENV RUBY_PACKAGES ruby ruby-io-console ruby-bundler ruby-raindrops ruby-nokogiri
+ENV BUILD_PACKAGES bash curl-dev ruby-dev build-base
+ENV RUBY_PACKAGES ruby ruby-bundler ruby-nokogiri
 
 # Update and install all of the required packages.
 # At the end, remove the apk cache
