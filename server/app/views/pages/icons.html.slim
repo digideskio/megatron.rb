@@ -15,7 +15,7 @@
   = heading "Icon library"
   markdown:
     The following icons come with Megatron, if you need an icon which is not here, [create a ticket](https://git.compose.io/compose/hq/issues) and tag it "icon-request".
-  - iconset.svgs.each do |k, v|
+  - iconset.svgs.keys.sort.each do |k|
     .test-icon data-name="#{k}" 
       span.test-icon-wrapper=icon k
       .test-icon-name.click-select contenteditable=true data-icon="#{k}" =k

@@ -1,7 +1,7 @@
 - primary_nav do |nav|
   = nav.item 'Deployments', "/#{current_account.slug}/deployments",
     icon: 'deployments',
-    class: "#{'here' if @primary_nav_here  == 'deployments' }"
+    here_if: { path: /#{current_account.slug}\/deployments/ }
 
   = nav.item 'Account', "/account",
     icon: 'account_circle',
