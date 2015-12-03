@@ -2,15 +2,24 @@
   h2 Icons
 
 - main
+
   = heading "Text icons"
   p Text icons sit inline with other text and respond to text size and colors
   code: ruby
     =text_icon("deployments")
 
+  p You can also place icon next to text, aligning them vertically
+
+  =demo_box("Align icons and text")
+    = text_icon('dot', color: :green)
+      |Server status
+  p Click the source to see how the indented text becomes aligned with the icon.
+
   = heading "Graphic icons"
   p Graphic icons are sized and colored based on the natural size of their source svg.
   code: ruby
     =icon("deployments")
+
 
   = heading "Icon library"
   markdown:

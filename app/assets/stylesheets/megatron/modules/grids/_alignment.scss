@@ -33,7 +33,10 @@
   }
 }
 
-.text-left, .align-left   { text-align: left; }
+.text-left,    .align-left   { text-align: left; }
 .text-center,  .align-center { text-align: center; }
 .text-right,   .align-right  { text-align: right; }
+.align-top  { vertical-align: top; }
+.align-middle  { vertical-align: middle; }
+.align-bottom  { vertical-align: bottom; }
 

@@ -10,17 +10,25 @@ module Megatron
       @icons
     end
 
-    def icon(name, options={})
+    def icon(name, options={}, &block)
       name = dasherize(name)
       i = iconset.svg_icon(name, options).html_safe
 
       if options[:wrapper]
-        content_tag(:span, class: options[:wrapper].strip) do
+        i = content_tag(:span, class: options[:wrapper].strip) do
           i
         end
-      else
-        i
       end
+
+      if options[:label]
+        i += %Q{<span class="icon-label align-middle">#{options[:label]}</span>}.html_safe
+      end
+
+      if block
+        i += content_tag('span', class: 'align-middle', &block)
+      end
+
+      i
     end
 
     def font_icon(name, options={})
@@ -28,14 +36,18 @@ module Megatron
       content_tag(:span, class: options[:class], 'aria-hidden' => true) {  }
     end
 
-    def text_icon(name, options={})
+    def text_icon(name, options={}, &block)
       options = set_icon_classes(options, class: 'text-icon', wrapper: 'icon-wrapper')
-      icon(name.to_s, options)
+      icon(name.to_s, options, &block)
     end
 
-    def nav_icon(name, options={})
+    def nav_icon(name, options={}, &block)
       options[:wrapper] = "nav-icon"
-      text_icon(name, options)
+      text_icon(name, options, &block)
+    end
+
+    def icon_label(name, options={}, &block)
+      text_icon(name, options) + content_tag('span', class: 'align-middle', &block)
     end
 
     def set_icon_classes(options, defaults={})
