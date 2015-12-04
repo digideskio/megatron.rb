@@ -23,7 +23,7 @@ module Megatron
         megatron_asset_path('logo.svg')
       ) +
       favicon_link_tag(
-        megatron_asset_path('favicon.ico')
+        megatron_asset_path('favicon.ico'), sizes: "32x32"
       ) +
       stylesheet_link_tag(
         megatron_asset_path("megatron-#{version}.css#{ext_suffix}")
