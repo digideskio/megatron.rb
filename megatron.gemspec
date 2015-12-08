@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
   spec.description = "Hotness."
   spec.license     = "MIT"
 
-  spec.files = Dir["{app,public,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
+  spec.files = Dir["{app,public,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc", "esvg.yml"]
 
   spec.add_runtime_dependency 'block_helpers', '~> 0.3.3'
   spec.add_runtime_dependency 'to_words', '~> 1.1.0'
