@@ -1,0 +1,6 @@
+path: app/assets/esvg/megatron
+output_path: app/assets/javascripts/megatron
+optimize: true
+cli: true
+alias:
+  account-circle-fill: account, kittens

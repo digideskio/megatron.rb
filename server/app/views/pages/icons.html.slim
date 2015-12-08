@@ -11,7 +11,13 @@
   p You can also place icon next to text, aligning them vertically
 
   =demo_box("Align icons and text")
-    = text_icon('dot', color: :green)
+    div= text_icon('account', color: :green)
+      |Server status
+    div= text_icon('dash-circle-fill', color: :red)
+      |Server status
+    div= text_icon('circle-fill', color: :orange)
+      |Server status
+    div= text_icon('circle', color: :gray)
       |Server status
   p Click the source to see how the indented text becomes aligned with the icon.
 
