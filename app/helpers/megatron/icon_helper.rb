@@ -2,7 +2,7 @@ module Megatron
   module IconHelper
     def iconset
       @icons ||= Esvg::SVG.new(
-        config_file: File.expand_path('../../../esvg.yml', File.dirname(__FILE__)),
+        config_file: File.expand_path('../../../config/esvg.yml', File.dirname(__FILE__)),
         path: File.expand_path('../../assets/esvg/megatron', File.dirname(__FILE__))
       )
 

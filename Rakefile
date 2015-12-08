@@ -164,7 +164,7 @@ end
 
 def build_svg(optimize=false)
   if @svg.nil? 
-    @svg = Esvg::SVG.new(config_file: 'esvg.yml', cli: true, optimize: true)
+    @svg = Esvg::SVG.new(config_file: 'config/esvg.yml', cli: true, optimize: true)
   else
     @svg.read_files
   end
