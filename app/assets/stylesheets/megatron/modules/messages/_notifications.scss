@@ -38,17 +38,17 @@ $status-text-shadow: rgba(#000, .2) 0 1px 1px;
     display: table;
     table-layout: fixed;
     animation: slide-down .3s;
-    @extend .bubble_icon;
-    &:before {
-      @include smooth-text;
-      background: darken($purple, 10);
-      font-family: 'roboticons';
-      display: table-cell;
-      width: 65px;
-      font-size: 30px;
-      vertical-align: middle;
-      text-align: center;
-    }
+    /*@extend .bubble_icon;*/
+    /*&:before {*/
+      /*@include smooth-text;*/
+      /*background: darken($purple, 10);*/
+      /*font-family: 'roboticons';*/
+      /*display: table-cell;*/
+      /*width: 65px;*/
+      /*font-size: 30px;*/
+      /*vertical-align: middle;*/
+      /*text-align: center;*/
+    /*}*/
   }
 
   &-message, &-close {
@@ -78,24 +78,24 @@ $status-text-shadow: rgba(#000, .2) 0 1px 1px;
     transition: opacity .1s ease-out;
     animation: half-spin .5s ease-out;
 
-    [class*=_icon]{
-      display: block;
-      transform: scale(.80, .80);
-      transition: all .3s cubic-bezier(0.190, 1.000, 0.220, 1.000);
-      cursor: pointer;
-      &:before {
-        position: relative;
-        top: 3px;
-        cursor: pointer;
-      }
-    }
+    /*[class*=_icon]{*/
+      /*display: block;*/
+      /*transform: scale(.80, .80);*/
+      /*transition: all .3s cubic-bezier(0.190, 1.000, 0.220, 1.000);*/
+      /*cursor: pointer;*/
+      /*&:before {*/
+        /*position: relative;*/
+        /*top: 3px;*/
+        /*cursor: pointer;*/
+      /*}*/
+    /*}*/
 
     &:focus, &:hover {
       opacity: 1;
       outline: none;
-      [class*=_icon]{
-        transform: scale(1, 1);
-      }
+      /*[class*=_icon]{*/
+        /*transform: scale(1, 1);*/
+      /*}*/
     }
   }
 

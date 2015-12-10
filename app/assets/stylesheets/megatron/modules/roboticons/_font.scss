@@ -7,8 +7,6 @@ $icon-host: "https://app.compose.io/assets/megatron" !default;
 
 @font-face {
   font-family: 'roboticons';
-  src:url('#{$icon-host}/fonts/roboticons.woff?hxraic') format('woff'),
-  url('#{$icon-host}/fonts/roboticons.ttf?hxraic') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
