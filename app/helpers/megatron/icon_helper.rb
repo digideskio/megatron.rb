@@ -64,7 +64,12 @@ module Megatron
       # Automate adding color classes, blue becomes blue-text
       # This should allow us to change it later more easily if necessary
       if options[:color]
-        options[:class] << " #{options[:color].to_s.strip}-text"
+        if options[:color].to_s.start_with?('#')
+          options[:style] ||= ''
+          options[:style] << " color: #{options[:color].strip}"
+        else
+          options[:class] << " #{options[:color].to_s.strip}-text"
+        end
       end
 
       # Automate adding size classes, x-small becomes x-small-text
@@ -85,6 +90,11 @@ module Megatron
         classnames = ''
       end
       classnames.to_s << " #{default}"
+    end
+
+    def deployment_text_icon(type, options={}, &block)
+      options[:color] = type
+      text_icon("deployment-#{type}-fill", options, &block)
     end
   end
 end

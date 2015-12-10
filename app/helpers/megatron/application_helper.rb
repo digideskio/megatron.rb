@@ -16,7 +16,12 @@ module Megatron
     end
 
     def megatron_assets_tags
-      version = Megatron::VERSION
+      if ENV['MEGATRONDEV']
+        version = ''
+      else
+        version = "-#{Megatron::VERSION}"
+      end
+
       ext_suffix = Rails.env.production? ? '.gz' : ''
 
       pin_tab_icon(
@@ -26,10 +31,10 @@ module Megatron
         megatron_asset_path('favicon.ico'), sizes: "32x32"
       ) +
       stylesheet_link_tag(
-        megatron_asset_path("megatron-#{version}.css#{ext_suffix}")
+        megatron_asset_path("megatron#{version}.css#{ext_suffix}")
       ) +
       javascript_include_tag(
-        megatron_asset_path("megatron-#{version}.js#{ext_suffix}")
+        megatron_asset_path("megatron#{version}.js#{ext_suffix}")
       )
     end
 

@@ -49,6 +49,14 @@ $purple:       hsl(265, 67%, 60%);
 $lightpurple:  #967ADC;
 $softpurple: hsla(265, 70%, 90%, 1);
 
+$rethinkdb-color: #236D82;
+$redis-color: #C31F2B;
+$mongodb-color: #57A53C;
+$postgresql-color: #00648B;
+$elasticsearch-color: #2AA69A;
+$influxdb-color: #E68E00;
+$etcd-color: #2482BC;
+$rabbitmq-color: #FE6502;
 
 $base-bg: $space;
 
@@ -120,7 +128,16 @@ $full-palette: (
 
 'purple':       $purple,
 'lightpurple':  $lightpurple,
-'softpurple':   $softpurple
+'softpurple':   $softpurple,
+
+'rethinkdb': $rethinkdb-color,
+'redis': $redis-color,
+'mongodb': $mongodb-color,
+'postgresql': $postgresql-color,
+'elasticsearch': $elasticsearch-color,
+'influxdb': $influxdb-color,
+'etcd': $etcd-color,
+'rabbitmq': $rabbitmq-color
 );
 
 
