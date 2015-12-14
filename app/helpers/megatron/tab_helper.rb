@@ -1,11 +1,15 @@
 module Megatron
   module TabHelper
     class Tabs < BlockHelpers::Base
-      def tab(text, href, options = {})
+      def tab(text, href, options = {}, &block)
         options[:class] = add_class(options[:class], "tab")
 
-        link_up href, options do
-          text
+        if block
+          link_up href, options, &block
+        else
+          link_up href, options do
+            text
+          end
         end
       end
 

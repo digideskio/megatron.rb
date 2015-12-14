@@ -1,13 +1,21 @@
 module Megatron
   module BreadcrumbHelper
     class Breadcrumbs < BlockHelpers::Base
-      def crumb(text, href = nil, options={})
+      def crumb(text = nil, href = nil, options={}, &block)
         options[:class] = add_class(options[:class], 'breadcrumb')
 
-        if href.nil?
-          content_tag(:span, options) { text.to_s }
+        if block
+          if href.nil?
+            content_tag :span, options, &block
+          else
+            link_to href, options, &block
+          end
         else
-          link_to(href, options){ text.to_s }
+          if href.nil?
+            content_tag(:span, options) { text.to_s }
+          else
+            link_to(href, options) { text.to_s }
+          end
         end
       end
 
