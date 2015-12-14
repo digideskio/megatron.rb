@@ -6,7 +6,7 @@ module Megatron
         path: File.expand_path('../../assets/esvg/megatron', File.dirname(__FILE__))
       )
 
-      if !Rails.env.production?
+      if Rails.env.development?
         @icons.read_files
       end
 
