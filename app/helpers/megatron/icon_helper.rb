@@ -15,7 +15,12 @@ module Megatron
 
     def icon(name, options={}, &block)
       name = dasherize(name)
-      i = iconset.svg_icon(name, options).html_safe
+      begin
+        i = iconset.svg_icon(name, options).html_safe
+      rescue Exception => e
+        raise e if !Rails.env.production?
+        i = ''
+      end
 
       if options[:wrapper]
         i = content_tag(:span, class: options[:wrapper].strip) do
