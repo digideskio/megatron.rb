@@ -1,7 +1,10 @@
 module Megatron
   module ApplicationHelper
     def megatron_asset_path(asset)
-      alt_host = ENV['MEGATRON_ASSET_HOST'] 
+      if ENV['MEGATRONDEV']
+        alt_host = "http://localhost:5000"
+      end
+      alt_host ||= ENV['MEGATRON_ASSET_HOST'] 
       return "#{alt_host}/assets/megatron/#{asset}" if alt_host
       return "https://d11f55tj5eo9e5.cloudfront.net/assets/megatron/#{asset}" if Rails.env.production?
       return "/assets/megatron/#{asset}"
