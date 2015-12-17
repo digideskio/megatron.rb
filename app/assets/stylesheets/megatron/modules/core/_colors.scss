@@ -57,6 +57,7 @@ $elasticsearch-color: #2AA69A;
 $influxdb-color: #E68E00;
 $etcd-color: #2482BC;
 $rabbitmq-color: #FE6502;
+$scylladb-color: #392C54;
 
 $base-bg: $space;
 
@@ -137,7 +138,8 @@ $full-palette: (
 'elasticsearch': $elasticsearch-color,
 'influxdb': $influxdb-color,
 'etcd': $etcd-color,
-'rabbitmq': $rabbitmq-color
+'rabbitmq': $rabbitmq-color,
+'scylladb-color': $scylladb-color
 );
 
 
