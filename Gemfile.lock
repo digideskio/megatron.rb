@@ -64,7 +64,7 @@ GEM
       thor (>= 0.14.6)
     diff-lcs (1.2.5)
     erubis (2.7.0)
-    esvg (2.8.1)
+    esvg (2.8.3)
     execjs (2.5.2)
     ffi (1.9.10)
     foreman (0.78.0)

@@ -1,24 +1,16 @@
 module Megatron
   module IconHelper
-
-    @@iconset = Esvg::SVG.new(
+    ICON_OPTIONS = {
       config_file: File.expand_path('../../../config/esvg.yml', File.dirname(__FILE__)),
       path: File.expand_path('../../assets/esvg/megatron', File.dirname(__FILE__))
-    )
+    }
 
     def iconset
-      @@iconset.read_files if Rails.env.development?
-      @@iconset
+      svg_icons(ICON_OPTIONS)
     end
 
     def icon(name, options={}, &block)
-      name = dasherize(name)
-      begin
-        i = iconset.svg_icon(name, options).html_safe
-      rescue Exception => e
-        raise e if !Rails.env.production?
-        i = ''
-      end
+      i = iconset.svg_icon(name, options).html_safe
 
       if options[:wrapper]
         i = content_tag(:span, class: options[:wrapper].strip) do
