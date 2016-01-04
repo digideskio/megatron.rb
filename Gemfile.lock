@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    megatron (0.1.49)
+    megatron (0.1.50)
       block_helpers (~> 0.3.3)
       esvg (~> 2.8)
       gaffe (~> 1)
@@ -210,4 +210,4 @@ DEPENDENCIES
   tzinfo-data
 
 BUNDLED WITH
-   1.10.6
+   1.11.2
