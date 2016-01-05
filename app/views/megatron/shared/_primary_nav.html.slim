@@ -4,7 +4,7 @@
     here_if: { path: /#{current_account.slug}\/deployments/ }
 
   = nav.item 'Account', "/account",
-    icon: 'account_circle',
+    icon: 'account-circle',
     class: "#{'here' if @primary_nav_here  == 'account' }"
   
   = nav.item 'Alerts', "/#{current_account.slug}/alerts",
@@ -12,7 +12,7 @@
     class: "#{'here' if @primary_nav_here  == 'alerts' }"
   
   = nav.item 'Support', "/#{current_account.slug}/support/tickets",
-    icon: 'question_line',
+    icon: 'question-line',
     class: "#{'here' if @primary_nav_here == 'support' }"
   
   = nav.sign_out
