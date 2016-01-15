@@ -105,9 +105,9 @@ input::-moz-focus-inner {
 
 .slider-container {
   position: relative;
-  max-width: $x-small;
+  max-width: 300px;
   align-items: center;
-  @include at-least($small){
+  @include at-least($x-small){
     display: flex;
     flex-flow: row nowrap;
   }
@@ -175,7 +175,6 @@ input::-moz-focus-inner {
 }
 
 .range-label {
-  white-space: nowrap;
   background: $range-mark;
   border-radius: 3px;
   box-shadow: $range-track-line 0 0 0 1px;
@@ -183,7 +182,9 @@ input::-moz-focus-inner {
   position: relative;
   text-align: center;
 
-  @include at-least($small){
+  @include at-least($x-small){
+    white-space: nowrap;
+    text-align: left;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -216,7 +217,7 @@ input::-moz-focus-inner {
   &:before { 
     content: " — "
   }
-  @include at-least($small) {
+  @include at-least($x-small) {
     display: block;
     &:before { content: ""; }
   }

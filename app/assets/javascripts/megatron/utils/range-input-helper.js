@@ -5,12 +5,17 @@ require('compose-dataset-shim')
 
 var RangeInputHelper = {
   listen: function(){
-    bean.on(document, "input", "[type=range]", RangeInputHelper.update)
+    bean.on(document, "input", "[type=range]", RangeInputHelper.change)
     bean.on(document, "click change input", "[type=range]", RangeInputHelper.focus)
   },
 
-  update: function(event) {
-    RangeInputHelper.setLabels(event.currentTarget)
+  change: function(event) {
+    RangeInputHelper.refresh(event.currentTarget)
+  },
+
+  refresh: function (slider) {
+    RangeInputHelper.setLabels(slider)
+    RangeInputHelper.setInput(slider)
   },
   
   focus: function(event){
@@ -27,7 +32,7 @@ var RangeInputHelper = {
     RangeInputHelper.setLabels(slider)
     slider.insertAdjacentHTML('beforebegin', RangeInputHelper.template(slider))
     slider.remove()
-    RangeInputHelper.setLabels(slider)
+    RangeInputHelper.refresh(slider)
   },
   
   template: function(slider){
@@ -35,6 +40,7 @@ var RangeInputHelper = {
       + RangeInputHelper.segmentTemplate(slider)
       + RangeInputHelper.labelTemplate(slider)
       + "</div>"
+      + RangeInputHelper.inputTemplate(slider)
   },
   
   segmentTemplate: function(slider){
@@ -61,16 +67,21 @@ var RangeInputHelper = {
   labelTemplate: function(slider){
     var html = ""
     
-    if(/auto-label/.test(slider.className)){
-      
-      for(var key in RangeInputHelper.getLabels(slider)){
-        if (!document.querySelector('[data-label='+key+']')){
-          html += "<span class='range-label-"+key+"' data-label='"+key+"'></span>"
-        }
+    for(var key in RangeInputHelper.getLabels(slider)){
+      if (!document.querySelector('[data-label='+key+']')){
+        html += "<span class='range-label-"+key+"' data-label='"+key+"'></span> "
       }
-      if (html != "") html = "<div class='range-label'>" + html + "</div>"
     }
+    if (html != "") html = "<div class='range-label'>" + html + "</div>"
 
+    return html
+  },
+
+  inputTemplate: function(slider) {
+    var html = ""
+    if (slider.dataset['input']) {
+      if (!document.querySelector('[name="'+slider.dataset['input']+'"]')) html += "<input type='hidden' name='"+slider.dataset['input']+"'>"
+    }
     return html
   },
   
@@ -99,6 +110,14 @@ var RangeInputHelper = {
       Array.prototype.forEach.call(els, function(target) {
         target.innerHTML = labels[key].split(';')[Number(slider.value) - 1]
       })
+    }
+  },
+
+  setInput: function(slider) {
+    if(slider.dataset['input'] && slider.dataset['values']) {
+      var value = slider.dataset['values'].split(',')[Number(slider.value) - 1]
+      var input = document.querySelector("input[name="+slider.dataset['input']+"]")
+      if(input) input.value = value
     }
   }
 }
