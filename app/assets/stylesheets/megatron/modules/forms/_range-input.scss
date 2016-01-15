@@ -1,0 +1,223 @@
+$range-track: #ddd;
+$range-track-line: #aaa;
+$range-mark: #fff;
+
+@mixin reset-range {
+  -webkit-appearance: none;
+  width: 100%;
+  margin: 0;
+  cursor: pointer;
+  &:focus { outline: none; }
+  &::-webkit-slider-thumb { -webkit-appearance: none; }
+  &::-ms-track {
+    width: 100%;
+    cursor: pointer;
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+  }
+  &::-moz-focus-outer { 
+    border: 0;
+  }
+}
+
+@mixin range-thumb {
+  &::-moz-range-thumb     { @content; }
+  &::-webkit-slider-thumb { @content; }
+  &::-ms-thumb            { @content; }
+}
+
+@mixin range-track {
+  @content;
+  &::-moz-range-track {
+    @content;
+  }
+  &::-ms-track {
+    @content;
+  }
+}
+
+input[type=range] {
+  @include reset-range;
+  position: relative;
+  z-index: 1;
+  margin: 15px 0;
+  
+  @include range-thumb {
+    box-shadow: rgba(#000, .4) 0 0 0 1px, rgba(#000, .4) 0 1px 1px inset;
+    border: 6px solid #fff;
+    background: $range-track-line;
+    box-sizing: border-box;
+    height: 19px;
+    width: 19px;
+    border-radius: 100%;
+    position: relative;
+    transition: all .15s ease-in;
+    &:after {
+      content: "";
+      position: absolute;
+      left: -15px; right: -15px; top: -15px; bottom: -15px;
+      
+    }
+    &:active {
+      background: #409bd9;
+      box-shadow: 0 0 2px 2px hsl(203, 47%, 65%), rgba(#000, .4) 0 1px 1px inset;
+    }
+  }
+  
+  &:focus {
+    @include range-thumb {
+      background: #409bd9;
+      box-shadow: 0 0 2px 2px hsl(203, 47%, 65%), rgba(#000, .4) 0 1px 1px inset;
+    }
+  }
+  
+  @include range-track {
+    height: 16px;
+    background: transparent;
+
+    &:after {
+      position: absolute;
+      content: "";
+      left: 9px; right: 9px; top: 6px;
+      height: 5px;
+      background: $range-track;
+      z-index: -1;
+      border-radius: 4px;
+      box-shadow: $range-track-line 0 0 0 1px;
+    }
+  }
+}
+
+input[type=range].range-input-slider {
+  margin: 0;
+
+  @include range-track {
+    &:after {
+      display: none;
+    }
+  }
+}
+
+input::-moz-focus-inner { 
+  border: 0; 
+}
+
+.slider-container {
+  position: relative;
+  max-width: $x-small;
+  align-items: center;
+  @include at-least($small){
+    display: flex;
+    flex-flow: row nowrap;
+  }
+}
+
+.range-input-container {
+  position: relative;
+  flex: 1 0 auto;
+  margin: .6em 0;
+}
+
+.range-track {
+  display: flex;
+  align-items: center;
+  flex-flow: row nowrap;
+  margin: 0 9px 0 10px;
+  z-index: 0;
+  position: absolute;
+  top: 6px;
+  left: 0; right: 0;
+  border-radius: 5px;
+  
+  &:after {
+    position: absolute;
+    content: "";
+    left: 0; right: 0; top: 0; bottom: 0;
+    background: $range-track;
+    z-index: 1;
+    border-radius: 4px;
+    box-shadow: $range-track-line 0 0 0 1px;
+  }
+}
+
+.range-segment {
+  height: 5px;
+  flex: 1 0 auto;
+  position: relative;
+  &:last-child {
+    flex: 0 0 auto;
+  }
+  &.mark {
+    position: relative;
+
+    &:before, &:after {
+      position: absolute;
+      content: "";
+      width: 13px;
+      height: 13px;
+      top: -4px;
+      left: -7px;
+      box-sizing: border-box;
+      border-radius: 100%;
+    }
+    &:before {
+      background: $range-mark;
+      border: $range-track 3px solid;
+      box-shadow: $range-track-line 0 0 0 1px inset;
+      z-index: 2;
+    }
+    &:after {
+      box-shadow: $range-track-line 0 0 0 1px;
+      z-index: -1;
+    }
+  }
+}
+
+.range-label {
+  white-space: nowrap;
+  background: $range-mark;
+  border-radius: 3px;
+  box-shadow: $range-track-line 0 0 0 1px;
+  padding: 6px 10px;
+  position: relative;
+  text-align: center;
+
+  @include at-least($small){
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: 8px;
+    &:after, &:before {
+      content: "";
+    }
+  }
+  
+  &:after, &:before {
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    left: -7px;
+    border-top: 7px solid transparent;
+    border-right: 7px solid $range-track-line;
+    border-bottom: 7px solid transparent;
+  }
+  &:after {
+    border-right-color: $range-mark;
+    left: -6px;
+  }
+}
+
+[class*=range-label-small] {
+  font-size: .8em;
+  color: #777;
+  &:before { 
+    content: " — "
+  }
+  @include at-least($small) {
+    display: block;
+    &:before { content: ""; }
+  }
+}
