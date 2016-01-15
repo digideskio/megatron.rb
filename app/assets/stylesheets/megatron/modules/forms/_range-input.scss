@@ -79,7 +79,7 @@ input[type=range] {
     &:after {
       position: absolute;
       content: "";
-      left: 9px; right: 9px; top: 6px;
+      left: 4px; right: 4px; top: 6px;
       height: 5px;
       background: $range-track;
       z-index: -1;
@@ -178,7 +178,8 @@ input::-moz-focus-inner {
   background: $range-mark;
   border-radius: 3px;
   box-shadow: $range-track-line 0 0 0 1px;
-  padding: 6px 10px;
+  font-size: 14px;
+  padding: 4px 8px;
   position: relative;
   text-align: center;
 
@@ -188,6 +189,7 @@ input::-moz-focus-inner {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
+    transform-style: preserve-3d;
     margin-left: 8px;
     &:after, &:before {
       content: "";
@@ -200,6 +202,7 @@ input::-moz-focus-inner {
     height: 0;
     top: 50%;
     transform: translateY(-50%);
+    transform-style: preserve-3d;
     left: -7px;
     border-top: 7px solid transparent;
     border-right: 7px solid $range-track-line;
@@ -209,16 +212,21 @@ input::-moz-focus-inner {
     border-right-color: $range-mark;
     left: -6px;
   }
+
+  > * + * {
+    &:before { content: " — " }
+
+    @include at-least($x-small) {
+      display: block;
+      &:before { content: ""; }
+    }
+  }
+}
+
+[class*=range-label-big] {
+  font-size: 1.15em;
 }
 
 [class*=range-label-small] {
   font-size: .8em;
-  color: #777;
-  &:before { 
-    content: " — "
-  }
-  @include at-least($x-small) {
-    display: block;
-    &:before { content: ""; }
-  }
 }

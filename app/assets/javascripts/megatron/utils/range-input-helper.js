@@ -17,77 +17,91 @@ var RangeInputHelper = {
     RangeInputHelper.setLabels(slider)
     RangeInputHelper.setInput(slider)
   },
-  
+
   focus: function(event){
     event.currentTarget.focus()
   },
-                              
+
   setup: function(){
     var ranges = document.querySelectorAll('[type=range]')
     Array.prototype.forEach.call(ranges, RangeInputHelper.initSlider)
     RangeInputHelper.listen()
   },
-  
+
   initSlider: function(slider){
     RangeInputHelper.setLabels(slider)
     slider.insertAdjacentHTML('beforebegin', RangeInputHelper.template(slider))
     slider.remove()
     RangeInputHelper.refresh(slider)
   },
-  
+
   template: function(slider){
+    // If there are no custom labels, automatically add a default label.
+    if (RangeInputHelper.objectSize(RangeInputHelper.getLabels(slider)) == 0) {
+      slider.dataset['label' + String(parseInt(Math.random() * 10000))] = true
+    }
+
     return "<div class='slider-container'>"
       + RangeInputHelper.segmentTemplate(slider)
       + RangeInputHelper.labelTemplate(slider)
       + "</div>"
       + RangeInputHelper.inputTemplate(slider)
   },
-  
+
   segmentTemplate: function(slider){
     var html = ""
 
-    if (slider.dataset['mark']) {
+    if (slider.dataset.mark) {
       var mark = []
-      slider.className += ' range-input-slider'      
-      mark = slider.dataset['mark'].split(',').map(Number)
-      
+      slider.className += ' range-input-slider'
+      mark = slider.dataset.mark.split(',').map(Number)
+
       for(var i = 1; i <= Number(slider.getAttribute('max')); i++) {
         html += "<div class='range-segment"+((mark.indexOf(i) != -1) ? ' mark' : '')+"'></div>"
       }
-    
+
       html = "<div class='range-track'>" + html + "</div>"
       html = "<div class='range-input-container'>" + slider.outerHTML + html + "</div>"
     } else {
       html = slider.outerHTML
     }
-    
+
     return html
   },
-  
+
   labelTemplate: function(slider){
     var html = ""
-    
+
     for(var key in RangeInputHelper.getLabels(slider)){
       if (!document.querySelector('[data-label='+key+']')){
-        html += "<span class='range-label-"+key+"' data-label='"+key+"'></span> "
+        var altKey = RangeInputHelper.camelCase(key)
+        var before = slider.dataset.before || slider.dataset[altKey+'Before']
+        var after  = slider.dataset.after || slider.dataset[altKey+'After']
+
+        html += "<span class='range-label-"+key+"'>"
+        if (before) { html += "<span class='label-before'>"+before+"</span>" }
+        html += "<span data-label='"+key+"'></span>"
+        if (after)  { html += "<span class='label-after'>"+after+"</span>" }
+        html += "</span> "
       }
     }
-    if (html != "") html = "<div class='range-label'>" + html + "</div>"
+
+    html = "<div class='range-label'>" + html + "</div>"
 
     return html
   },
 
   inputTemplate: function(slider) {
     var html = ""
-    if (slider.dataset['input']) {
-      if (!document.querySelector('[name="'+slider.dataset['input']+'"]')) html += "<input type='hidden' name='"+slider.dataset['input']+"'>"
+    if (slider.dataset.input) {
+      if (!document.querySelector('[name="'+slider.dataset.input+'"]')) html += "<input type='hidden' name='"+slider.dataset.input+"'>"
     }
     return html
   },
-  
+
   getLabels: function(slider) {
     var labels = {}
-  
+
     // Find all data-label attributes
     for (var i = 0; i < slider.attributes.length; i++){
       var name = slider.attributes[i].nodeName
@@ -104,21 +118,37 @@ var RangeInputHelper = {
 
   setLabels: function(slider) {
     var labels = RangeInputHelper.getLabels(slider)
+
     for (var key in labels) {
       var selector = '[data-label='+key+']'
       var els = document.querySelectorAll(selector)
       Array.prototype.forEach.call(els, function(target) {
-        target.innerHTML = labels[key].split(';')[Number(slider.value) - 1]
+        if (labels[key] == 'true') {
+          target.innerHTML = slider.value
+        } else {
+          target.innerHTML = labels[key].split(';')[Number(slider.value) - 1]
+        }
       })
     }
   },
 
   setInput: function(slider) {
-    if(slider.dataset['input'] && slider.dataset['values']) {
-      var value = slider.dataset['values'].split(',')[Number(slider.value) - 1]
-      var input = document.querySelector("input[name="+slider.dataset['input']+"]")
+    if(slider.dataset.input && slider.dataset.values) {
+      var value = slider.dataset.values.split(',')[Number(slider.value) - 1]
+      var input = document.querySelector("input[name="+slider.dataset.input+"]")
       if(input) input.value = value
     }
+  },
+
+  objectSize: function(object) {
+    var length = 0; for(var i in object) { length++ }
+    return length
+  },
+
+  camelCase: function(input) {
+    return input.toLowerCase().replace(/-(.)/g, function(match, group) {
+      return group.toUpperCase();
+    });
   }
 }
 
