@@ -58,7 +58,7 @@ var RangeInputHelper = {
       slider.className += ' range-input-slider'
       mark = slider.dataset.mark.split(',').map(Number)
   
-      for(var i = 1; i <= segments; i++) {
+      for(var i = 0; i < segments; i++) {
         html += "<div class='range-segment"+((mark.indexOf(i) != -1) ? ' mark' : '')+"'></div>"
       }
 

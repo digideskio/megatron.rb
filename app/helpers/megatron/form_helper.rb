@@ -26,13 +26,6 @@ module Megatron
       end
     end
 
-    {
-      label: { disk: [1,2,3], ram: ['a','b','c'] },
-      values: [(1..20)]
-    }
-
-
-
     def range_input_tag(name, options={})
       options = options.stringify_keys
       data = options['data'] || {}
@@ -61,6 +54,10 @@ module Megatron
             data["#{key}-before-label"] = value
           end
         end
+      end
+
+      if mark = options['mark']
+        data['mark'] = mark.join(',')
       end
 
       if after = options['after']

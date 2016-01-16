@@ -221,12 +221,13 @@ input::-moz-focus-inner {
       &:before { content: ""; }
     }
   }
+
+  [class*=big] {
+    font-size: 1.15em;
+  }
+
+  [class*=small] {
+    font-size: .8em;
+  }
 }
 
-[class*=range-label-big] {
-  font-size: 1.15em;
-}
-
-[class*=range-label-small] {
-  font-size: .8em;
-}
