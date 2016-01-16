@@ -134,5 +134,9 @@ module Megatron
         check_params[key] == value_to_check
       end
     end
+
+    def dasherize(input)
+      input.gsub(/[\W,_]/, '-').gsub(/-{2,}/, '-')
+    end
   end
 end
