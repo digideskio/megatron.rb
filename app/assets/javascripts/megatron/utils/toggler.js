@@ -111,11 +111,16 @@ var Toggler = {
   show: function togglerShow(el) {
     classie.remove(el, 'hidden')
     classie.add(el, 'visible')
-    var focusEl = el.querySelector('[data-focus]')
 
-    if (focusEl) {
-      focusEl.focus()
-    }
+    // Focus on key element if an element expects focus
+    var focusEl = el.querySelector('[data-focus]')
+    if (focusEl) { focusEl.focus() }
+
+    // Trigger input event on ranges that have been hidden
+    var ranges = el.querySelectorAll('[type=range]')
+    Array.prototype.forEach.call(ranges, function(range) { 
+      bean.fire(range, 'input')
+    })
   },
 
   hide: function togglerHide(el) {
