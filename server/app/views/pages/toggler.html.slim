@@ -18,5 +18,5 @@
     input type='checkbox' id='remove-checkbox' data-remove-class='primary-btn; .test-button'
     label for='remove-checkbox' Remove
 
-  .test-range.hidden
-    = range_input_tag 'range1', after: '%'
+  .test-range
+    = range_input_tag 'range1', label: ['1GB Disk','2GB Disk','6GB Disk','12GB Disk','20GB Disk'] 

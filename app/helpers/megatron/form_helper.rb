@@ -30,20 +30,22 @@ module Megatron
       options = options.stringify_keys
       data = options['data'] || {}
       data["input"] ||= name
+      
+      # Set values (and max based on values size)
+      if values = options['values']
+        data['values'] = values.join(',')
+        options['max'] ||= values.size - 1
+      end
 
       # Set label options
       if labels = options['labels']
         labels.each do |label, value|
           data['label-'+dasherize(label.to_s.downcase)] = value.join(';')
+          options['max'] ||= value.size - 1
         end
       elsif label = options['label']
         data['label'] = label.join(';')
-      end
-
-      # Set values (and max based on values size)
-      if values = options['values']
-        data['values'] = values.join(',')
-        options['max'] ||= values.size - 1
+        options['max'] ||= label.size - 1
       end
 
       if before = options['before']

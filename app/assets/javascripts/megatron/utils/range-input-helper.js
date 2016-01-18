@@ -126,7 +126,9 @@ var RangeInputHelper = {
       var els = document.querySelectorAll(selector)
       Array.prototype.forEach.call(els, function(target) {
         if (labels[key] == 'true') {
-          if(slider.dataset.values){
+          if(slider.dataset.label) {
+            target.innerHTML = slider.dataset.label.split(';')[RangeInputHelper.rangeValueIndex(slider)]
+          } else if(slider.dataset.values){
             target.innerHTML = slider.dataset.values.split(',')[RangeInputHelper.rangeValueIndex(slider)]
           } else {
             target.innerHTML = slider.value
