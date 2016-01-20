@@ -41,25 +41,29 @@ var RangeInputHelper = {
       slider.dataset['labelDefault' + String(parseInt(Math.random() * 10000))] = true
     }
 
-    return "<div class='slider-container'>"
-      + RangeInputHelper.segmentTemplate(slider)
-      + RangeInputHelper.labelTemplate(slider)
-      + "</div>"
+    return RangeInputHelper.rangeTemplate(slider)
       + RangeInputHelper.inputTemplate(slider)
   },
   
-  segmentTemplate: function(slider){
+  rangeTemplate: function(slider){
     var html = ""
+    var lineLabels = RangeInputHelper.lineLabels(slider)
 
-    if (slider.dataset.mark) {
-      var mark = []
+    if (slider.dataset.mark || slider.dataset.lineLabels) {
       var segments = RangeInputHelper.segments(slider)
 
       slider.className += ' range-input-slider'
-      mark = slider.dataset.mark.split(',').map(Number)
-  
-      for(var i = 0; i < segments; i++) {
-        html += "<div class='range-segment"+((mark.indexOf(i) != -1) ? ' mark' : '')+"'></div>"
+      var mark = slider.dataset.mark.split(',').map(Number)
+      
+      for(var i = 1; i <= segments; i++) {
+        var markClass = ((mark.indexOf(i) != -1) ? ' mark' : '')
+        var lineLabel = lineLabels[String(i)]
+        
+        html += "<div class='range-segment"+markClass+"'>"
+        if (lineLabel) {
+          html += "<span class='range-line-label'>"+lineLabel+"</span>"
+        }
+        html += "</div>"
       }
 
       html = "<div class='range-track'>" + html + "</div>"
@@ -68,10 +72,24 @@ var RangeInputHelper = {
       html = slider.outerHTML
     }
     
-    return html
+    return "<div class='slider-container"+(RangeInputHelper.objectSize(lineLabels) > 0 ? " line-labels" : "")+"'>"
+    + html
+    + RangeInputHelper.labelTemplate(slider)
+    + "</div>"
+  },
+
+  lineLabels: function(slider){
+    var lineLabels = {}
+    if(slider.dataset.lineLabels) {
+      slider.dataset.lineLabels.split(';').map(function(labels){
+        var l = labels.split(':')
+        lineLabels[l[0]] = l[1]
+      })
+    }
+    return lineLabels
   },
   
-    labelTemplate: function(slider){
+  labelTemplate: function(slider){
     var html = ""
 
     for(var key in RangeInputHelper.getLabels(slider)){
@@ -94,13 +112,12 @@ var RangeInputHelper = {
   },
 
   inputTemplate: function(slider) {
-    var html = ""
     if (slider.dataset.input) {
-      if (!document.querySelector('[name="'+slider.dataset.input+'"]')) html += "<input type='hidden' name='"+slider.dataset.input+"'>"
-    }
-    return html
+      var classname = slider.dataset.input.replace(/\W/g,'-')
+      return "<input class='"+classname+"' type='hidden' name='"+slider.dataset.input+"'>"
+    } else return ""
   },
-  
+
   getLabels: function(slider) {
     var labels = {}
   
@@ -125,17 +142,8 @@ var RangeInputHelper = {
       var selector = '[data-label='+key+']'
       var els = document.querySelectorAll(selector)
       Array.prototype.forEach.call(els, function(target) {
-        if (labels[key] == 'true') {
-          if(slider.dataset.label) {
-            target.innerHTML = slider.dataset.label.split(';')[RangeInputHelper.rangeValueIndex(slider)]
-          } else if(slider.dataset.values){
-            target.innerHTML = slider.dataset.values.split(',')[RangeInputHelper.rangeValueIndex(slider)]
-          } else {
-            target.innerHTML = slider.value
-          }
-        } else {
-          target.innerHTML = labels[key].split(';')[RangeInputHelper.rangeValueIndex(slider)]
-        }
+        var index = RangeInputHelper.rangeValueIndex(slider)
+        target.innerHTML = RangeInputHelper.getLabelsAtIndex(slider, index)[key]
       })
     }
   },
@@ -143,11 +151,33 @@ var RangeInputHelper = {
   setInput: function(slider) {
     if(slider.dataset.input && slider.dataset.values) {
       var value = slider.dataset.values.split(',')[RangeInputHelper.rangeValueIndex(slider)]
-      var input = document.querySelector("input[name="+slider.dataset.input+"]")
-      if(input) input.value = value
+      var selector = "."+slider.dataset.input.replace(/\W/g,'-')
+      var inputs = document.querySelectorAll(selector)
+
+      Array.prototype.forEach.call(inputs, function(input){
+        input.value = value
+      })
     }
   },
-  
+
+  getLabelsAtIndex: function(slider, index){
+    var labels = RangeInputHelper.getLabels(slider)
+    for (var key in labels) {
+      if (labels[key] == 'true') {
+        if(slider.dataset.label) {
+          labels[key] = slider.dataset.label.split(';')[index]
+        } else if(slider.dataset.values){
+          labels[key] = slider.dataset.values.split(',')[index]
+        } else {
+          labels[key] = slider.value
+        }
+      } else {
+        labels[key] = labels[key].split(';')[index]
+      }
+    }
+    return labels
+  }, 
+
   segments: function(slider){
     return Number(slider.getAttribute('max')) - Number(slider.getAttribute('min')) + 1
   },

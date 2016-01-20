@@ -87,14 +87,14 @@ input[type=range] {
       box-shadow: $range-track-line 0 0 0 1px;
     }
   }
-}
 
-input[type=range].range-input-slider {
-  margin: 0;
+  &.range-input-slider {
+    margin: 0;
 
-  @include range-track {
-    &:after {
-      display: none;
+    @include range-track {
+      &:after {
+        display: none;
+      }
     }
   }
 }
@@ -106,10 +106,15 @@ input::-moz-focus-inner {
 .slider-container {
   position: relative;
   max-width: 300px;
+  padding: 10px 0;
   align-items: center;
   @include at-least($x-small){
     display: flex;
     flex-flow: row nowrap;
+  }
+  &.line-labels {
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
   }
 }
 
@@ -123,6 +128,7 @@ input::-moz-focus-inner {
   display: flex;
   align-items: center;
   flex-flow: row nowrap;
+  justify-content: space-between;
   margin: 0 9px 0 10px;
   z-index: 0;
   position: absolute;
@@ -143,7 +149,8 @@ input::-moz-focus-inner {
 
 .range-segment {
   height: 5px;
-  flex: 1 0 auto;
+  flex: 0 0 auto;
+  width: 0;
   position: relative;
   &:last-child {
     flex: 0 0 auto;
@@ -174,6 +181,47 @@ input::-moz-focus-inner {
   }
 }
 
+.range-line-label {
+  position: absolute;
+  white-space: nowrap;
+  font-size: 12px;
+  z-index: 2;
+  height: 1.25;
+  top: -30px;
+  right: -25px;
+  left: -24px;
+  text-align: center;
+  &:before {
+    content: "|";
+    position: absolute;
+    left: -26px;
+    right: -25px;
+    text-align: inherit;
+    bottom: -6px;
+    height: 6px;
+    color: rgba(#000, .5);
+    overflow: hidden;
+  }
+}
+
+.range-segment:first-child .range-line-label {
+  left: -10px;
+  right: auto;
+  text-align: left;
+  &:before {
+    left: 8px;
+  }
+}
+
+.range-segment:last-child .range-line-label {
+  right: -10px;
+  left: auto;
+  text-align: right;
+  &:before {
+    right: 9px;
+  }
+}
+
 .range-label {
   background: $range-mark;
   border-radius: 3px;
@@ -190,7 +238,7 @@ input::-moz-focus-inner {
     top: 50%;
     transform: translateY(-50%);
     transform-style: preserve-3d;
-    margin-left: 8px;
+    margin-left: 10px;
     &:after, &:before {
       content: "";
     }

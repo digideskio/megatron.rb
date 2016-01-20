@@ -119,7 +119,9 @@ var Toggler = {
     // Trigger input event on ranges that have been hidden
     var ranges = el.querySelectorAll('[type=range]')
     Array.prototype.forEach.call(ranges, function(range) { 
-      bean.fire(range, 'input')
+      if (el.offsetParent != null) {
+        bean.fire(range, 'input')
+      }
     })
   },
 
@@ -177,7 +179,7 @@ var Toggler = {
   },
 
   toggleCheckboxes: function togglerToggleCheckboxes() {
-    var checkboxes = 'input[type=checkbox][data-toggle]'
+    var checkboxes = '[type=checkbox][data-toggle], [type=checkbox][data-show], [type=checkbox][data-hide]'
     Array.prototype.forEach.call(document.querySelectorAll(checkboxes), Toggler.toggleCheckbox)
   },
 

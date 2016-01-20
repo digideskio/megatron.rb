@@ -19,4 +19,8 @@
     label for='remove-checkbox' Remove
 
   .test-range
-    = range_input_tag 'range1', label: ['1GB Disk','2GB Disk','6GB Disk','12GB Disk','20GB Disk'] 
+    form
+      = check_box_tag :foo
+      = label_tag :foo
+    form 
+      = range_input_tag 'vector_deployment[provision_options][units]', label: ['1GB Disk','2GB Disk','6GB Disk','12GB Disk','20GB Disk'] 

@@ -72,6 +72,14 @@ module Megatron
         end
       end
 
+      if line_labels = options['line_labels']
+        data['line_labels'] = []
+        line_labels.each do |k, v|
+          data['line_labels'] << "#{k}:#{v}"
+        end
+        data['line_labels'] = data['line_labels'].join(';')
+      end
+
       options['value'] ||= options['min'] || 0
 
       html_options = { "type" => "range", "min" => options['min'], "max" => options['max'], "value" => options['value'] }.update('data' => data)
