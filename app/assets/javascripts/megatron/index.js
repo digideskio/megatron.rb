@@ -38,7 +38,6 @@ function pageLoad(){
   utils.Toggler.listen()
   utils.AutoNavigate.listen()
   utils.TextHelpers.load()
-  utils.RangeInputHelper.setup()
   if(!window.Turbolinks) {
     pageChange()
   }
