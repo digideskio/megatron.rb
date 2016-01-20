@@ -4,7 +4,7 @@
 .medium-width { max-width: $medium; }
 .large-width { max-width: $large; }
 .x-large-width { max-width: $x-large; }
-.max-width { max-width: 100%; }
+.max-width.max-width { max-width: 100%; }
 
 .small-height { max-height: 5em; }
 .medium-height { max-height: 15em; }

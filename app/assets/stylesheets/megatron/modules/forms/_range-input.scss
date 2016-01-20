@@ -105,12 +105,12 @@ input::-moz-focus-inner {
 
 .slider-container {
   position: relative;
-  max-width: 300px;
   padding: 10px 0;
   align-items: center;
   @include at-least($x-small){
     display: flex;
     flex-flow: row nowrap;
+    max-width: 320px;
   }
   &.line-labels {
     border-top: 10px solid transparent;

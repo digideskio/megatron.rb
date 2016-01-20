@@ -45,11 +45,13 @@ input[type=checkbox]:not(.switch) {
     &:before {
       border-radius: 4px;
     }
+
     &:after {
-      left: 5px;
-      width: 8px; height: 4px;
+      left: 4px;
+      width: 10px;
+      height: 6px;
       border: 3px solid rgba($blue, 0) { top: none; right: none;};
-      top: .55em;
+      top: .5em;
       transform: rotate(-45deg);
     }
 
