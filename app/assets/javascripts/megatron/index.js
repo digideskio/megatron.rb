@@ -55,6 +55,7 @@ function pageChange(){
   utils.TimeSwitch.setup()
   utils.Timeago.setup()
   utils.Messages.load()
+  utils.RangeInputHelper.setup()
 }
 
 // Dialog document listener and auto-creator
