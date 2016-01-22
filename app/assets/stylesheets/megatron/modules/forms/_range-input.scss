@@ -107,11 +107,15 @@ input::-moz-focus-inner {
   position: relative;
   padding: 10px 0;
   align-items: center;
+
   @include at-least($x-small){
     display: flex;
     flex-flow: row nowrap;
-    max-width: 320px;
+    &.with-label {
+      max-width: 320px;
+    }
   }
+
   &.line-labels {
     border-top: 10px solid transparent;
     border-bottom: 10px solid transparent;

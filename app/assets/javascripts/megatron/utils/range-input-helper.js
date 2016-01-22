@@ -5,7 +5,7 @@ require('compose-dataset-shim')
 
 var RangeInputHelper = {
   listen: function(){
-    bean.on(document, "input", "[type=range]", RangeInputHelper.change)
+    bean.on(document, "input", "[type=range], refresh", RangeInputHelper.change)
     bean.on(document, "click change input", "[type=range]", RangeInputHelper.focus)
   },
 
@@ -36,11 +36,6 @@ var RangeInputHelper = {
   },
   
   template: function(slider){
-    // If there are no custom labels, automatically add a default label.
-    if (RangeInputHelper.objectSize(RangeInputHelper.getLabels(slider)) == 0) {
-      slider.dataset['labelDefault' + String(parseInt(Math.random() * 10000))] = true
-    }
-
     return RangeInputHelper.rangeTemplate(slider)
       + RangeInputHelper.inputTemplate(slider)
   },
@@ -48,6 +43,11 @@ var RangeInputHelper = {
   rangeTemplate: function(slider){
     var html = ""
     var lineLabels = RangeInputHelper.lineLabels(slider)
+    
+    // If there are no custom labels, automatically add a default label.
+    if (RangeInputHelper.objectSize(RangeInputHelper.getLabels(slider)) == 0) {
+      slider.dataset['labelDefault' + String(parseInt(Math.random() * 10000))] = true
+    }
 
     if (slider.dataset.mark || slider.dataset.lineLabels) {
       var segments = RangeInputHelper.segments(slider)
@@ -71,10 +71,15 @@ var RangeInputHelper = {
     } else {
       html = slider.outerHTML
     }
+
+    var labelHTML = RangeInputHelper.labelTemplate(slider)
     
-    return "<div class='slider-container"+(RangeInputHelper.objectSize(lineLabels) > 0 ? " line-labels" : "")+"'>"
+    return "<div class='slider-container"
+    + (RangeInputHelper.objectSize(lineLabels) > 0 ? " line-labels" : "")
+    + (labelHTML.length > 0 ? " with-label" : " without-label")
+    + "'>"
     + html
-    + RangeInputHelper.labelTemplate(slider)
+    + labelHTML
     + "</div>"
   },
 
@@ -106,7 +111,9 @@ var RangeInputHelper = {
       }
     }
 
-    html = "<div class='range-label'>" + html + "</div>"
+    if (html.length > 0) {
+      html = "<div class='range-label'>" + html + "</div>"
+    }
 
     return html
   },

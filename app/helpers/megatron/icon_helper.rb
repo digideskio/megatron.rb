@@ -90,7 +90,7 @@ module Megatron
     def deployment_text_icon(type, options={}, &block)
       options[:color] ||= type
       options[:fallback] ||= 'deployment'
-      text_icon("deployment-#{type}-fill", options, &block)
+      text_icon("deployment-#{type}", options, &block)
     end
   end
 end

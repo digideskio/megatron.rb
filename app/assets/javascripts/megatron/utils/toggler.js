@@ -120,7 +120,7 @@ var Toggler = {
     var ranges = el.querySelectorAll('[type=range]')
     Array.prototype.forEach.call(ranges, function(range) { 
       if (el.offsetParent != null) {
-        bean.fire(range, 'input')
+        bean.fire(range, 'refresh')
       }
     })
   },
