@@ -34,11 +34,11 @@
   p Each of the demos below is using the following data.
 
   code: ruby
-    disk = ['1GB','2GB','5GB','15GB','20GB']
-    price = ['$10/mo', '$20/mo', '$60/mo', '$120/mo', '$2,000/mo']
+    disk = ['1GB','2GB','5GB','15GB','50GB']
+    price = ['$10/mo', '$20/mo', '$50/mo', '$1,500/mo', '$5,000/mo']
 
-  - disk = ['1GB','2GB','5GB','15GB','20GB']
-  - price = ['$10/mo', '$20/mo', '$60/mo', '$120/mo', '$2,000/mo']
+  - disk = ['1GB','2GB','5GB','15GB','50GB']
+  - price = ['$10/mo', '$20/mo', '$50/mo', '$1,500/mo', '$5,000/mo']
 
   = demo_box "A simple range"
     = range_input_tag 'number'
@@ -47,11 +47,12 @@
     = range_input_tag 'percent', after: '%', mark: [1, 50, 100]
 
   = demo_box "Range with line labels"
-    = range_input_tag 'deployment1[units]', labels: disk, line_labels: {'1' => '1GB', '3' => '5GB', '5' => '20GB'}
+    = range_input_tag 'deployment1[units]', labels: disk, line_labels: {'1' => '1GB', '3' => '5GB', '5' => '50GB'}
 
   = demo_box "Range with two labels (using size hack)"
     = range_input_tag 'deployment2[units]', labels: { big_disk: disk, small_price: price }
 
-  = demo_box "Range with external labels"
-    = range_input_tag 'deployment3[units]', labels: { size: disk }, external_labels: { disk: disk, price: price }
+  = demo_box "Range with external labels and custom values"
+    = range_input_tag 'deployment3[units]', labels: { size: disk }, external_labels: { disk: disk, price: price }, values: [1, 2, 5, 15, 50]
     p With <strong data-range-label='disk'></strong> your price will be <strong data-range-label='price'></strong>.
+    p.help-text Use the web inspector and you'll see a hidden input being updated as the slider changes.
