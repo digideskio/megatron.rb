@@ -17,7 +17,7 @@ gem 'sass', '~> 3.3', '>= 3.3.4'
 gem 'rack-cors'
 gem 'puma'
 gem 'sass-rails', '5.0.3'
-gem 'redcarpet'
+gem 'kramdown'
 gem 'autoprefixer-rails'
 gem 's3', require: false
 gem 'tzinfo-data'

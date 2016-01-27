@@ -283,3 +283,8 @@ input::-moz-focus-inner {
   }
 }
 
+[data-range-label] {
+  &:after { content: attr(data-after); }
+  &:before { content: attr(data-before); }
+}
+

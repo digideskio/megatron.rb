@@ -31,7 +31,7 @@ module Megatron
         }
 
         concat code(options[:type], id: "source-#{rand}", class: 'hidden') {
-          lines = extract_code(block)
+          lines = extract_code(block, 'demo_box')
         }
         concat content_tag(:div, id: "demo-#{rand}", &block)
       end
@@ -83,13 +83,23 @@ module Megatron
       content_tag(:pre, options.merge(class: classes), &block)
     end
 
-    def extract_code(block)
+    def markdown(&block)
+      text = extract_code(block, 'markdown') 
+      #text = content_tag('div', {}, &block).gsub('<div>','')
+      Kramdown::Document.new(text).to_html.html_safe
+    end
+
+    def markdown_table(classname='doc-table', &block)
+      markdown(&block).gsub(/<table/, "<table class='#{classname}'").html_safe
+    end
+
+    def extract_code(block, marker)
       filename, start_line = block.source_location
       lines = File.readlines(filename)
 
       start_line -= 1
 
-      until lines[start_line] =~ /demo_box/
+      until lines[start_line] =~ /#{marker}/
         start_line += 1
       end
 

@@ -35,6 +35,19 @@
     &:last-child {
       border-bottom: 0;
     }
+    &[data-title] {
+      padding-top: 1.4em;
+
+      &:after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: attr(data-title);
+        font-size: .75em;
+        border: 1px solid #e5e5e5 { left: 0; top: 0; };
+        padding: 3px 4px;
+      }
+    }
   }
 
   &.padded {

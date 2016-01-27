@@ -1,14 +1,57 @@
 - main_header "Forms"
 
 - main
-  p Using the default form builder from Rails, we can achieve Megatron-enhanced forms!
+  p The form helpers are being reworked, this page will be updated as they are developed.
 
-  = demo_box "Table forms"
-    = table_form_for :test do |f|
-      = f.text_field :hello, value: 'hello'
-      = f.select :ahhh, [:ah, :oh]
-  
-  = demo_box "Stacked forms"
-    = stacked_form_for :test do |f|
-      = f.text_field nil, placeholder: 'hello'
-      = f.select :ahhh, [:ah, :oh]
+  = heading 'Range Input (Slider)'
+
+  = heading :h5, 'Basic usage'
+
+  code: slim
+    = range_input_tag 'name', [options]
+    / Name should be the input name, eg. 'some_model[some_property]'
+
+  = heading :h5, 'Options'
+
+  = markdown_table
+    | Option | Type/Value | Example & Description |
+    |:-|:-|:-|
+    | min                     | Default: `0`      | Set a min value |
+    | max                     | Default: `100`    | Set a max value |
+    | value                   | Default: `0`      | Set a starting value |
+    | values                  | `Array`           | `[1, 2, 5, …]` - Use custom values to set arbitrary values on a hidden input. <br> By default range inputs can only have number values (min - max) |
+    | before                  | `String`          | `'$'` - Put a `$` before the label.
+    | after                   | `String`          | `'GB'` - Put `GB` after the label.
+    | mark                    | `Array`           | `[1, 5, 10]` - Mark the first, fifth and 10th points. |
+    | labels                  | `Array` or `Hash` | `{ disk: ['1GB, '2GB', …], price: ['$15', '$20', …] }` - Show custom labels. Use a hash for multiline labels. |
+    | external_labels         | `Hash`            | `{ ram: ['256GB', '512GB', …] }` - Set contents of elements with `data-range-label='ram'`. |
+    | line_labels             | `Array`           | `[0: '1GB', 9: '256GB']` - Set a permanent "floating" label on the 1st and 10th point on the range. |
+
+  p Note: It's a bit of a hack, but if you use `big` or `small` in your hash keys for `labels` it will affect the label font size.
+
+  = heading 'Demos'
+
+  p Each of the demos below is using the following data.
+
+  code: ruby
+    disk = ['1GB','2GB','5GB','15GB','20GB']
+    price = ['$10/mo', '$20/mo', '$60/mo', '$120/mo', '$2,000/mo']
+
+  - disk = ['1GB','2GB','5GB','15GB','20GB']
+  - price = ['$10/mo', '$20/mo', '$60/mo', '$120/mo', '$2,000/mo']
+
+  = demo_box "A simple range"
+    = range_input_tag 'number'
+
+  = demo_box "Range with after label and markings"
+    = range_input_tag 'percent', after: '%', mark: [1, 50, 100]
+
+  = demo_box "Range with line labels"
+    = range_input_tag 'deployment1[units]', labels: disk, line_labels: {'1' => '1GB', '3' => '5GB', '5' => '20GB'}
+
+  = demo_box "Range with two labels (using size hack)"
+    = range_input_tag 'deployment2[units]', labels: { big_disk: disk, small_price: price }
+
+  = demo_box "Range with external labels"
+    = range_input_tag 'deployment3[units]', labels: { size: disk }, external_labels: { disk: disk, price: price }
+    p With <strong data-range-label='disk'></strong> your price will be <strong data-range-label='price'></strong>.

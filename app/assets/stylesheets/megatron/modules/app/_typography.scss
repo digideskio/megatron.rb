@@ -23,6 +23,19 @@ h4, h5, h6 {
   margin: 1em 0;
 }
 
+a label {
+  cursor: pointer;
+}
+
+.link-style {
+  color: $link-color;
+  text-decoration: none;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 .mono-font {
   font-family: $mono-font;
 }

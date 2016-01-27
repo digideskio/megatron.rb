@@ -37,15 +37,27 @@ module Megatron
         options['max'] ||= values.size - 1
       end
 
-      # Set label options
+      # Support legacy option
+      options['labels'] ||= options['label']
+
       if labels = options['labels']
-        labels.each do |label, value|
-          data['label-'+dasherize(label.to_s.downcase)] = value.join(';')
-          options['max'] ||= value.size - 1
+        if labels.is_a?(Array)
+          data['label'] = labels.join(';')
+          options['max'] ||= labels.size - 1
+        elsif labels.is_a?(Hash)
+          labels.each do |label, value|
+            data['label-'+dasherize(label.to_s.downcase)] = value.join(';')
+            options['max'] ||= value.size - 1
+          end
         end
-      elsif label = options['label']
-        data['label'] = label.join(';')
-        options['max'] ||= label.size - 1
+      end
+
+      if labels = options['external_labels']
+        if labels.is_a?(Hash)
+          labels.each do |label, value|
+            data['external-label-'+dasherize(label.to_s.downcase)] = value.join(';')
+          end
+        end
       end
 
       if before = options['before']

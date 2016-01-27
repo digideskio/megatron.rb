@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    megatron (0.1.58)
+    megatron (0.1.61)
       block_helpers (~> 0.3.3)
       esvg (~> 2.8)
       gaffe (~> 1)
@@ -75,6 +75,7 @@ GEM
       activesupport (>= 4.1.0)
     i18n (0.7.0)
     json (1.8.3)
+    kramdown (1.9.0)
     listen (3.0.3)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
@@ -134,7 +135,6 @@ GEM
     rb-fsevent (0.9.5)
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
-    redcarpet (3.3.2)
     rspec-core (3.3.2)
       rspec-support (~> 3.3.0)
     rspec-expectations (3.3.1)
@@ -195,13 +195,13 @@ DEPENDENCIES
   autoprefixer-rails
   combustion (~> 0.5.3)
   foreman
+  kramdown
   listen (~> 3.0)
   megatron!
   pry-byebug
   puma
   rack-cors
   rails_12factor
-  redcarpet
   rspec-rails (~> 3.3.0)
   s3
   sass (~> 3.3, >= 3.3.4)

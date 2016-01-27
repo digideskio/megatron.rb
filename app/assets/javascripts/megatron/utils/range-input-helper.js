@@ -23,37 +23,51 @@ var RangeInputHelper = {
   },
                               
   setup: function(){
-    var ranges = document.querySelectorAll('[type=range]')
+    var ranges = document.querySelectorAll('[type=range]:not(.range-input)')
     Array.prototype.forEach.call(ranges, RangeInputHelper.initSlider)
     RangeInputHelper.listen()
   },
   
   initSlider: function(slider){
-    RangeInputHelper.setLabels(slider)
+    slider.className += ' range-input'
+    slider.dataset.id = String(parseInt(Math.random() * 10000))
+    RangeInputHelper.cacheSet(slider)
+
     slider.insertAdjacentHTML('beforebegin', RangeInputHelper.template(slider))
     slider.remove()
+
     RangeInputHelper.refresh(slider)
+  },
+
+  cacheSet: function(slider) {
+    var labels = RangeInputHelper.getLabels(slider)
+    slider.dataset.cache = JSON.stringify({
+      labels: labels,
+      externalLabels: RangeInputHelper.extractLabels(slider, 'data-external-label-'),
+    })
   },
   
   template: function(slider){
-    return RangeInputHelper.rangeTemplate(slider)
-      + RangeInputHelper.inputTemplate(slider)
+
+    var temp = RangeInputHelper.rangeTemplate(slider)
+    temp += RangeInputHelper.inputTemplate(slider)
+
+    return temp
   },
   
   rangeTemplate: function(slider){
     var html = ""
     var lineLabels = RangeInputHelper.lineLabels(slider)
     
-    // If there are no custom labels, automatically add a default label.
-    if (RangeInputHelper.objectSize(RangeInputHelper.getLabels(slider)) == 0) {
-      slider.dataset['labelDefault' + String(parseInt(Math.random() * 10000))] = true
-    }
-
     if (slider.dataset.mark || slider.dataset.lineLabels) {
       var segments = RangeInputHelper.segments(slider)
+      var mark = []
 
       slider.className += ' range-input-slider'
-      var mark = slider.dataset.mark.split(',').map(Number)
+
+      if (slider.dataset.mark) {
+        mark = slider.dataset.mark.split(',').map(Number)
+      }
       
       for(var i = 1; i <= segments; i++) {
         var markClass = ((mark.indexOf(i) != -1) ? ' mark' : '')
@@ -77,7 +91,7 @@ var RangeInputHelper = {
     return "<div class='slider-container"
     + (RangeInputHelper.objectSize(lineLabels) > 0 ? " line-labels" : "")
     + (labelHTML.length > 0 ? " with-label" : " without-label")
-    + "'>"
+    + "' id='slider-"+ slider.dataset.id +"' >"
     + html
     + labelHTML
     + "</div>"
@@ -96,19 +110,18 @@ var RangeInputHelper = {
   
   labelTemplate: function(slider){
     var html = ""
+    var labels = JSON.parse(slider.dataset.cache).labels
 
-    for(var key in RangeInputHelper.getLabels(slider)){
-      if (!document.querySelector('[data-label='+key+']')){
-        var altKey = RangeInputHelper.camelCase(key)
-        var before = slider.dataset.beforeLabel || slider.dataset[altKey+'BeforeLabel']
-        var after  = slider.dataset.afterLabel || slider.dataset[altKey+'AfterLabel']
+    for(var key in labels){
+      var altKey = RangeInputHelper.camelCase(key)
+      var before = slider.dataset.beforeLabel || slider.dataset[altKey+'BeforeLabel']
+      var after  = slider.dataset.afterLabel || slider.dataset[altKey+'AfterLabel']
 
-        html += "<span class='range-label-"+key+"'>"
-        if (before) { html += "<span class='before-label'>"+before+"</span>" }
-        html += "<span data-label='"+key+"'></span>"
-        if (after)  { html += "<span class='after-label'>"+after+"</span>" }
-        html += "</span> "
-      }
+      html += "<span class='range-label-"+key+"'>"
+      if (before) { html += "<span class='before-label'>"+before+"</span>" }
+      html += "<span data-label='"+key+"'></span>"
+      if (after)  { html += "<span class='after-label'>"+after+"</span>" }
+      html += "</span> "
     }
 
     if (html.length > 0) {
@@ -120,6 +133,7 @@ var RangeInputHelper = {
 
   inputTemplate: function(slider) {
     if (slider.dataset.input) {
+      // Generate a class name for querying later (because some name attributes contain illegal characters for queries)
       var classname = slider.dataset.input.replace(/\W/g,'-')
       return "<input class='"+classname+"' type='hidden' name='"+slider.dataset.input+"'>"
     } else return ""
@@ -127,32 +141,67 @@ var RangeInputHelper = {
 
   getLabels: function(slider) {
     var labels = {}
+
+    if (slider.dataset.label == 'false')
+      return labels
   
-    // Find all data-label attributes
+    labels = RangeInputHelper.extractLabels(slider, 'data-label-')
+    
+    if (RangeInputHelper.objectSize(labels) == 0) {
+      if (slider.dataset.label) {
+        labels['default'] = slider.dataset.label.split(';')
+      } else if(slider.dataset.values){
+        labels['default'] = slider.dataset.values.split(',')
+      } else {
+        labels['default'] = RangeInputHelper.valueLabels(slider)
+      }
+    }
+
+    return labels
+  },
+
+  extractLabels: function(slider, pattern) {
+    var labels = {}
+
     for (var i = 0; i < slider.attributes.length; i++){
       var name = slider.attributes[i].nodeName
 
-      if(/^data-label-/.test(name)) {
-
-        // Extract label name
-        name = name.replace(/data-label-/, '')
-        labels[name] = slider.attributes[i].nodeValue
+      if(new RegExp("^"+pattern).test(name)) {
+        name = name.replace(pattern, '')
+        labels[name] = slider.attributes[i].nodeValue.split(';')
       }
     }
     return labels
   },
 
   setLabels: function(slider) {
-    var labels = RangeInputHelper.getLabels(slider)
+    var labels = JSON.parse(slider.dataset.cache).labels
+    var externalLabels = JSON.parse(slider.dataset.cache).externalLabels
 
+    RangeInputHelper.updateLabels(slider, labels)
+    RangeInputHelper.updateLabels(slider, externalLabels, 'external')
+  },
+
+  updateLabels: function(slider, labels, type) {
     for (var key in labels) {
-      var selector = '[data-label='+key+']'
-      var els = document.querySelectorAll(selector)
-      Array.prototype.forEach.call(els, function(target) {
+      var elements = RangeInputHelper.labelElements(slider, type, key)
+
+      Array.prototype.forEach.call(elements, function(target) {
         var index = RangeInputHelper.rangeValueIndex(slider)
-        target.innerHTML = RangeInputHelper.getLabelsAtIndex(slider, index)[key]
+        target.innerHTML = RangeInputHelper.getLabelsAtIndex(labels, index)[key]
       })
     }
+  },
+
+  labelElements: function(slider, type, key) {
+    var selector = ''
+
+    if (type == 'external')
+      selector = '[data-range-label='+key+']'
+    else
+      selector = '#slider-'+slider.dataset.id+' [data-label='+key+']'
+
+    return document.querySelectorAll(selector)
   },
 
   setInput: function(slider) {
@@ -167,26 +216,28 @@ var RangeInputHelper = {
     }
   },
 
-  getLabelsAtIndex: function(slider, index){
-    var labels = RangeInputHelper.getLabels(slider)
+  getLabelsAtIndex: function(labels, index){
+    var set = {}
     for (var key in labels) {
-      if (labels[key] == 'true') {
-        if(slider.dataset.label) {
-          labels[key] = slider.dataset.label.split(';')[index]
-        } else if(slider.dataset.values){
-          labels[key] = slider.dataset.values.split(',')[index]
-        } else {
-          labels[key] = slider.value
-        }
-      } else {
-        labels[key] = labels[key].split(';')[index]
-      }
+      set[key] = labels[key][index]
     }
-    return labels
+    return set
   }, 
 
   segments: function(slider){
-    return Number(slider.getAttribute('max')) - Number(slider.getAttribute('min')) + 1
+    return Number(slider.getAttribute('max') || 100) - Number(slider.getAttribute('min') || 0) + 1
+  },
+
+  valueLabels: function(slider) {
+    var values = []
+    var start = Number(slider.getAttribute('min')) || 0
+    var end = Number(slider.getAttribute('max')) || 100
+
+    for (var i = start; i <= end; i++ ) {
+      values[i] = i
+    }
+
+    return values
   },
   
   rangeValueIndex: function(slider){

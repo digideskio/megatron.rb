@@ -71,14 +71,11 @@ module.exports = {
   },
 
   linkHeadings: function linkHeadings(){
-    var headings = document.querySelectorAll('h2, h3, h4')
-    for(let i = 0; i < headings.length; i++){
-      var heading = headings[i];
-      if (heading.id != ''){
-        heading.innerHTML = "<a href='#"+heading.id+"' class='heading-link'>"+ heading.innerHTML +"</a>"
-        heading.className = heading.className + " linked_heading";
-      }
-    }
+    var headings = document.querySelectorAll('h2[id], h3[id], h4[id], h5[id]')
+    Array.prototype.forEach.call(headings, function(heading) {
+      heading.innerHTML = "<a href='#"+heading.id+"' class='heading-link'>"+ heading.innerHTML +"</a>"
+      heading.className = heading.className + " linked_heading";
+    })
   },
 
   autoSizeTextarea: function autoSizeTextarea() {
