@@ -1,6 +1,6 @@
 module Megatron
   module BoxHelper
-    class BoxMessage < BlockHelpers::Base
+    class BoxMessage < Megatron::Helper
       def initialize(options = {})
         @options = options
       end

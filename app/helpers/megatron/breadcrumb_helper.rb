@@ -1,6 +1,6 @@
 module Megatron
   module BreadcrumbHelper
-    class Breadcrumbs < BlockHelpers::Base
+    class Breadcrumbs < Megatron::Helper
       def crumb(text = nil, href = nil, options={}, &block)
         options[:class] = add_class(options[:class], 'breadcrumb')
 

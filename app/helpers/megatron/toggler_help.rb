@@ -1,6 +1,6 @@
 module Megatron
   module TogglerHelper
-    class Toggler < BlockHelpers::Base
+    class Toggler < Megatron::Helper
       
     end
   end

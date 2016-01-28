@@ -1,6 +1,6 @@
 module Megatron
   module NavigationHelper
-    class Nav < BlockHelpers::Base
+    class Nav < Megatron::Helper
       def item(text, href, options = {})
         options[:class] = add_class(options[:class], "#{nav_class}-item")
         nav_icon = options.delete(:icon)

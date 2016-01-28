@@ -6,6 +6,7 @@ end
 require "megatron/version"
 
 # require "megatron/form"
+require "megatron/helper"
 require "megatron/engine"
 
 module Megatron

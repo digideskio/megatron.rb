@@ -1,0 +1,30 @@
+web:
+  command: bundle exec rails server -p 5000 -b 0.0.0.0
+  working_dir: /app/server
+  volumes:
+    - ./:/app
+  expose:
+    - 5000
+  proxy:
+    domains:
+      - megatron.compose.devkit
+
+js:
+  command: bundle exec rake megatron:js:watch
+
+css:
+  command: bundle exec rake megatron:css:watch
+
+svg:
+  command: bundle exec rake megatron:svg:watch
+
+defaults:
+  volumes:
+    - ./:/app
+  environment:
+    MEGATRON_ASSET_HOST: ""
+  hooks:
+    start:
+      pre:
+        - bundle install --jobs 4 --without test
+        - npm install

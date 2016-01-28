@@ -1,6 +1,6 @@
 module Megatron
   module GridHelper
-    class Grid < BlockHelpers::Base
+    class Grid < Megatron::Helper
 
       DEFAULTS = {
         tag: :div,
