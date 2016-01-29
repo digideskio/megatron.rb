@@ -53,6 +53,6 @@
     = range_input_tag 'deployment2[units]', labels: { big_disk: disk, small_price: price }
 
   = demo_box "Range with external labels and custom values"
-    = range_input_tag 'deployment3[units]', labels: { size: disk }, external_labels: { disk: disk, price: price }, values: [1, 2, 5, 15, 50]
+    = range_input_tag 'deployment3[units]', labels: { size: disk }, external_labels: { disk: disk, price: price }, values: [1, 2, 5, 15, 50], mark: [1,3,5]
     p With <strong data-range-label='disk'></strong> your price will be <strong data-range-label='price'></strong>.
     p.help-text Use the web inspector and you'll see a hidden input being updated as the slider changes.

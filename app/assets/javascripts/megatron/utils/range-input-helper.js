@@ -63,8 +63,6 @@ var RangeInputHelper = {
       var segments = RangeInputHelper.segments(slider)
       var mark = []
 
-      slider.className += ' range-input-slider'
-
       if (slider.dataset.mark) {
         mark = slider.dataset.mark.split(',').map(Number)
       }
@@ -73,18 +71,19 @@ var RangeInputHelper = {
         var markClass = ((mark.indexOf(i) != -1) ? ' mark' : '')
         var lineLabel = lineLabels[String(i)]
         
-        html += "<div class='range-segment"+markClass+"'>"
+        html += "<div class='range-segment'><span class='range-segment-content'>"
+        if (mark.indexOf(i) != -1){
+          html += "<span class='range-segment-mark'></span>"
+        }
         if (lineLabel) {
           html += "<span class='range-line-label'>"+lineLabel+"</span>"
         }
-        html += "</div>"
+        html += "</span></div>"
       }
-
-      html = "<div class='range-track'>" + html + "</div>"
-      html = "<div class='range-input-container'>" + slider.outerHTML + html + "</div>"
-    } else {
-      html = slider.outerHTML
     }
+
+    slider.className += ' range-input-slider'
+    html = "<div class='range-input-container'>" + slider.outerHTML + "<div class='range-track'>" + html + "</div><div class='range-track-bg'></div></div>"
 
     var labelHTML = RangeInputHelper.labelTemplate(slider)
     

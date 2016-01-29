@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    megatron (0.1.61)
+    megatron (0.1.62)
       block_helpers (~> 0.3.3)
       esvg (~> 2.8)
       gaffe (~> 1)
@@ -48,7 +48,7 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     arel (6.0.3)
-    autoprefixer-rails (5.2.0.1)
+    autoprefixer-rails (6.3.1)
       execjs
       json
     block_helpers (0.3.3)
@@ -65,7 +65,7 @@ GEM
     diff-lcs (1.2.5)
     erubis (2.7.0)
     esvg (2.8.7)
-    execjs (2.5.2)
+    execjs (2.6.0)
     ffi (1.9.10)
     foreman (0.78.0)
       thor (~> 0.19.1)

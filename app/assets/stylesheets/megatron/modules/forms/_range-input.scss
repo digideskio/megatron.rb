@@ -40,7 +40,7 @@ $range-mark: #fff;
 input[type=range] {
   @include reset-range;
   position: relative;
-  z-index: 1;
+  z-index: 2;
   margin: 15px 0;
   
   @include range-thumb {
@@ -52,6 +52,7 @@ input[type=range] {
     width: 19px;
     border-radius: 100%;
     position: relative;
+    top: 1px;
     transition: all .15s ease-in;
     &:after {
       content: "";
@@ -105,20 +106,19 @@ input::-moz-focus-inner {
 
 .slider-container {
   position: relative;
-  padding: 10px 0;
-  align-items: center;
+  padding: .5em 0;
 
   @include at-least($x-small){
     display: flex;
     flex-flow: row nowrap;
+    align-items: center;
     &.with-label {
       max-width: 320px;
     }
   }
 
   &.line-labels {
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid transparent;
+    padding: 1em 0;
   }
 }
 
@@ -129,59 +129,53 @@ input::-moz-focus-inner {
 }
 
 .range-track {
+  height: 0px;
   display: flex;
   align-items: center;
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
   justify-content: space-between;
-  margin: 0 9px 0 10px;
-  z-index: 0;
-  position: absolute;
-  top: 6px;
-  left: 0; right: 0;
+  margin: 0 10px 0 9px;
+  position: relative;
+  top: -12px;
+}
+
+.range-track-bg {
+  flex: none;
   border-radius: 5px;
-  
-  &:after {
-    position: absolute;
-    content: "";
-    left: 0; right: 0; top: 0; bottom: 0;
-    background: $range-track;
-    z-index: 1;
-    border-radius: 4px;
-    box-shadow: $range-track-line 0 0 0 1px;
-  }
+  box-shadow: $range-track-line 0 0 0 1px;
+  background: $range-track;
+  height: 5px;
+  position: absolute;
+  left: 9px;
+  right: 10px;
+  top: 7px;
 }
 
 .range-segment {
-  height: 5px;
-  flex: 0 0 auto;
-  width: 0;
   position: relative;
-  &:last-child {
-    flex: 0 0 auto;
-  }
-  &.mark {
-    position: relative;
+  flex: none;
+}
 
-    &:before, &:after {
-      position: absolute;
-      content: "";
-      width: 13px;
-      height: 13px;
-      top: -4px;
-      left: -7px;
-      box-sizing: border-box;
-      border-radius: 100%;
-    }
-    &:before {
-      background: $range-mark;
-      border: $range-track 3px solid;
-      box-shadow: $range-track-line 0 0 0 1px inset;
-      z-index: 2;
-    }
-    &:after {
-      box-shadow: $range-track-line 0 0 0 1px;
-      z-index: -1;
-    }
+.range-segment-mark {
+  &:before, &:after {
+    position: absolute;
+    content: "";
+    width: 13px;
+    height: 13px;
+    top: -4px;
+    left: -5px;
+    box-sizing: border-box;
+    border-radius: 100%;
+  }
+  &:before {
+    background: $range-mark;
+    border: $range-track 3px solid;
+    box-shadow: $range-track-line 0 0 0 1px inset;
+    z-index: 1;
+  }
+  &:after {
+    box-shadow: $range-track-line 0 0 0 1px;
+    z-index: 0;
   }
 }
 
@@ -209,7 +203,7 @@ input::-moz-focus-inner {
 }
 
 .range-segment:first-child .range-line-label {
-  left: -10px;
+  left: -9px;
   right: auto;
   text-align: left;
   &:before {
@@ -218,7 +212,7 @@ input::-moz-focus-inner {
 }
 
 .range-segment:last-child .range-line-label {
-  right: -10px;
+  right: -11px;
   left: auto;
   text-align: right;
   &:before {
