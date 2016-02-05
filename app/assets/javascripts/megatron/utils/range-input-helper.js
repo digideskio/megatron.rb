@@ -5,15 +5,15 @@ require('compose-dataset-shim')
 
 var RangeInputHelper = {
   listen: function(){
-    bean.on(document, "input refresh", "[type=range]", RangeInputHelper.change)
+    bean.on(document, "input refresh", "[type=range]", RangeInputHelper.refresh)
     bean.on(document, "click change input", "[type=range]", RangeInputHelper.focus)
   },
 
-  change: function(event) {
-    RangeInputHelper.setLabels(event.currentTarget)
-    RangeInputHelper.setInput(event.currentTarget)
+  refresh: function (slider) {
+    RangeInputHelper.setLabels(slider)
+    RangeInputHelper.setInput(slider)
   },
-
+  
   focus: function(event){
     event.currentTarget.focus()
   },
@@ -32,7 +32,7 @@ var RangeInputHelper = {
     slider.insertAdjacentHTML('beforebegin', RangeInputHelper.template(slider))
     slider.remove()
 
-    RangeInputHelper.change(slider)
+    RangeInputHelper.refresh(slider)
   },
 
   cacheSet: function(slider) {
