@@ -3,3 +3,147 @@
 - main do
   p Colors are good mkay?
 
+  - path = File.expand_path(File.join(__dir__, '../../../../app/assets/stylesheets/megatron/modules/core/_colors.scss'))
+  - parser = Sass::SCSS::Parser.new(File.read(path), '_colors.scss', Sass::Importers::Filesystem.new(File.expand_path(__FILE__))).parse
+
+
+  - full_palette = nil
+  - parser.each { |node| full_palette = node if node.is_a?(Sass::Tree::VariableNode) && node.name == 'full-palette' }
+
+  table.box-table
+    thead
+      th
+      th name
+    tbody
+      - full_palette.expr.pairs.map(&:first).map {|n| n.value.to_s.gsub('"', '') }.each do |name|
+        tr
+          td class="#{name}-bg"
+          td = name
+
+
+  / table.box-table
+  /   thead
+
+  /   .tile_label white
+  /   .white-bg 
+  /   .color-code #fff
+  /   .tile_label softwhite
+  /   .softwhite-bg 
+  /   .color-code #fbfbfb
+  /   .tile_label offwhite
+  /   .offwhite-bg 
+  /   .color-code #f5f6f6
+  /   .tile_label silver
+  /   .silver-bg 
+  /   .color-code #edefef
+  /   .tile_label overcast
+  /   .overcast-bg 
+  /   .color-code #dadede
+  /   .tile_label lightgray
+  /   .lightgray-bg 
+  /   .color-code #b3b9bc
+  /   .tile_label gray
+  /   .gray-bg 
+  /   .color-code #8d9297
+  /   .tile_label mediumgray
+  /   .mediumgray-bg 
+  /   .color-code #666
+  /   .tile_label darkgray
+  /   .darkgray-bg 
+  /   .color-code #444
+  /   .tile_label slate
+  /   .slate-bg 
+  /   .color-code #788392
+  /   .tile_label bluegray
+  /   .bluegray-bg 
+  /   .color-code #5e6b77
+  /   .tile_label shade
+  /   .shade-bg 
+  /   .color-code #47515b
+  /   .tile_label night
+  /   .night-bg 
+  /   .color-code #2d333b
+  /   .tile_label space
+  /   .space-bg 
+  /   .color-code #262b30
+  /   .tile_label black
+  /   .black-bg 
+  /   .color-code #000
+  /   .tile_label boldred
+  /   .boldred-bg 
+  /   .color-code #df192a
+  /   .tile_label red
+  /   .red-bg 
+  /   .color-code #cb413a
+  /   .tile_label palered
+  /   .palered-bg 
+  /   .color-code #e46767
+  /   .tile_label pink
+  /   .pink-bg 
+  /   .color-code #ff2d55
+  /   .tile_label softred
+  /   .softred-bg 
+  /   .color-code #f7d4d4
+  /   .tile_label orange
+  /   .orange-bg 
+  /   .color-code #ff9500
+  /   .tile_label paleorange
+  /   .paleorange-bg 
+  /   .color-code #e4a667
+  /   .tile_label softorange
+  /   .softorange-bg 
+  /   .color-code #f7e8d4
+  /   .tile_label yellow
+  /   .yellow-bg 
+  /   .color-code #fc0
+  /   .tile_label softyellow
+  /   .softyellow-bg 
+  /   .color-code #f7f4d4
+  /   .tile_label cream
+  /   .cream-bg 
+  /   .color-code #fef0bd
+  /   .tile_label yellowwhite
+  /   .yellowwhite-bg 
+  /   .color-code #fffefa
+  /   .tile_label green
+  /   .green-bg 
+  /   .color-code #2ab22e
+  /   .tile_label softgreen
+  /   .softgreen-bg 
+  /   .color-code #d4f7e0
+  /   .tile_label greenwhite
+  /   .greenwhite-bg 
+  /   .color-code #fafffa
+  /   .tile_label darkblue
+  /   .darkblue-bg 
+  /   .color-code #427bc5
+  /   .tile_label blue
+  /   .blue-bg 
+  /   .color-code #4a89dc
+  /   .tile_label lightblue
+  /   .lightblue-bg 
+  /   .color-code #5d9cec
+  /   .tile_label boyblue
+  /   .boyblue-bg 
+  /   .color-code #409bd9
+  /   .tile_label babyblue
+  /   .babyblue-bg 
+  /   .color-code #82c1ed
+  /   .tile_label paleblue
+  /   .paleblue-bg 
+  /   .color-code #79add2
+  /   .tile_label softblue
+  /   .softblue-bg 
+  /   .color-code #d4eef7
+  /   .tile_label bluewhite
+  /   .bluewhite-bg 
+  /   .color-code #f5fcff
+  /   .tile_label purple
+  /   .purple-bg 
+  /   .color-code #8e55dd
+  /   .tile_label lightpurple
+  /   .lightpurple-bg 
+  /   .color-code #967adc
+  /   .tile_label softpurple
+  /   .softpurple-bg 
+  /   .color-code #e3d4f7
