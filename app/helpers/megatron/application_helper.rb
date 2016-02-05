@@ -1,9 +1,19 @@
 module Megatron
   module ApplicationHelper
+    
+    # Mounted from dev-kit
+    def dev?
+      __dir__.start_with?("/megatron") || ENV['MEGATRON_DEV']
+    end
+
     def megatron_asset_path(asset)
-      if ENV['MEGATRONDEV']
-        alt_host = "http://localhost:5000"
-      end
+      if dev?
+        if ENV['DEVKIT']
+          alt_host = "https://megatron.compose.devkit"
+        else
+          alt_host = "http://localhost:5000"
+        end
+      end 
       alt_host ||= ENV['MEGATRON_ASSET_HOST'] 
       return "#{alt_host}/assets/megatron/#{asset}" if alt_host
       return "https://d11f55tj5eo9e5.cloudfront.net/assets/megatron/#{asset}" if Rails.env.production?
@@ -19,10 +29,12 @@ module Megatron
     end
 
     def megatron_assets_tags
-      if ENV['MEGATRONDEV']
-        version = ''
+      version = if dev?
+        ''
+      elsif params[:__megatron_version]
+        "-#{params[:__megatron_version]}"
       else
-        version = "-#{Megatron::VERSION}"
+        "-#{Megatron::VERSION}"
       end
 
       ext_suffix = Rails.env.production? ? '.gz' : ''

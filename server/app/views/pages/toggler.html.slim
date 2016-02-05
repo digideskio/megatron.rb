@@ -17,3 +17,13 @@
 
     input type='checkbox' id='remove-checkbox' data-remove-class='primary-btn; .test-button'
     label for='remove-checkbox' Remove
+
+
+
+  p
+    input type='checkbox' id='toggle-range' data-toggle='.range-test'
+    label for='toggle-range' Toggle Range
+  .range-test
+    = range_input_tag 'number', values: (1..20).to_a
+  .range-test.hidden
+    = range_input_tag 'number', values: (1..20).to_a

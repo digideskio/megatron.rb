@@ -5,19 +5,15 @@ require('compose-dataset-shim')
 
 var RangeInputHelper = {
   listen: function(){
-    bean.on(document, "input", "[type=range], refresh", RangeInputHelper.change)
+    bean.on(document, "input refresh", "[type=range]", RangeInputHelper.change)
     bean.on(document, "click change input", "[type=range]", RangeInputHelper.focus)
   },
 
   change: function(event) {
-    RangeInputHelper.refresh(event.currentTarget)
+    RangeInputHelper.setLabels(event.currentTarget)
+    RangeInputHelper.setInput(event.currentTarget)
   },
 
-  refresh: function (slider) {
-    RangeInputHelper.setLabels(slider)
-    RangeInputHelper.setInput(slider)
-  },
-  
   focus: function(event){
     event.currentTarget.focus()
   },
@@ -36,7 +32,7 @@ var RangeInputHelper = {
     slider.insertAdjacentHTML('beforebegin', RangeInputHelper.template(slider))
     slider.remove()
 
-    RangeInputHelper.refresh(slider)
+    RangeInputHelper.change(slider)
   },
 
   cacheSet: function(slider) {
@@ -49,10 +45,10 @@ var RangeInputHelper = {
   
   template: function(slider){
 
-    var temp = RangeInputHelper.rangeTemplate(slider)
-    temp += RangeInputHelper.inputTemplate(slider)
+    var inputTemplate = RangeInputHelper.inputTemplate(slider)
+    var rangeTemplate = RangeInputHelper.rangeTemplate(slider)
 
-    return temp
+    return inputTemplate + rangeTemplate
   },
   
   rangeTemplate: function(slider){
@@ -131,10 +127,10 @@ var RangeInputHelper = {
   },
 
   inputTemplate: function(slider) {
-    if (slider.dataset.input) {
+    if (slider.dataset.input && slider.dataset.values) {
       // Generate a class name for querying later (because some name attributes contain illegal characters for queries)
       var classname = slider.dataset.input.replace(/\W/g,'-')
-      return "<input class='"+classname+"' type='hidden' name='"+slider.dataset.input+"'>"
+      return "<input class='"+classname+"' type='hidden' name='"+slider.dataset.input+"' value='"+slider.value+"'>"
     } else return ""
   },
 

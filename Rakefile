@@ -16,6 +16,11 @@ RDoc::Task.new(:rdoc) do |rdoc|
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
 
+task :watch do
+  ENV['MEGATRON_DEV'] = "TRUE"
+  system 'foreman start -c esvg=1,js=1,css=1'
+end
+
 Bundler::GemHelper.install_tasks
 
 namespace :megatron do

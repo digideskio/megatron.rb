@@ -9,14 +9,8 @@ web:
     domains:
       - megatron.compose.devkit
 
-js:
-  command: bundle exec rake megatron:js:watch
-
-css:
-  command: bundle exec rake megatron:css:watch
-
-svg:
-  command: bundle exec rake megatron:svg:watch
+watch:
+  command: bundle exec rake watch
 
 defaults:
   volumes:
