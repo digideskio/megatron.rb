@@ -119,7 +119,8 @@ var Toggler = {
     // Trigger input event on ranges that have been hidden
     var ranges = el.querySelectorAll('[type=range]')
     Array.prototype.forEach.call(ranges, function(range) { 
-      if (el.offsetParent != null) {
+      if (range.offsetParent != null) {
+        console.log(range)
         bean.fire(range, 'refresh')
       }
     })

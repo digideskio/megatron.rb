@@ -48,13 +48,15 @@ function pageChange(){
   utils.toggleActiveNav()
   utils.autoSizeTextarea()
   utils.highlightCode()
-  utils.Toggler.refresh()
   utils.autofocus()
   utils.notifyFormFlash()
   utils.TimeSwitch.setup()
   utils.Timeago.setup()
   utils.Messages.load()
   utils.RangeInputHelper.setup()
+
+  // Do last to ensure no other default setup overrides visibility state
+  utils.Toggler.refresh()
 }
 
 // Dialog document listener and auto-creator
