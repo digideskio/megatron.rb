@@ -3,17 +3,17 @@ module Megatron
     
     # Mounted from dev-kit
     def dev?
-      __dir__.start_with?("/megatron") || ENV['MEGATRON_DEV']
+      __dir__.start_with?("/megatron") || ENV['DEVKIT']
     end
 
     def megatron_asset_path(asset)
-      if dev?
-        if ENV['DEVKIT']
-          alt_host = "https://megatron.compose.devkit"
-        else
-          alt_host = "http://localhost:5000"
-        end
+
+      if ENV['LOCAL_DEV']
+        alt_host = "http://localhost:5000"
+      elsif dev?
+        alt_host = "https://megatron.compose.devkit"
       end 
+
       alt_host ||= ENV['MEGATRON_ASSET_HOST'] 
       return "#{alt_host}/assets/megatron/#{asset}" if alt_host
       return "https://d11f55tj5eo9e5.cloudfront.net/assets/megatron/#{asset}" if Rails.env.production?
