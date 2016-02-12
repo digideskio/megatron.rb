@@ -6,6 +6,10 @@ require('compose-tap-event')
 require('compose-dataset-shim')
 
 var Toggler = {
+  checkboxSelector: "[type=checkbox][data-toggle], [type=checkbox][data-show], [type=checkbox][data-hide]",
+  radioSelector: "input[type=radio][data-show], input[type=radio][data-add-class]",
+  selectSelector: "option[data-show]",
+
   listen: function togglerListen(){
     bean.on(document, "click", "[data-toggle], [data-show], [data-hide], [data-toggle-class], [data-add-class], [data-remove-class]", Toggler.trigger)
     bean.on(document, "change", ".select-toggler", Toggler.trigger)
@@ -26,7 +30,7 @@ var Toggler = {
     } 
 
     if (target.type == 'radio') {
-      Toggler.toggleRadios('input[name="'+ target.name +'"]')
+      Toggler.toggleRadios(document.querySelectorAll('input[name="'+ target.name +'"]'))
       Toggler.dispatch(target, 'addClass')
     } else if (target.type == 'checkbox') {
       Toggler.toggleCheckbox(target)
@@ -118,9 +122,17 @@ var Toggler = {
 
     // Trigger input event on ranges that have been hidden
     var ranges = el.querySelectorAll('[type=range]')
+    var radios = el.querySelectorAll(Toggler.radioSelector)
+    var checkboxes = el.querySelectorAll(Toggler.checkboxSelector)
+    var selects = el.querySelectorAll('.select-toggler')
+
+    Toggler.toggleRadios(radios)
+    Toggler.toggleCheckboxes(checkboxes)
+
+    Array.prototype.forEach.call(selects, Toggler.toggleSelect)
+
     Array.prototype.forEach.call(ranges, function(range) { 
       if (range.offsetParent != null) {
-        console.log(range)
         bean.fire(range, 'refresh')
       }
     })
@@ -132,7 +144,8 @@ var Toggler = {
   },
 
   toggleRadios: function togglerToggleRadio(radios) {
-    var radios = radios || 'input[type=radio][data-show], input[type=radio][data-add-class]'
+    radios = radios || document.querySelectorAll('input[type=radio][data-show], input[type=radio][data-add-class]')
+
     var checked = []
     var process = function(radio) {
       if (radio.dataset.show)
@@ -142,7 +155,7 @@ var Toggler = {
         Toggler.setClass(radio.dataset.addClass, radio.checked)
     }
 
-    Array.prototype.forEach.call(document.querySelectorAll(radios), function(radio){
+    Array.prototype.forEach.call(radios, function(radio){
       if (radio.checked) {
         checked.push(radio)
       } else {
@@ -179,16 +192,19 @@ var Toggler = {
     Toggler.dispatch(option, 'removeClass')
   },
 
-  toggleCheckboxes: function togglerToggleCheckboxes() {
-    var checkboxes = '[type=checkbox][data-toggle], [type=checkbox][data-show], [type=checkbox][data-hide]'
-    Array.prototype.forEach.call(document.querySelectorAll(checkboxes), Toggler.toggleCheckbox)
+  toggleCheckboxes: function togglerToggleCheckboxes(checkboxes) {
+    checkboxes = checkboxes || document.querySelectorAll(Toggler.checkboxSelector)
+
+    Array.prototype.forEach.call(checkboxes, Toggler.toggleCheckbox)
   },
 
   // Add data-hide to each <option> containing the selectors from other
   // option's data-show. This makes the toggling of elements exclusive.
   //
-  setupSelects: function togglerSetupSelects(select){
-    Array.prototype.forEach.call(document.querySelectorAll('option[data-show]'), function(option){
+  setupSelects: function togglerSetupSelects(selects){
+    selects = selects || document.querySelectorAll(Toggler.selectSelector)
+
+    Array.prototype.forEach.call(selects, function(option){
       if (!option.dataset.hide) {
 
         var select = Toggler.getSelectFromOption(option)
