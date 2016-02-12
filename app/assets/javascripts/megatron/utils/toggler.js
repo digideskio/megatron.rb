@@ -122,14 +122,6 @@ var Toggler = {
 
     // Trigger input event on ranges that have been hidden
     var ranges = el.querySelectorAll('[type=range]')
-    var radios = el.querySelectorAll(Toggler.radioSelector)
-    var checkboxes = el.querySelectorAll(Toggler.checkboxSelector)
-    var selects = el.querySelectorAll('.select-toggler')
-
-    Toggler.toggleRadios(radios)
-    Toggler.toggleCheckboxes(checkboxes)
-
-    Array.prototype.forEach.call(selects, Toggler.toggleSelect)
 
     Array.prototype.forEach.call(ranges, function(range) { 
       if (range.offsetParent != null) {
