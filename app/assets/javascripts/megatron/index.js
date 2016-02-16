@@ -10,6 +10,8 @@ var request = require('superagent')
 var NProgress = require('nprogress')
 var esvg = require('./esvg')
 
+require('./shims/classlist')
+
 window.Megatron = module.exports = {
   Dialog: Dialog,
   notify: notify,
@@ -71,14 +73,14 @@ function handleDialogTrigger(event){
 
 function toggleNavigationMode(event) {
   event.target.blur()
-  utils.Classie.toggle(document.querySelector('body'), 'active-nav')
+  document.querySelector('body').classList.toggle('active-nav')
 }
 
 function disableWith(event){
   var buttons = event.currentTarget.querySelectorAll('[data-disable-with]')
   Array.prototype.forEach.call(buttons, function(button){
     button.disabled = true
-    utils.Classie.add(button, 'disabled')
+    button.classList.add('disabled')
 
     var buttonText = button.dataset.disableWith
     if (!buttonText || buttonText == '') { buttonText = button.innerHTML }

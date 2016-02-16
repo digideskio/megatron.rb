@@ -1,5 +1,4 @@
 var bean = require('bean')
-var classie = require('classie')
 
 require('compose-tap-event')
 

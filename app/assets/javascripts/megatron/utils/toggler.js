@@ -1,9 +1,6 @@
 var bean = require('bean')
-var classie = require('classie')
-var _ = require('lodash')
 
 require('compose-tap-event')
-require('compose-dataset-shim')
 
 var Toggler = {
   checkboxSelector: "[type=checkbox][data-toggle], [type=checkbox][data-show], [type=checkbox][data-hide]",
@@ -68,7 +65,7 @@ var Toggler = {
 
   setClass: function (selectors, action, el){
     if (typeof(action) == 'boolean') {
-      action = (action ? 'addClass' : 'removeClass')
+      action = (action ? 'add' : 'remove')
     }
 
     // Get selector and classnames, format: "classname classname; selector,selector"
@@ -85,8 +82,9 @@ var Toggler = {
     }
 
     Array.prototype.forEach.call(matches, function(match){
+      action = action.replace(/Class/,'')
       Array.prototype.forEach.call(classnames.split(' '), function(classname) {
-        classie[action](match, classname)
+        match.classList[action](classname)
       })
     })
   },
@@ -113,8 +111,8 @@ var Toggler = {
   },
 
   show: function togglerShow(el) {
-    classie.remove(el, 'hidden')
-    classie.add(el, 'visible')
+    el.classList.remove('hidden')
+    el.classList.add('visible')
 
     // Focus on key element if an element expects focus
     var focusEl = el.querySelector('[data-focus]')
@@ -131,8 +129,8 @@ var Toggler = {
   },
 
   hide: function togglerHide(el) {
-    classie.remove(el, 'visible')
-    classie.add(el, 'hidden')
+    el.classList.remove('visible')
+    el.classList.add('hidden')
   },
 
   toggleRadios: function togglerToggleRadio(radios) {
@@ -171,7 +169,7 @@ var Toggler = {
     if (checkbox.dataset.removeClass)
       Toggler.setClass(checkbox.dataset.removeClass, !checkbox.checked, checkbox)
     if (checkbox.dataset.toggleClass)
-      Toggler.setClass(checkbox.dataset.toggleClass, 'toggleClass', checkbox)
+      Toggler.setClass(checkbox.dataset.toggleClass, 'toggle', checkbox)
     if (checkbox.dataset.addClass)
       Toggler.setClass(checkbox.dataset.addClass, checkbox.checked, checkbox)
   },
@@ -200,14 +198,14 @@ var Toggler = {
       if (!option.dataset.hide) {
 
         var select = Toggler.getSelectFromOption(option)
-        classie.add(select, 'select-toggler')
+        select.classList.add('select-toggler')
         var options = select.querySelectorAll('option')
         var selectors = Toggler.showAttributes(options)
 
         Array.prototype.forEach.call(options, function(o) {
-          option.dataset.hide = _.compact(selectors.filter(function(selector){
+          option.dataset.hide = selectors.filter(function(selector){
             return option.dataset.show != selector && selector != ""
-          })).join(',')
+          }).join(',')
         })
 
         // Ensure that currently selected option is toggled properly

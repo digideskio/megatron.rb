@@ -1,7 +1,6 @@
 var bean = require('bean')
 
 require('compose-tap-event')
-require('compose-dataset-shim')
 
 var RangeInputHelper = {
   listen: function(){

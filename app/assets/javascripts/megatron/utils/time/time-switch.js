@@ -1,9 +1,6 @@
 var timeago = require('./timeago')
 var dateToHtml = require('./date-to-html')
-var classie = require('classie')
 var bean = require('bean')
-
-require('compose-dataset-shim')
 
 var TimeSwitch = {
 
@@ -19,7 +16,7 @@ var TimeSwitch = {
       var timeagoPosition = el.dataset.timeago
       var timeagoStyle = el.dataset.timeagoStyle
       el.innerHTML = TimeSwitch.template(datetime, timeagoPosition, timeagoStyle)
-      classie.add(el, 'time-switch')
+      el.classList.add('time-switch')
       el.setAttribute('title', 'toggle timezones')
     })
   },
@@ -35,7 +32,7 @@ var TimeSwitch = {
     var timeEls = document.querySelectorAll('.time-switch')
 
     Array.prototype.forEach.call(timeEls, function(el) {
-      classie.toggle(el, 'alt-zone')
+      el.classList.toggle('alt-zone')
     })
   },
 

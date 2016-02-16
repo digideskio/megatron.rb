@@ -1,6 +1,5 @@
 var bean = require('bean')
 var CodeMirror = require('codemirror')
-var classie = require('classie')
 var Toggler = require('./toggler')
 var Messages = require('./messages')
 var AutoNavigate = require('./auto-navigate')
@@ -22,7 +21,6 @@ module.exports = {
   Timeago: Timeago,
   TimeSwitch: TimeSwitch,
   CodeMirror: CodeMirror,
-  Classie: classie,
   Toggler: Toggler,
   Messages: Messages,
   AutoNavigate: AutoNavigate,
@@ -53,9 +51,9 @@ module.exports = {
       var lang = element.className.match(/lang.*?-(\S+)/)[1]
 
       // Standardize classes: lang-[language]
-      if (classie.has(element, 'language-'+lang)) {
-        classie.remove(element, 'language-'+lang)
-        classie.add(element, 'lang-'+lang)
+      if (element.classList.contains('language-'+lang)) {
+        element.classList.remove('language-'+lang)
+        element.classList.add('lang-'+lang)
       }
       var code = element.textContent.trim()
 
@@ -66,7 +64,7 @@ module.exports = {
 
       CodeMirror.runMode(code, aliasLang(lang), element, options)
       element.innerHTML = "<code class='highlighted-code static-code cm-s-default'>" + element.innerHTML + "</code>"
-      classie.add(element, 'highlighted')
+      element.classList.add('highlighted')
     }
   },
 
@@ -100,7 +98,7 @@ module.exports = {
       var type = flash.dataset.type || 'error'
       if (type == 'info') type = 'action'
       notify[type](flash.textContent.trim())
-      classie.add(flash, 'hidden')
+      flash.classList.add('hidden')
     }
   },
 

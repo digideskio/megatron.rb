@@ -17,9 +17,7 @@
   "dependencies": {
     "autoprefixer": "^5.2",
     "bean": "^1.0.15",
-    "classie": "^1.0.0",
     "codemirror": "^5.5.0",
-    "compose-dataset-shim": "^1.0.0",
     "compose-dialog": "^1.0.6",
     "compose-notification": "^2.0.6",
     "compose-remote-form": "^1.0.2",
