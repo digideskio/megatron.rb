@@ -99,8 +99,10 @@ if (!window.$ || !$.rails) {
 }
 
 function handleRemoteFormSubmit(event){
-  if (_.find(boundForms, function(el){return el == event.currentTarget}))
+  // Prevent doubling up on form event hanlding.
+  if(boundForms.filter(function(el){return el == event.currentTarget})[0])
     return
+  // Trigger a form submission event.
   new Form({el: event.currentTarget}).submit(event)
   boundForms.push(event.currentTarget)
 }
