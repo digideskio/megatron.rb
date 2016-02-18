@@ -7,10 +7,6 @@
     icon: 'account-circle',
     class: "#{'here' if @primary_nav_here  == 'account' }"
   
-  = nav.item 'Alerts', "/#{current_account.slug}/alerts",
-    icon: 'alerts',
-    class: "#{'here' if @primary_nav_here  == 'alerts' }"
-  
   = nav.item 'Support', "/#{current_account.slug}/support/tickets",
     icon: 'question-line',
     class: "#{'here' if @primary_nav_here == 'support' }"
