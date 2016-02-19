@@ -59,6 +59,7 @@ function pageChange(){
 
   // Do last to ensure no other default setup overrides visibility state
   utils.Toggler.refresh()
+  utils.Clipboard.setup()
 }
 
 // Dialog document listener and auto-creator

@@ -6,6 +6,7 @@ var AutoNavigate = require('./auto-navigate')
 var TextHelpers = require('./text-helpers')
 var RangeInputHelper = require('./range-input-helper')
 var Timeago = require('./time/timeago')
+var Clipboard = require('./clipboard')
 var TimeSwitch = require('./time/time-switch')
 var notify = require('notify')
 
@@ -26,6 +27,7 @@ module.exports = {
   AutoNavigate: AutoNavigate,
   TextHelpers: TextHelpers,
   RangeInputHelper: RangeInputHelper,
+  Clipboard: Clipboard,
 
   toggleActiveNav: function toggleActiveNav(){
     Array.prototype.forEach.call(document.querySelectorAll('[data-match-url]'), function(node){

@@ -27,7 +27,8 @@
     "nprogress": "^0.2.0",
     "postcss-cli": "^1.5.0",
     "superagent": "^1.2.0",
-    "svgo": "^0.5.5"
+    "svgo": "^0.5.5",
+    "clipboard": "^1.5.8"
   },
   "devDependencies": {
     "babelify": "^6.1.3",
