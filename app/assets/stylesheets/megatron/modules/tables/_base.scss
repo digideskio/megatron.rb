@@ -50,12 +50,21 @@ $bright-table-bg: $bright;
 }
 
 %table_base .table-heading-row td,
-%table_base .table-heading-row .table-cell {
+%table_base .table-spacing-row td,
+%table_base .table-heading-row .table-cell,
+%table_base .table-spacing-row .table-cell {
   color: $light-text-color;
   @include v-pad_box((3px, 5px));
   text-shadow: 0 1px rgba(#fff, .8);
   font-size: 12px;
   background-color: $silver;
+}
+
+
+%table_base .table-spacing-row td,
+%table_base .table-spacing-row .table-cell {
+  padding-top: 2px;
+  padding-bottom: 2px;
 }
 
 th {
