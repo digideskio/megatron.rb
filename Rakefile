@@ -22,7 +22,7 @@ task :start do
 end
 
 task :watch do
-  system 'foreman start -c esvg=1,js=1,css=1'
+  system 'foreman start -c svg=1,js=1,css=1'
 end
 
 Bundler::GemHelper.install_tasks

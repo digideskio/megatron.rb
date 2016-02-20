@@ -27,6 +27,20 @@ module Megatron
       button(text, options.merge(type: :header, flavor: 'primary-btn'))
     end
 
+    def copy_button(text, options = {})
+      options[:data] ||= {}
+      options[:data][:clipboard_target] = options[:target]
+      options[:flavor] = 'copy-button'
+      options[:class] = button_classes(options)
+
+      content_tag 'button', options do
+        concat text_icon('copy')
+        concat text_icon('check-thin')
+        concat ' '
+        concat text
+      end
+    end
+
     def primary_button(text, options = {})
       button(text, options.merge(type: :primary))
     end

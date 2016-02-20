@@ -264,3 +264,17 @@ $button-dark: lighten($night, 8);
     margin: 13px 0;
   }
 }
+
+.copy-button {
+  .icon-check-thin {
+    position: relative;
+    left: -1em;
+    margin-right: -1em;
+    opacity: 0;
+    color: $green;
+  }
+  &.clipboard-copied {
+    .icon-check-thin { opacity: 1; }
+    .icon-copy { opacity: 0; }
+  }
+}

@@ -1,7 +1,6 @@
 var clipboard = require('clipboard')
 
 var Clipboard = {
-
   setup: function() {
     if (document.queryCommandSupported('copy')) {
       var cbwatcher = new clipboard('[data-clipboard-target],[data-clipboard-text]')
@@ -17,15 +16,15 @@ var Clipboard = {
   success: function(cbEvent) {
     cbEvent.trigger.classList.add('clipboard-copied')
     setTimeout(function(){
-      cbEvent.trigger.dataset.remove('clipboard-copied')
-    }, 1000)
+      cbEvent.trigger.classList.remove('clipboard-copied')
+    }, 1200)
   },
 
   error: function(event) {
     cbEvent.trigger.classList.add('clipboard-failed')
     setTimeout(function(){
-      cbEvent.trigger.dataset.remove('clipboard-failed')
-    }, 1000)
+      cbEvent.trigger.classList.remove('clipboard-failed')
+    }, 1200)
   }
 }
 

@@ -95,3 +95,12 @@
     span.purple-outline-pill .purple-outline-pill
     span.black-outline-pill .black-outline-pill
 
+
+  = heading 'Copy Button'
+
+  p Use a copy button to make it easy to copy the contents of some element to the clipboard.
+
+  = demo_box "Copy button" do
+    
+    input#test-copy type='text' readonly='true' value="Copy this text"
+    = copy_button 'Copy', target: '#test-copy'
