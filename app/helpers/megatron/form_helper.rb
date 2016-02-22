@@ -52,6 +52,10 @@ module Megatron
         end
       end
 
+      if labels == false
+        data['label'] = 'false'
+      end
+
       if labels = options['external_labels']
         if labels.is_a?(Hash)
           labels.each do |label, value|
