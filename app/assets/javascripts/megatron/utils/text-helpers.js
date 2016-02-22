@@ -1,4 +1,5 @@
 var bean = require('bean')
+var Clipboard = require('./clipboard')
 
 var TextHelpers = {
   listen: function(){
@@ -9,6 +10,7 @@ var TextHelpers = {
     TextHelpers.linkHeadings()
     TextHelpers.autoSizeTextarea()
     TextHelpers.autofocus()
+    Clipboard.setup()
   },
 
   selectOnClick(event) {
