@@ -39,23 +39,21 @@ bean.on(document, 'page:restore', function() { NProgress.remove() })
 function pageLoad(){
   utils.Toggler.listen()
   utils.AutoNavigate.listen()
-  utils.TextHelpers.load()
+  utils.TextHelpers.listen()
   if(!window.Turbolinks) {
     pageChange()
   }
 }
 
 function pageChange(){
-  utils.linkHeadings()
   utils.toggleActiveNav()
-  utils.autoSizeTextarea()
   utils.highlightCode()
-  utils.autofocus()
   utils.notifyFormFlash()
   utils.TimeSwitch.setup()
   utils.Timeago.setup()
   utils.Messages.load()
   utils.RangeInputHelper.setup()
+  utils.TextHelpers.setup()
 
   // Do last to ensure no other default setup overrides visibility state
   utils.Toggler.refresh()

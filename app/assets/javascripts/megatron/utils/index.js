@@ -70,30 +70,6 @@ module.exports = {
     }
   },
 
-  linkHeadings: function linkHeadings(){
-    var headings = document.querySelectorAll('h2[id], h3[id], h4[id], h5[id]')
-    Array.prototype.forEach.call(headings, function(heading) {
-      heading.innerHTML = "<a href='#"+heading.id+"' class='heading-link'>"+ heading.innerHTML +"</a>"
-      heading.className = heading.className + " linked_heading";
-    })
-  },
-
-  autoSizeTextarea: function autoSizeTextarea() {
-
-    var autoHeight = function(node) {
-      if (!node.className.match(/fixed/)) {
-        var offset = node.offsetHeight - node.clientHeight;
-        node.style.height = 'auto';
-        node.style.height = (node.scrollHeight  + offset ) + 'px';
-      }
-    }
-    Array.prototype.forEach.call(document.querySelectorAll('textarea'), autoHeight)
-
-    bean.on(document.querySelector('body'), 'keyup', 'textarea', function(event){
-      autoHeight(event.currentTarget)
-    })
-  },
-
   notifyFormFlash: function notifyFormFlash(){
     var flash = document.querySelector('.form-flash')
     if (flash) {
@@ -102,12 +78,6 @@ module.exports = {
       notify[type](flash.textContent.trim())
       flash.classList.add('hidden')
     }
-  },
-
-  autofocus: function autofocus() {
-    var focus_el = document.querySelector('.autofocus')
-    if (focus_el) {
-      focus_el.focus()
-    }
   }
+
 }
