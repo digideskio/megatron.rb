@@ -44,18 +44,24 @@ var Toggler = {
   },
 
   dispatch: function togglerDispatch(el, type, force) {
+    var dispatchedElements
+
     if (el.dataset[type]){
       if (type.match(/class/i)){
-        Toggler.setClass(el.dataset[type], type, el)
+        dispatchedElements = Toggler.setClass(el.dataset[type], type, el)
       } else {
-        Toggler.setState(el.dataset[type], type)
+        dispatchedElements = Toggler.setState(el.dataset[type], type)
       }
+
+      Array.prototype.forEach.call(dispatchedElements, function(node){
+        Toggler.triggerTogglerEventsOnChildren(node, type)
+      })
     }
   },
 
   // Add, remove, or toggle classnames, triggered by elements with:
   //  data-hide-class, data-show-class, and data-toggle-class values
-  //   
+  //
   //  Data value examples:
   //   - "classname" - add/remove/toggle classname on current element
   //   - "foo bar"   - multiple classnames, separated by spaces (like html class property)
@@ -87,6 +93,8 @@ var Toggler = {
         match.classList[action](classname)
       })
     })
+
+    return matches
   },
 
   setState: function togglerSetState(selectors, state) {
@@ -98,6 +106,8 @@ var Toggler = {
     Array.prototype.forEach.call(matches, function(match){
       Toggler[state](match)
     })
+
+    return matches
   },
 
   toggle: function togglerToggle(el) {
@@ -131,6 +141,28 @@ var Toggler = {
   hide: function togglerHide(el) {
     el.classList.remove('visible')
     el.classList.add('hidden')
+  },
+
+  getLeafNodes: function (parent) {
+    // is the parent itself a leaf node?
+    if (!parent.hasChildNodes()) return [parent]
+
+    var nodes = Array.prototype.slice.call(parent.getElementsByTagName("*"), 0)
+
+    return nodes.filter(function(elem) {
+      return elem.children && elem.children.length === 0
+    })
+  },
+
+  triggerTogglerEventsOnChildren: function(el, eventName){
+    // we care about leaf nodes since the event will bubble to
+    // non-leaf nodes from the leaf nodes
+    var leafChildNodes = Toggler.getLeafNodes(el)
+
+    Array.prototype.forEach.call(leafChildNodes, function(node) {
+      // 'toggler:show', 'toggler:hide', etc
+      bean.fire(node, "toggler:" + eventName)
+    })
   },
 
   toggleRadios: function togglerToggleRadio(radios) {

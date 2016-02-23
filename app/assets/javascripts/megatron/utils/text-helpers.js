@@ -50,7 +50,7 @@ var TextHelpers = {
     }
     Array.prototype.forEach.call(document.querySelectorAll('textarea:not(.no-auto-size)'), autoHeight)
 
-    bean.on(document.querySelector('body'), 'keyup', 'textarea', function(event){
+    bean.on(document.querySelector('body'), 'keyup toggler:show', 'textarea', function(event){
       autoHeight(event.currentTarget)
     })
   },
