@@ -1,85 +1,36 @@
-@keyframes slide-bg-x {
-  0% { background-position: 0 0; }
-  100% { background-position: 100% 0; }
-}
-
-@keyframes slide-down-progress {
-  0% { transform: translateY(-5px); }
-  100% { transform: translateY(0px); }
-}
-
-@keyframes slide-up-progress {
-  0% { transform: translateY(0px); }
-  100% { transform: translateY(-5px); }
-}
-
-.progress_bar {
-  position: fixed;
-  top: 0; left: 0;
-  height: 5px;
-  width: 100%;
-  overflow-x: hidden;
-  animation: slide-down-progress .3s ease-out;
-
-  &.out {
-    animation: slide-up-progress .3s ease-out;
-  }
-
-  &:after {
-    content: "";
-    animation: slide-bg-x 1.4s linear infinite;
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 300%;
-    height: 5px;
-    background: {
-      image: linear-gradient(to right, $blue, $base-bg, $blue);
-      repeat: repeat-x;
-      position: 0px 0px;
-      size: 50% 100%;
-    }
-  }
-}
-
-@keyframes ripple {
-  0% {
-    opacity: .1;
-    border-width: 20px;
-    transform: scale3d(.1, .1, 1);
-  }
-  100% {
-    opacity: .2;
-    border-width: 0px;
-    transform: scale3d(1, 1, 1);
-  }
-}
-
-.progress_drop {
+.progress-bar {
+  height: .7em;
+  border-radius: 3px;
   position: relative;
-  width: 40px;
-  height: 40px;
-  margin: 0 auto;
+  display: inline-block;
+  background: #fff;
 
-  &:before, &:after {
-    left: 0; top: 0;
-    position: absolute;
+  &:before {
     content: "";
-    width: 40px;
-    height: 40px;
-    border-radius: 30px;
-    border: 1px solid $blue;
-    animation: ripple 1.5s linear infinite;
-    box-sizing: border-box;
+    position: absolute;
+    left: 0; right: 0; top: 0; bottom: 0;
+    box-shadow: 0 0 0 1px rgba(#000, .3) inset;
+    z-index: 1;
+    border-radius: 3px;
   }
 
-  &:after {
-    opacity: 0;
-    animation-delay: .75s;
-  }
+
 }
 
-#nprogress {
+.progress-bar-label {
+  padding-left: .4em;
+  font-size: .8em;
+  line-height: .7em;
+  color: $mediumgray;
+}
+
+.progress-bar-fill {
+  border-radius: 3px;
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+}
+
+[id=nprogress] {
   .bar {
     background: $babyblue;
   }

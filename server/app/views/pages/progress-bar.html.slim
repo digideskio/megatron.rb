@@ -1,0 +1,18 @@
+- main_header 
+  h2 Progress Bar
+
+- main
+  = heading "Text icons"
+  p 
+    |Progress bars are cool, like this one: 
+
+  code: slim
+    =capacity_bar('20GB', '28GB', width: '200px')
+    =capacity_bar('110GB', '128GB', width: '200px')
+    =capacity_bar('120GB', '128GB', width: '200px')
+
+  div=capacity_bar('20GB', '28GB', width: '200px')
+  div=capacity_bar('110GB', '128GB', width: '200px')
+  div=capacity_bar('120GB', '128GB', width: '200px')
+
+
