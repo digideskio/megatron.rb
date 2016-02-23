@@ -15,7 +15,7 @@ gemspec
 
 gem 'sass', '~> 3.3', '>= 3.3.4'
 gem 'rack-cors'
-gem 'puma'
+gem 'puma', '~> 2.16.0'
 gem 'sass-rails', '5.0.3'
 gem 'kramdown'
 gem 'autoprefixer-rails'
