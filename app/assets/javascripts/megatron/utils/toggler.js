@@ -48,14 +48,10 @@ var Toggler = {
 
     if (el.dataset[type]){
       if (type.match(/class/i)){
-        dispatchedElements = Toggler.setClass(el.dataset[type], type, el)
+        Toggler.setClass(el.dataset[type], type, el)
       } else {
-        dispatchedElements = Toggler.setState(el.dataset[type], type)
+        Toggler.setState(el.dataset[type], type)
       }
-
-      Array.prototype.forEach.call(dispatchedElements, function(node){
-        Toggler.triggerTogglerEventsOnChildren(node, type)
-      })
     }
   },
 
@@ -88,39 +84,44 @@ var Toggler = {
     }
 
     Array.prototype.forEach.call(matches, function(match){
-      action = action.replace(/Class/,'')
       Array.prototype.forEach.call(classnames.split(' '), function(classname) {
-        match.classList[action](classname)
+        match.classList[action.replace(/Class/,'')](classname)
       })
-    })
 
-    return matches
+      Toggler.triggerTogglerEventsOnChildren(match, 'class')
+    })
   },
 
-  setState: function togglerSetState(selectors, state) {
+  setState: function(selectors, state) {
     var matches = document.querySelectorAll(selectors)
-    if (typeof(state) == 'boolean') {
-      state = (state ? 'show' : 'hide')
-    }
 
     Array.prototype.forEach.call(matches, function(match){
-      Toggler[state](match)
-    })
+      var action = Toggler.toggleAction(match, state)
 
-    return matches
+      Toggler[action](match)
+      Toggler.triggerTogglerEventsOnChildren(match, action)
+    })
   },
 
-  toggle: function togglerToggle(el) {
+  toggleAction: function(el, action) {
 
-    if (el.offsetParent === null) {
-      Toggler.show(el)
-    } else {
-      Toggler.hide(el)
+    if (typeof(action) == 'boolean') {
+      action = (action ? 'show' : 'hide')
     }
 
+    if (action == 'toggle') {
+      if (el.offsetParent === null) {
+        action = 'show'
+      } else {
+        action = 'hide'
+      }
+    }
+
+    return action
+
   },
 
-  show: function togglerShow(el) {
+  show: function(el) {
     el.classList.remove('hidden')
     el.classList.add('visible')
 
@@ -130,12 +131,6 @@ var Toggler = {
 
     // Trigger input event on ranges that have been hidden
     var ranges = el.querySelectorAll('[type=range]')
-
-    Array.prototype.forEach.call(ranges, function(range) { 
-      if (range.offsetParent != null) {
-        bean.fire(range, 'refresh')
-      }
-    })
   },
 
   hide: function togglerHide(el) {
