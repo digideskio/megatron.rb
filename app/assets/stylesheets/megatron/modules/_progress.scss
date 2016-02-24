@@ -4,6 +4,8 @@
   position: relative;
   display: inline-block;
   background: #fff;
+  width: 150px;
+  max-width: 100%;
 
   &:before {
     content: "";

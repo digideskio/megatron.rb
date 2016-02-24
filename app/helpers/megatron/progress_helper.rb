@@ -44,7 +44,7 @@ module Megatron
       end
 
       unless label = false
-        options[:label] = "#{percentage}% - #{size} / #{total}"
+        options[:label] = "#{percentage}% - #{number_to_human_size(size).sub(' ','')} / #{number_to_human_size(total).sub(' ','')}"
       end
 
       progress_bar(percentage, options)
