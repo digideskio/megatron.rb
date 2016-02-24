@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    megatron (0.1.77)
+    megatron (0.1.78)
       block_helpers (~> 0.3.3)
       esvg (~> 2.8)
       gaffe (~> 1)
