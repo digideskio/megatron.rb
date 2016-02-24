@@ -3,7 +3,8 @@ module Megatron
     def progress_bar(percentage, options={})
       
       options = {
-        percentage: percentage
+        percentage: percentage,
+        label_position: 'before'
       }.merge(options)
 
       if options[:label] == true
@@ -19,10 +20,13 @@ module Megatron
       color = options.delete(:color) || 'blue'
 
       content_tag(:span, class: 'progress-bar-wrapper') { 
+        if options[:label] && options[:label_position].to_s == 'before'
+          concat content_tag(:span, class: "progress-bar-label"){ options[:label] }
+        end
         concat content_tag(:span, class: 'progress-bar', data: options, style: width) { 
           content_tag(:span, class: "progress-bar-fill #{color}-bg", style: "width: #{percentage}%"){}
         }
-        if options[:label]
+        if options[:label] && options[:label_position].to_s == 'after'
           concat content_tag(:span, class: "progress-bar-label"){ options[:label] }
         end
       }

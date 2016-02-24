@@ -1,11 +1,15 @@
+.progress-bar-wrapper {
+  font-size: .8em;
+}
 .progress-bar {
-  height: .7em;
+  height: 1em;
   border-radius: 3px;
   position: relative;
   display: inline-block;
   background: #fff;
   width: 150px;
   max-width: 100%;
+  vertical-align: middle;
 
   &:before {
     content: "";
@@ -16,14 +20,14 @@
     border-radius: 3px;
   }
 
-
+  .progress-bar-label + &,
+  + .progress-bar-label {
+    margin-left: .5em;
+  }
 }
 
 .progress-bar-label {
-  padding-left: .4em;
-  font-size: .8em;
-  line-height: .7em;
-  color: $mediumgray;
+  vertical-align: middle;
 }
 
 .progress-bar-fill {
