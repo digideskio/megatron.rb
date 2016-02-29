@@ -41,14 +41,32 @@ var TextHelpers = {
 
   autoSizeTextarea: function autoSizeTextarea() {
 
-    var autoHeight = function(node) {
-      if (!node.className.match(/fixed/)) {
-        var offset = node.offsetHeight - node.clientHeight;
-        node.style.height = 'auto';
-        node.style.height = (node.scrollHeight  + offset ) + 'px';
+    var wrapTextarea = function(node) {
+      if (!node.classList.contains('fixed')) {
+        if (!node.parentElement.classList.contains('textarea-size-wrapper')) {
+          node.outerHTML = "<div class='textarea-size-wrapper'>"+node.outerHTML+"</div>"
+        }
       }
     }
-    Array.prototype.forEach.call(document.querySelectorAll('textarea:not(.no-auto-size)'), autoHeight)
+    var autoHeight = function(node) {
+      if (!node.classList.contains('fixed')) {
+        node.parentElement.style.height = node.style.height
+
+        var offset = node.offsetHeight - node.clientHeight
+        node.style.height = 'auto'
+        var newHeight = (node.scrollHeight  + offset )
+        var maxHeight = window.innerHeight * .95
+
+        if (newHeight < maxHeight)
+          node.style.height = newHeight + 'px'
+        else
+          node.style.height = maxHeight + 'px'
+
+        node.parentElement.style.height = 'auto';
+      }
+    }
+    Array.prototype.forEach.call(document.querySelectorAll('textarea'), wrapTextarea)
+    Array.prototype.forEach.call(document.querySelectorAll('.textarea-size-wrapper textarea'), autoHeight)
 
     bean.on(document.querySelector('body'), 'keyup toggler:show', 'textarea', function(event){
       autoHeight(event.currentTarget)

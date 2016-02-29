@@ -42,6 +42,7 @@ textarea {
   min-height: 10em;
   width: 100%;
   display: block;
+  max-height: 95vh;
   
   label + & {
     margin-top: .4em;
