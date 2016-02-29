@@ -134,7 +134,7 @@ var RangeInputHelper = {
       // Generate a class name for querying later (because some name attributes contain illegal characters for queries)
       var classname = slider.dataset.input.replace(/\W/g,'-')
 
-      var existingInput = document.querySelector('input[name='+slider.dataset.input+']') 
+      var existingInput = document.querySelector('input[name="'+slider.dataset.input+'"]') 
 
       if (existingInput) {
         existingInput.classList.add(classname)

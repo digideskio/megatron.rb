@@ -5,8 +5,8 @@
 
   p
     button data-toggle='.range-test, .range-test-2' Toggle Range
-  input type='text' name='number'
+  input type='text' name='vector_deployment[provision_options][units]'
   .range-test
-    = range_input_tag 'number', values: (1..20).to_a, value: '4'
+    = range_input_tag 'vector_deployment[provision_options][units]', values: (1..20).to_a, value: '4'
   .range-test-2.hidden
-    = range_input_tag 'number', values: (1..20).to_a
+    = range_input_tag 'vector_deployment[provision_options][units]', values: (1..20).to_a
