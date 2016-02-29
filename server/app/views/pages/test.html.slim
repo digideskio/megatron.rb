@@ -2,50 +2,11 @@
   h2 Testing ground
 
 - main
-  = heading "Auto-size textarea"
 
-  textarea
-    |
-      this
-      is a 
-      lot
-
-
-      of
-
-      text
-
-      How 
-
-      does it
-
-
-      work
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      asdf
-
+  p
+    button data-toggle='.range-test, .range-test-2' Toggle Range
+  input type='text' name='number'
+  .range-test
+    = range_input_tag 'number', values: (1..20).to_a, value: '4'
+  .range-test-2.hidden
+    = range_input_tag 'number', values: (1..20).to_a

@@ -33,9 +33,9 @@ var RangeInputHelper = {
     RangeInputHelper.cacheSet(slider)
 
     slider.insertAdjacentHTML('beforebegin', RangeInputHelper.template(slider))
-    slider.remove()
-
     RangeInputHelper.refresh(slider)
+
+    slider.remove()
   },
 
   cacheSet: function(slider) {
@@ -133,6 +133,14 @@ var RangeInputHelper = {
     if (slider.dataset.input && slider.dataset.values) {
       // Generate a class name for querying later (because some name attributes contain illegal characters for queries)
       var classname = slider.dataset.input.replace(/\W/g,'-')
+
+      var existingInput = document.querySelector('input[name='+slider.dataset.input+']') 
+
+      if (existingInput) {
+        existingInput.classList.add(classname)
+        return ""
+      }
+      
       return "<input class='"+classname+"' type='hidden' name='"+slider.dataset.input+"' value='"+slider.value+"'>"
     } else return ""
   },
@@ -203,7 +211,8 @@ var RangeInputHelper = {
   },
 
   setInput: function(slider) {
-    if(slider.dataset.input && slider.dataset.values) {
+    if (slider.offsetParent === null) { return }
+    if (slider.dataset.input && slider.dataset.values) {
       var value = slider.dataset.values.split(',')[RangeInputHelper.rangeValueIndex(slider)]
       var selector = "."+slider.dataset.input.replace(/\W/g,'-')
       var inputs = document.querySelectorAll(selector)
