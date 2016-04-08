@@ -134,15 +134,29 @@ var RangeInputHelper = {
       // Generate a class name for querying later (because some name attributes contain illegal characters for queries)
       var classname = slider.dataset.input.replace(/\W/g,'-')
 
-      var existingInput = document.querySelector('input[name="'+slider.dataset.input+'"]') 
+      var input = this.existingInput(slider)
 
-      if (existingInput) {
-        existingInput.classList.add(classname)
+      if (input) {
+        input.classList.add(classname)
         return ""
       }
       
       return "<input class='"+classname+"' type='hidden' name='"+slider.dataset.input+"' value='"+slider.value+"'>"
     } else return ""
+  },
+
+  existingInput: function(slider) {
+    return this.scope(slider).querySelector('input[name="'+slider.dataset.input+'"]')
+  },
+
+  scope: function(slider) {
+    var el = slider
+
+    while (el && el.tagName != "FORM") {
+      el = el.parentNode
+    }
+
+    return el || document
   },
 
   getLabels: function(slider) {
@@ -215,7 +229,7 @@ var RangeInputHelper = {
     if (slider.dataset.input && slider.dataset.values) {
       var value = slider.dataset.values.split(',')[RangeInputHelper.rangeValueIndex(slider)]
       var selector = "."+slider.dataset.input.replace(/\W/g,'-')
-      var inputs = document.querySelectorAll(selector)
+      var inputs = this.scope(slider).querySelectorAll(selector)
 
       Array.prototype.forEach.call(inputs, function(input){
         input.value = value
