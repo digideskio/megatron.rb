@@ -1,5 +1,5 @@
 path: app/assets/esvg/megatron
-output_path: app/assets/javascripts/megatron
+js_path: app/assets/javascripts/megatron/esvg.js
 optimize: true
 cli: true
 alias:
