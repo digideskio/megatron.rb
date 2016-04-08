@@ -47,7 +47,7 @@ module Megatron
         options[:color] = 'orange'
       end
 
-      unless label == false
+      unless options.delete(:label) == false
         options[:label] = "#{percentage}% - #{number_to_human_size(size).sub(' ','')} / #{number_to_human_size(total).sub(' ','')}"
       end
 
