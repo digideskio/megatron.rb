@@ -1,6 +1,6 @@
 var timeago = require('./timeago')
 var dateToHtml = require('./date-to-html')
-var bean = require('bean')
+var event = require('compose-event')
 
 var TimeSwitch = {
 
@@ -23,7 +23,7 @@ var TimeSwitch = {
 
   // Attach listeners to toggle time zones whine clicked
   listen: function timeSwitchListen() {
-    bean.on(document, "click", ".time-switch", TimeSwitch.toggle)
+    event.on(document, "click", ".time-switch", TimeSwitch.toggle)
     this.listening = true
   },
 

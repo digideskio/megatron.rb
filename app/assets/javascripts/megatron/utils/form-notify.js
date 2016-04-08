@@ -1,4 +1,4 @@
-var bean = require('bean')
+var event = require('compose-event')
 var notify = require('notify')
 
 module.exports = {
@@ -28,7 +28,7 @@ module.exports = {
   },
 
   listen: function formListen() {
-    bean.on(document.querySelector('body'), 'submit', 'form', function(event){
+    event.on(document.querySelector('body'), 'submit', 'form', function(event){
       if(!event.target.dataset['remote']) {
         event.preventDefault()
         setTimeout(function(){event.target.submit()}, 100)

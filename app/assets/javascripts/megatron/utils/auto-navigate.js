@@ -1,10 +1,8 @@
-var bean = require('bean')
-
-require('compose-tap-event')
+var event = require('compose-event')
 
 var AutoNavigate = {
   listen: function autoNavigateListen(){
-    bean.on(document, "click", ".auto-navigate", AutoNavigate.trigger)
+    event.on(document, "click", ".auto-navigate", AutoNavigate.trigger)
   },
 
   trigger: function autoNavigateTrigger(event) {
@@ -14,7 +12,7 @@ var AutoNavigate = {
       if (event.metaKey) {
         window.open(link)
       } else {
-        bean.fire(link, 'click')
+        event.fire(link, 'click')
       }
     }
   }

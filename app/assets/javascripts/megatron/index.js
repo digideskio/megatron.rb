@@ -1,7 +1,6 @@
 var utils = require('./utils')
-var bean = require('bean')
+var event = require('compose-event')
 var Dialog = require('dialog')
-var tap = require('tap-event')
 var Form = require('./form')
 var Link = require('./link')
 var _ = require('lodash')
@@ -16,7 +15,7 @@ window.Megatron = module.exports = {
   Dialog: Dialog,
   notify: notify,
   utils: utils,
-  Event: bean,
+  Event: event,
   Toggler: utils.Toggler,
   Form: Form,
   request: request,
@@ -25,27 +24,24 @@ window.Megatron = module.exports = {
   _: _
 }
 
-bean.on(document, 'DOMContentLoaded', pageLoad)
+event.on(document, 'DOMContentLoaded', pageLoad)
 
 // Support rails turbolinks page load event
-bean.on(document, 'page:change', pageChange)
+event.on(document, 'page:change', pageChange)
 
 NProgress.configure({showSpinner: false})
 
-bean.on(document, 'page:fetch', function() { NProgress.start() })
-bean.on(document, 'page:change', function() { NProgress.done() })
-bean.on(document, 'page:restore', function() { NProgress.remove() })
+event.on(document, 'page:fetch', function() { NProgress.start() })
+event.on(document, 'page:change', function() { NProgress.done() })
+event.on(document, 'page:restore', function() { NProgress.remove() })
 
-function pageLoad(){
+event.ready(function(){
   utils.Toggler.listen()
   utils.AutoNavigate.listen()
   utils.TextHelpers.listen()
-  if(!window.Turbolinks) {
-    pageChange()
-  }
-}
+})
 
-function pageChange(){
+event.change(function(){
   utils.toggleActiveNav()
   utils.highlightCode()
   utils.notifyFormFlash()
@@ -57,12 +53,9 @@ function pageChange(){
 
   // Do last to ensure no other default setup overrides visibility state
   utils.Toggler.refresh()
-}
+})
 
-// Dialog document listener and auto-creator
-bean.on(document, 'click', '[data-trigger=dialog]', handleDialogTrigger)
-bean.on(document, 'click', '[data-trigger=dialog]', tap(handleDialogTrigger))
-bean.on(document, 'click', '.nav_toggle', toggleNavigationMode)
+event.on(document, 'click', '.nav_toggle', toggleNavigationMode)
 
 function handleDialogTrigger(event){
   event.preventDefault()
@@ -91,9 +84,9 @@ function disableWith(event){
 if (!window.$ || !$.rails) {
   var boundForms = []
   // Form event listener
-  bean.on(document, 'submit', 'form[data-remote]', handleRemoteFormSubmit)
-  bean.on(document, 'submit', 'form', disableWith)
-  bean.on(document, 'click', 'a[data-method], a[data-confirm], button[data-method], button[data-confirm]', Link.click)
+  event.on(document, 'submit', 'form[data-remote]', handleRemoteFormSubmit)
+  event.on(document, 'submit', 'form', disableWith)
+  event.on(document, 'click', 'a[data-method], a[data-confirm], button[data-method], button[data-confirm]', Link.click)
 }
 
 function handleRemoteFormSubmit(event){

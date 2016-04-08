@@ -1,4 +1,3 @@
-var bean = require('bean')
 var CodeMirror = require('codemirror')
 var Toggler = require('./toggler')
 var Messages = require('./messages')

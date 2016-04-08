@@ -1,5 +1,4 @@
 var RemoteForm = require('remote-form')
-var bean = require('bean')
 var notify = require('notify')
 
 var MegatronForm = module.exports = RemoteForm.extend({

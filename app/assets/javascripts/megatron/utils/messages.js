@@ -1,5 +1,5 @@
 var request = require('superagent')
-var bean = require('bean')
+var event = require('compose-event')
 
 var Messages = {
   el: function messagesEl(){
@@ -36,7 +36,7 @@ var Messages = {
         var html = this.messageHTML(options)
         this.saveMessage(html)
         this.showMessage(html)
-        bean.on(this.el(), 'click', '.dismiss', this.dismiss.bind(this))
+        event.on(this.el(), 'click', '.dismiss', this.dismiss.bind(this))
       }
     }
   },

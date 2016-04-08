@@ -1,6 +1,4 @@
-var bean = require('bean')
-
-require('compose-tap-event')
+var event = require('compose-event')
 
 var Toggler = {
   checkboxSelector: "[type=checkbox][data-toggle], [type=checkbox][data-show], [type=checkbox][data-hide]",
@@ -8,8 +6,8 @@ var Toggler = {
   selectSelector: "option[data-show]",
 
   listen: function togglerListen(){
-    bean.on(document, "click", "[data-toggle], [data-show], [data-hide], [data-toggle-class], [data-add-class], [data-remove-class]", Toggler.trigger)
-    bean.on(document, "change", ".select-toggler", Toggler.trigger)
+    event.on(document, "click", "[data-toggle], [data-show], [data-hide], [data-toggle-class], [data-add-class], [data-remove-class]", Toggler.trigger)
+    event.on(document, "change", ".select-toggler", Toggler.trigger)
   },
 
   refresh: function togglerRefresh(){
@@ -156,7 +154,7 @@ var Toggler = {
 
     Array.prototype.forEach.call(leafChildNodes, function(node) {
       // 'toggler:show', 'toggler:hide', etc
-      bean.fire(node, "toggler:" + eventName)
+      event.fire(node, "toggler:" + eventName)
     })
   },
 

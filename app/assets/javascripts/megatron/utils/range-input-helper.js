@@ -1,11 +1,9 @@
-var bean = require('bean')
-
-require('compose-tap-event')
+var event = require('compose-event')
 
 var RangeInputHelper = {
   listen: function(){
-    bean.on(document, "input toggler:show", "[type=range]", RangeInputHelper.change)
-    bean.on(document, "click change input", "[type=range]", RangeInputHelper.focus)
+    event.on(document, "input toggler:show", "[type=range]", RangeInputHelper.change)
+    event.on(document, "click change input", "[type=range]", RangeInputHelper.focus)
   },
 
   change: function(event) {

@@ -1,6 +1,7 @@
 {
   "name": "megatron",
   "version": "1.0.0",
+  "private": true,
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -11,29 +12,27 @@
   "browser": {
     "dialog": "compose-dialog",
     "notify": "compose-notification",
-    "tap-event": "compose-tap-event",
     "remote-form": "compose-remote-form"
   },
   "dependencies": {
-    "autoprefixer": "^5.2",
-    "bean": "^1.0.15",
+    "compose-event": "^1.0.0",
     "codemirror": "^5.5.0",
-    "compose-dialog": "^1.0.6",
+    "compose-dialog": "^2.0.0",
     "compose-notification": "^2.0.6",
     "compose-remote-form": "^1.0.2",
-    "compose-tap-event": "^1.0.0",
     "domify": "^1.3.3",
     "lodash": "^3.10.1",
     "nprogress": "^0.2.0",
-    "postcss-cli": "^1.5.0",
     "superagent": "^1.2.0",
-    "svgo": "^0.5.5",
     "clipboard": "^1.5.8"
   },
   "devDependencies": {
     "babelify": "^6.1.3",
+    "autoprefixer": "^5.2",
+    "postcss-cli": "^1.5.0",
     "browserify": "^11.0.1",
     "minifyify": "^7.0.3",
+    "svgo": "^0.5.5",
     "watchify": "^3.3.1"
   }
 }

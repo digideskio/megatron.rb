@@ -1,6 +1,5 @@
 var domify = require('domify')
 var Dialog = require('dialog')
-var bean = require('bean')
 
 module.exports = Link
 

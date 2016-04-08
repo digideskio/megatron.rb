@@ -18,3 +18,10 @@
     input type='checkbox' id='remove-checkbox' data-remove-class='primary-btn; .test-button'
     label for='remove-checkbox' Remove
 
+  form
+    p
+      = range_input_tag 'dang', values: [1,2,3,5], labels: ['a','b','c','d']
+      = range_input_tag 'dang', values: [10,2,3,5], labels: ['z','b','c','d']
+
+  p
+    = range_input_tag 'dang', values: [10,2,3,5], labels: ['z','b','c','d']
