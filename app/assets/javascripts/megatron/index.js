@@ -3,7 +3,6 @@ var event = require('compose-event')
 var Dialog = require('dialog')
 var Form = require('./form')
 var Link = require('./link')
-var _ = require('lodash')
 var notify = require('notify')
 var request = require('superagent')
 var NProgress = require('nprogress')
@@ -21,7 +20,6 @@ window.Megatron = module.exports = {
   request: request,
   Link: Link,
   esvg: esvg,
-  _: _
 }
 
 event.on(document, 'DOMContentLoaded', pageLoad)
