@@ -34,7 +34,6 @@ event.on(document, 'page:change', function() { NProgress.done() })
 event.on(document, 'page:restore', function() { NProgress.remove() })
 
 event.ready(function(){
-  utils.Toggler.listen()
   utils.AutoNavigate.listen()
   utils.TextHelpers.listen()
 })
@@ -48,9 +47,6 @@ event.change(function(){
   utils.Messages.load()
   utils.RangeInputHelper.setup()
   utils.TextHelpers.setup()
-
-  // Do last to ensure no other default setup overrides visibility state
-  utils.Toggler.refresh()
 })
 
 event.on(document, 'click', '.nav_toggle', toggleNavigationMode)

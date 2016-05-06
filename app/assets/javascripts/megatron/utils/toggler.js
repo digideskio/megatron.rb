@@ -269,4 +269,7 @@ var Toggler = {
   }
 }
 
+event.ready(Toggler.listen)
+event.change(Toggler.refresh)
+
 module.exports = Toggler
