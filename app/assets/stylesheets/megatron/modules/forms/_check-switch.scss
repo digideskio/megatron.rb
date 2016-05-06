@@ -60,7 +60,7 @@
       box-shadow: $lightgray 0 0 0 1px inset, rgba(#fff, .5) 0 1px inset;
     }
   }
-  
+
   input {
     position: absolute;
     z-index: -100;
@@ -84,5 +84,37 @@
       box-shadow: $babyblue 0 0 0 1px inset, $babyblue 0 0 0 2px inset;
     }
 
+    &:disabled {
+      opacity: .2;
+      &:checked + label {
+        &:before {
+          transform: translateX(100%);
+          background-color: rgba($boyblue, .1);
+          box-shadow: rgba($boyblue, .3) 0 0 0 1px inset;
+        }
+        
+        &:after {
+          color: $boyblue;
+        }
+      }
+
+      &:focus + label:before {
+        box-shadow: $babyblue 0 0 0 1px inset, $babyblue 0 0 0 2px inset;
+      }
+    }
+
+  }
+
+  input:disabled + label, input:checked:disabled + label {
+    background: rgba(#fff, .5);
+    box-shadow: #fff 0 1px 1px, $overcast 0 0 0 1px inset;
+    &:after {
+      color: rgba(#888, .5);
+    }
+    &:before {
+      background: none;
+      color: rgba(#888, .5);
+      box-shadow: $lightgray 0 0 0 1px inset, rgba(#fff, .5) 0 1px inset;
+    }
   }
 }

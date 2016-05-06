@@ -3,6 +3,24 @@
 - main
   p The form helpers are being reworked, this page will be updated as they are developed.
 
+  = heading 'Check switch'
+
+  .check-switch
+    input.switch#check-switch-test type='checkbox' checked=true
+    label for='check-switch-test' Enable
+
+  .check-switch
+    input.switch#check-switch-test-3 type='checkbox'
+    label for='check-switch-test-3' Enable
+
+  .check-switch
+    input.switch#check-switch-test type='checkbox' disabled=true checked=true
+    label for='check-switch-test-2' Enable
+
+  .check-switch
+    input.switch#check-switch-test-4 type='checkbox' disabled=true
+    label for='check-switch-test-4' Enable
+
   = heading 'Range Input (Slider)'
 
   = heading :h5, 'Basic usage'
