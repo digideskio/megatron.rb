@@ -1,5 +1,4 @@
 var CodeMirror = require('codemirror')
-var Toggler = require('./toggler')
 var Messages = require('./messages')
 var AutoNavigate = require('./auto-navigate')
 var TextHelpers = require('./text-helpers')
@@ -20,7 +19,6 @@ module.exports = {
   Timeago: Timeago,
   TimeSwitch: TimeSwitch,
   CodeMirror: CodeMirror,
-  Toggler: Toggler,
   Messages: Messages,
   AutoNavigate: AutoNavigate,
   TextHelpers: TextHelpers,

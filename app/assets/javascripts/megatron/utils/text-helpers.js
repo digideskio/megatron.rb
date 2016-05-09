@@ -1,9 +1,9 @@
-var event = require('compose-event')
+var Event = require('compose-event')
 var Clipboard = require('./clipboard')
 
 var TextHelpers = {
   listen: function(){
-    event.on(document, "click", ".click-select, [data-click-select]", TextHelpers.selectOnClick)
+    Event.on(document, "click", ".click-select, [data-click-select]", TextHelpers.selectOnClick)
   },
 
   setup: function() {
@@ -68,7 +68,7 @@ var TextHelpers = {
     Array.prototype.forEach.call(document.querySelectorAll('textarea'), wrapTextarea)
     Array.prototype.forEach.call(document.querySelectorAll('.textarea-size-wrapper textarea'), autoHeight)
 
-    event.on(document.querySelector('body'), 'keyup toggler:show', 'textarea', function(event){
+    Event.on(document.querySelector('body'), 'keyup toggler:show', 'textarea', function(event){
       autoHeight(event.currentTarget)
     })
   },
