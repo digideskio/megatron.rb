@@ -106,6 +106,7 @@
   }
 
   input:disabled + label, input:checked:disabled + label {
+    cursor: default;
     background: rgba(#fff, .5);
     box-shadow: #fff 0 1px 1px, $overcast 0 0 0 1px inset;
     &:after {
