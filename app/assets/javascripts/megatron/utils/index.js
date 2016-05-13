@@ -3,8 +3,6 @@ var Messages = require('./messages')
 var AutoNavigate = require('./auto-navigate')
 var TextHelpers = require('./text-helpers')
 var RangeInputHelper = require('./range-input-helper')
-var Timeago = require('./time/timeago')
-var TimeSwitch = require('./time/time-switch')
 var notify = require('notify')
 
 require('codemirror/mode/htmlmixed/htmlmixed')
@@ -16,8 +14,6 @@ require('codemirror/addon/runmode/runmode.js')
 require('codemirror/addon/edit/matchbrackets.js')
 
 module.exports = {
-  Timeago: Timeago,
-  TimeSwitch: TimeSwitch,
   CodeMirror: CodeMirror,
   Messages: Messages,
   AutoNavigate: AutoNavigate,

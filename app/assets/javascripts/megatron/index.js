@@ -9,6 +9,7 @@ var esvg = require('./esvg')
 var Dialog = require('compose-dialog')
 require('compose-toggler')
 require('compose-remote-form')
+require('compose-time-toggle')
 
 require('./shims/classlist')
 
@@ -42,8 +43,6 @@ Event.change(function(){
   utils.toggleActiveNav()
   utils.highlightCode()
   utils.notifyFormFlash()
-  utils.TimeSwitch.setup()
-  utils.Timeago.setup()
   utils.Messages.load()
   utils.RangeInputHelper.setup()
   utils.TextHelpers.setup()
