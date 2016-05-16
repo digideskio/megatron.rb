@@ -23,10 +23,6 @@ window.Megatron = module.exports = {
   esvg: esvg,
 }
 
-Event.on(document, 'DOMContentLoaded', pageLoad)
-
-// Support rails turbolinks page load event
-Event.on(document, 'page:change', pageChange)
 
 NProgress.configure({showSpinner: false})
 
