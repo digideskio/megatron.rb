@@ -1,35 +1,31 @@
-var RemoteForm = require('remote-form')
+var Event = require('compose-event')
 var notify = require('notify')
 
-var MegatronForm = module.exports = RemoteForm.extend({
+var defaultMessages = {
+  beforeSend: 'Submitting...',
+  success: 'Success!',
+  error: 'Something went wrong.'
+}
 
-  defaultMessages: {
-    beforeSend: 'Submitting...',
-    success: 'Success!',
-    error: 'Something went wrong.'
-  },
+var notifyForm = function(event) {
+  var message = getMessage(event.target, event.type)
 
-  messageFor: function formMessageFor(type){
-    if (this.el.dataset[type])
-      return this.el.dataset[type]
-    else {
-      var msg = this.$('[data-ajax-event='+type+']').innerHTML || this.$('script.'+type).innerHTML
-      if (msg)
-        return msg
-      else
-        return this.defaultMessages[type]
-    }
-  },
+  if (event.type == 'beforeSend')
+    notify.progress(message)
+  else
+    notify[type](message)
+}
 
-  beforeSend: function formBeforeSend(req){
-    notify.progress(this.messageFor('beforeSend'))
-  },
-  
-  success: function formSuccessHandler(body, status, xhr){
-    notify.success(this.messageFor('success'))
-  },
+var getMessage = function(form, type) {
+  if (form.dataset[type])
+    return form.dataset[type]
 
-  error: function formErrorHandler(xhr, error){
-    notify.error(this.messageFor('error'))
-  }
-})
+  var el = form.querySelector('[data-ajax-event='+type+'], script.'+type)
+
+  if (el)
+    return el.innerHTML
+  else
+    return defaultMessages[type]
+}
+
+Event.on(document, 'beforeSend success error', 'form[data-remote]', notifyForm)
