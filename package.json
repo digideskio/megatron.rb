@@ -18,7 +18,7 @@
     "compose-event": "^1.0.0",
     "codemirror": "^5.5.0",
     "compose-dialog": "^2.0.0",
-    "compose-notification": "^2.0.6",
+    "compose-notification": "^3.0.0",
     "compose-remote-form": "^1.0.2",
     "compose-time-toggle": "^1.0.0",
     "compose-toggler": "^1.0.0",
