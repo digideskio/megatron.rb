@@ -81,4 +81,5 @@ var TextHelpers = {
   }
 }
 
-module.exports = TextHelpers
+Event.ready(TextHelpers.listen)
+Event.change(TextHelpers.setup)

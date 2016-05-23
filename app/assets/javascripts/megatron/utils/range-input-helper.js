@@ -1,9 +1,9 @@
-var event = require('compose-event')
+var Event = require('compose-event')
 
 var RangeInputHelper = {
   listen: function(){
-    event.on(document, "input toggler:show", "[type=range]", RangeInputHelper.change)
-    event.on(document, "click change input", "[type=range]", RangeInputHelper.focus)
+    Event.on(document, "input toggler:show", "[type=range]", RangeInputHelper.change)
+    Event.on(document, "click change input", "[type=range]", RangeInputHelper.focus)
   },
 
   change: function(event) {
@@ -22,7 +22,6 @@ var RangeInputHelper = {
   setup: function(){
     var ranges = document.querySelectorAll('[type=range]:not(.range-input)')
     Array.prototype.forEach.call(ranges, RangeInputHelper.initSlider)
-    RangeInputHelper.listen()
   },
   
   initSlider: function(slider){
@@ -275,4 +274,5 @@ var RangeInputHelper = {
   }
 }
 
-module.exports = RangeInputHelper
+Event.ready(RangeInputHelper.listen)
+Event.change(RangeInputHelper.setup)

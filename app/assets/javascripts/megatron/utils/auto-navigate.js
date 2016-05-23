@@ -1,21 +1,19 @@
-var event = require('compose-event')
+var Event = require('compose-event')
 
-var AutoNavigate = {
-  listen: function autoNavigateListen(){
-    event.on(document, "click", ".auto-navigate", AutoNavigate.trigger)
-  },
-
-  trigger: function autoNavigateTrigger(event) {
+Event.ready(function(){ 
+  // Allow clicking an element with .auto-navigate transfers the 
+  // click to the link (a child element) with the class navigate
+  event.on(document, "click", ".auto-navigate", function(event) {
     var target = event.target
+
     if (target.tagName.toLowerCase() != 'a') {
       var link = event.currentTarget.querySelector('a.navigate')
+
       if (event.metaKey) {
         window.open(link)
       } else {
-        event.fire(link, 'click')
+        Event.fire(link, 'click')
       }
     }
-  }
-}
-
-module.exports = AutoNavigate
+  })
+})

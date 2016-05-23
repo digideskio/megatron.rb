@@ -1,5 +1,5 @@
 var request = require('superagent')
-var event = require('compose-event')
+var Event = require('compose-event')
 
 var Messages = {
   el: function messagesEl(){
@@ -36,7 +36,7 @@ var Messages = {
         var html = this.messageHTML(options)
         this.saveMessage(html)
         this.showMessage(html)
-        event.on(this.el(), 'click', '.dismiss', this.dismiss.bind(this))
+        Event.on(this.el(), 'click', '.dismiss', this.dismiss.bind(this))
       }
     }
   },
@@ -94,4 +94,4 @@ var Messages = {
   }
 }
 
-module.exports = Messages
+Event.ready(Messages.load)

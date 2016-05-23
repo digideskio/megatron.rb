@@ -28,4 +28,4 @@ var Clipboard = {
   }
 }
 
-module.exports = Clipboard
+Event.change(Clipboard.setup)
