@@ -3,7 +3,7 @@ var Event = require('compose-event')
 Event.ready(function(){ 
   // Allow clicking an element with .auto-navigate transfers the 
   // click to the link (a child element) with the class navigate
-  event.on(document, "click", ".auto-navigate", function(event) {
+  Event.on(document, "click", ".auto-navigate", function(event) {
     var target = event.target
 
     if (target.tagName.toLowerCase() != 'a') {

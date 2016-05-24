@@ -34,7 +34,6 @@ require('./shims/classlist')
 window.Megatron = module.exports = {
   Dialog: Dialog,
   notify: Notify,
-  utils: utils,
   Event: Event,
   request: request,
   esvg: esvg,

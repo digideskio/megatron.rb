@@ -1,3 +1,4 @@
+var Event = require('compose-event')
 var clipboard = require('clipboard')
 
 var Clipboard = {
