@@ -1,6 +1,8 @@
 var Event = require('compose-event')
 var Notify = require('compose-notification')
 
+// If a page has an element .form-flash, trigger a notification
+//
 Event.change(function(){
   var flash = document.querySelector('.form-flash')
   if (flash) {

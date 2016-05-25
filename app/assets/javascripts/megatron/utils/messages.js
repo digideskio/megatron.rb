@@ -1,6 +1,10 @@
 var request = require('superagent')
 var Event = require('compose-event')
 
+// Look for messages at /messages.json
+// (an internal json document which we use to publish site-wide messages)
+// Then pin the topmost message to the top of the page.
+
 var Messages = {
   el: function messagesEl(){
     return document.querySelector('.pop-message')

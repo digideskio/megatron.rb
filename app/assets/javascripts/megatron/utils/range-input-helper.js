@@ -1,5 +1,7 @@
 var Event = require('compose-event')
 
+// Improves the utility and user interface for range inputs
+
 var RangeInputHelper = {
   listen: function(){
     Event.on(document, "input toggler:show", "[type=range]", RangeInputHelper.change)

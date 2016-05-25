@@ -1,6 +1,14 @@
 var Event = require('compose-event')
 var CodeMirror = require('codemirror')
 
+// Use CodeMirror to render static code higlighting
+//
+// Example:
+//
+//   <pre class="lang-ruby">
+//     puts 'awesome' if true
+//   </pre>
+//
 var aliasLang = function(lang) {
   var aliases = {
     'markup': 'htmlmixed',
@@ -14,7 +22,6 @@ var aliasLang = function(lang) {
 var highlightCode = function() {
   var elements = document.querySelectorAll('[class*="language-"], [class*="lang-"]');
 
-  if (elements == null) { return }
   Array.prototype.forEach.call(elements, function(element) {
     var lang = element.className.match(/lang.*?-(\S+)/)[1]
 

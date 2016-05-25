@@ -1,5 +1,6 @@
 var Event = require('compose-event')
-var Clipboard = require('./clipboard')
+
+// Minor text behaviors
 
 var TextHelpers = {
   listen: function(){
@@ -10,11 +11,12 @@ var TextHelpers = {
     TextHelpers.linkHeadings()
     TextHelpers.autoSizeTextarea()
     TextHelpers.autofocus()
-    Clipboard.setup()
   },
 
+  // Make it easy to set a range selection
+  //
   selectOnClick(event) {
-    var select = event.currentTarget.dataset['click-select']
+    var select = event.currentTarget.dataset.clickSelect
     var target = [event.target]
 
     if (select) {
@@ -31,6 +33,9 @@ var TextHelpers = {
     })
   },
 
+  // Use heading ids to create an on-page anchor
+  // link to make it easy to link to headings on a page
+  //
   linkHeadings: function linkHeadings(){
     var headings = document.querySelectorAll('h2[id], h3[id], h4[id], h5[id]')
     Array.prototype.forEach.call(headings, function(heading) {
@@ -39,6 +44,8 @@ var TextHelpers = {
     })
   },
 
+  // Resize textareas to fit the contents as a user types
+  //
   autoSizeTextarea: function autoSizeTextarea() {
 
     var wrapTextarea = function(node) {
@@ -73,6 +80,8 @@ var TextHelpers = {
     })
   },
 
+  // Focus on the first element with the class .autofocus, when the page loads
+  //
   autofocus: function autofocus() {
     var focus_el = document.querySelector('.autofocus')
     if (focus_el) {
