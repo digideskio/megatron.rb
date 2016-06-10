@@ -17,6 +17,7 @@ require('codemirror/addon/edit/matchbrackets.js')
 
 require('compose-remote-form')
 require('compose-time-toggle')
+require('compose-slider')
 
 require('./utils/activate-nav-items')
 require('./utils/auto-navigate')
@@ -25,7 +26,6 @@ require('./utils/form-flash')
 require('./utils/form-notify')
 require('./utils/highlight-code')
 require('./utils/messages')
-require('./utils/range-input-helper')
 require('./utils/text-helpers')
 require('./utils/progress-bar')
 

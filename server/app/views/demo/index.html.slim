@@ -13,9 +13,10 @@
     p.lightgray-text.deployment-status-message This may take a couple minutes.
 
   form
-    /input type='range' min="1" max="17" value ="1" data-big-scale-after-label="GB Disk" data-small-price-before-label="$" data-small-price-after="/month" data-label-big-scale="1;2;3;4;5;10;15;20;25;50;75;100;125;250;375;500;625" data-label-small-price="17.50;29.50;41.50;53.50;65.50;125.50;185.50;245.50;305.50;605.50;905.50;1205.50;1505.50;3005.50;4505.50;6005.50;7505.50" data-mark="0,4,8,12,16" data-input='unit-scale' data-values='1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31,33'
-    /input type='range' value ="10" data-after-label='%'
+    input type="range" max="12" value="0" name="vector_deployment[provision_options][units]" data-values="1,2,3,4,5,10,15,20,25,50,75,100,125" data-label-storage="1GB Storage,2GB Storage,3GB Storage,4GB Storage,5GB Storage,10GB Storage,15GB Storage,20GB Storage,25GB Storage,50GB Storage,75GB Storage,100GB Storage,125GB Storage" data-external-label-mongodb-memory="102MB RAM,204MB RAM,306MB RAM,408MB RAM,510MB RAM,1020MB RAM,1.49GB RAM,1.99GB RAM,2.49GB RAM,4.98GB RAM,7.47GB RAM,9.96GB RAM,12.45GB RAM" data-external-label-mongodb-price="$31.00/mo,$49.00/mo,$67.00/mo,$85.00/mo,$103.00/mo,$193.00/mo,$283.00/mo,$373.00/mo,$463.00/mo,$913.00/mo,$1,363.00/mo,$1,813.00/mo,$2,263.00/mo" data-mark="1,4,7,10,13" data-line-labels="1:1GB,13:125GB"
 
-    = range_input_tag 'range1', after: '%'
-    = range_input_tag 'range2', values: [1, 2, 3], label: [10, 20, 30], before: 'Disk: ', after: ' GB'
-    = range_input_tag 'range35', values: [1, 2, 3], mark: [0, 1, 2], value: 0, labels: { disk: [10, 20, 30], price: ['10.50', '25.50', '30.50'] }, before: { price: '$' }, after: { disk: ' GB Disk' }
+    input type="range" min="0" max="100"
+
+    = slider_input_tag 'range1', after: '%'
+    = slider_input_tag 'range2', values: [1, 2, 3], label: [10, 20, 30], before: 'Disk: ', after: ' GB'
+    = slider_input_tag 'range35', values: [1, 2, 3], mark: [1, 2, 3], value: 0, labels: { disk: [10, 20, 30], price: ['10.50', '25.50', '30.50'] }, before: { price: '$' }, after: { disk: ' GB Disk' }

@@ -1,8 +1,8 @@
-$range-track: #ddd;
-$range-track-line: #aaa;
-$range-mark: #fff;
+$slider-track: #ddd;
+$slider-track-line: #aaa;
+$slider-mark: #fff;
 
-@mixin reset-range {
+@mixin reset-slider {
   -webkit-appearance: none;
   width: 100%;
   margin: 0;
@@ -21,15 +21,15 @@ $range-mark: #fff;
   }
 }
 
-@mixin range-thumb {
-  &::-moz-range-thumb     { @content; }
+@mixin slider-thumb {
+  &::-moz-slider-thumb     { @content; }
   &::-webkit-slider-thumb { @content; }
   &::-ms-thumb            { @content; }
 }
 
-@mixin range-track {
+@mixin slider-track {
   @content;
-  &::-moz-range-track {
+  &::-moz-slider-track {
     @content;
   }
   &::-ms-track {
@@ -38,15 +38,15 @@ $range-mark: #fff;
 }
 
 input[type=range] {
-  @include reset-range;
+  @include reset-slider;
   position: relative;
   z-index: 2;
   margin: 15px 0;
   
-  @include range-thumb {
+  @include slider-thumb {
     box-shadow: rgba(#000, .4) 0 0 0 1px, rgba(#000, .4) 0 1px 1px inset;
     border: 6px solid #fff;
-    background: $range-track-line;
+    background: $slider-track-line;
     box-sizing: border-box;
     height: 19px;
     width: 19px;
@@ -67,13 +67,13 @@ input[type=range] {
   }
   
   &:focus {
-    @include range-thumb {
+    @include slider-thumb {
       background: #409bd9;
       box-shadow: 0 0 2px 2px hsl(203, 47%, 65%), rgba(#000, .4) 0 1px 1px inset;
     }
   }
   
-  @include range-track {
+  @include slider-track {
     height: 16px;
     background: transparent;
 
@@ -82,17 +82,17 @@ input[type=range] {
       content: "";
       left: 4px; right: 4px; top: 6px;
       height: 5px;
-      background: $range-track;
+      background: $slider-track;
       z-index: -1;
       border-radius: 4px;
-      box-shadow: $range-track-line 0 0 0 1px;
+      box-shadow: $slider-track-line 0 0 0 1px;
     }
   }
 
-  &.range-input-slider {
+  &.slider-input {
     margin: 0;
 
-    @include range-track {
+    @include slider-track {
       &:after {
         display: none;
       }
@@ -122,13 +122,13 @@ input::-moz-focus-inner {
   }
 }
 
-.range-input-container {
+.slider-input-container {
   position: relative;
   flex: 1 0 auto;
   margin: .6em 0;
 }
 
-.range-track {
+.slider-track {
   height: 0px;
   display: flex;
   align-items: center;
@@ -139,11 +139,11 @@ input::-moz-focus-inner {
   top: -12px;
 }
 
-.range-track-bg {
+.slider-track-bg {
   flex: none;
   border-radius: 5px;
-  box-shadow: $range-track-line 0 0 0 1px;
-  background: $range-track;
+  box-shadow: $slider-track-line 0 0 0 1px;
+  background: $slider-track;
   height: 5px;
   position: absolute;
   left: 9px;
@@ -151,12 +151,12 @@ input::-moz-focus-inner {
   top: 7px;
 }
 
-.range-segment {
+.slider-segment {
   position: relative;
   flex: none;
 }
 
-.range-segment-mark {
+.slider-segment-mark {
   &:before, &:after {
     position: absolute;
     content: "";
@@ -168,18 +168,18 @@ input::-moz-focus-inner {
     border-radius: 100%;
   }
   &:before {
-    background: $range-mark;
-    border: $range-track 3px solid;
-    box-shadow: $range-track-line 0 0 0 1px inset;
+    background: $slider-mark;
+    border: $slider-track 3px solid;
+    box-shadow: $slider-track-line 0 0 0 1px inset;
     z-index: 1;
   }
   &:after {
-    box-shadow: $range-track-line 0 0 0 1px;
+    box-shadow: $slider-track-line 0 0 0 1px;
     z-index: 0;
   }
 }
 
-.range-line-label {
+.slider-line-label {
   position: absolute;
   white-space: nowrap;
   font-size: 12px;
@@ -202,7 +202,7 @@ input::-moz-focus-inner {
   }
 }
 
-.range-segment:first-child .range-line-label {
+.slider-segment:first-child .slider-line-label {
   left: -9px;
   right: auto;
   text-align: left;
@@ -211,7 +211,7 @@ input::-moz-focus-inner {
   }
 }
 
-.range-segment:last-child .range-line-label {
+.slider-segment:last-child .slider-line-label {
   right: -11px;
   left: auto;
   text-align: right;
@@ -220,10 +220,10 @@ input::-moz-focus-inner {
   }
 }
 
-.range-label {
-  background: $range-mark;
+.slider-label {
+  background: $slider-mark;
   border-radius: 3px;
-  box-shadow: $range-track-line 0 0 0 1px;
+  box-shadow: $slider-track-line 0 0 0 1px;
   font-size: 14px;
   padding: 4px 8px;
   position: relative;
@@ -251,11 +251,11 @@ input::-moz-focus-inner {
     transform-style: preserve-3d;
     left: -7px;
     border-top: 7px solid transparent;
-    border-right: 7px solid $range-track-line;
+    border-right: 7px solid $slider-track-line;
     border-bottom: 7px solid transparent;
   }
   &:after {
-    border-right-color: $range-mark;
+    border-right-color: $slider-mark;
     left: -6px;
   }
 
@@ -277,7 +277,7 @@ input::-moz-focus-inner {
   }
 }
 
-[data-range-label] {
+[data-slider-label] {
   &:after { content: attr(data-after); }
   &:before { content: attr(data-before); }
 }
