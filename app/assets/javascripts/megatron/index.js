@@ -15,9 +15,11 @@ require('codemirror/mode/sql/sql')
 require('codemirror/addon/runmode/runmode.js')
 require('codemirror/addon/edit/matchbrackets.js')
 
-require('compose-remote-form')
-require('compose-time-toggle')
-require('compose-slider')
+require('compose-remote-form') // Our UJS implementation
+require('compose-time-toggle') // Switch time elements between local and UTC
+require('compose-slider')      // Our slider (range input) component
+require('rangetouch')          // mobile accessiblity on sliders
+window.rangetouch.set("thumbWidth", 19);
 
 require('./utils/activate-nav-items')
 require('./utils/auto-navigate')
